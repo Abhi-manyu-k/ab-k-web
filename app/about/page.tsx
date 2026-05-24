@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   Briefcase,
   Layers,
   Factory,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedCard } from "@/components/ui/AnimatedCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTASection } from "@/components/sections/CTASection";
@@ -26,65 +26,89 @@ const iconMap: Record<string, LucideIcon> = {
 export default function AboutPage() {
   return (
     <>
-      <section className="section-glow pt-32 pb-16 lg:pt-40 lg:pb-24">
+      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
           <SectionHeading
-            eyebrow="Our Edge"
-            title="The Vertical Integration Advantage"
-            description="Most AI consultancies stop at strategy decks or isolated demos. AB Kinetics connects the full stack—from boardroom intent to agentic architecture to shop-floor data—so your AI investments create durable operational leverage."
+            eyebrow="Our edge"
+            title="The vertical integration advantage"
+            description="Most AI consultancies stop at strategy decks or isolated demos. We connect boardroom intent to agentic architecture and shop-floor data—so investments hold up in production."
           />
         </Container>
       </section>
 
       <section className="pb-20 lg:pb-28">
         <Container>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <ol className="space-y-0">
             {aboutPillars.map((pillar, index) => {
               const Icon = iconMap[pillar.icon] ?? Briefcase;
               return (
-                <AnimatedCard key={pillar.title} delay={index * 0.1}>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-electric/20 to-cyan-neon/20 text-cyan-neon">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
+                <li
+                  key={pillar.title}
+                  className="grid gap-6 border-t divider-subtle py-10 first:border-t-0 first:pt-0 lg:grid-cols-[auto_1fr] lg:gap-12 lg:py-14"
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="font-heading text-2xl font-bold tabular-nums text-amber-action/80">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
+                      <Icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-text-primary">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-3 text-text-muted">{pillar.description}</p>
-                </AnimatedCard>
+                  <div>
+                    <h3 className="font-heading text-xl font-semibold text-text-primary lg:text-2xl">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-text-muted">{pillar.description}</p>
+                  </div>
+                </li>
               );
             })}
-          </div>
+          </ol>
 
-          <AnimatedCard className="mt-10" delay={0.3}>
-            <h3 className="font-heading text-2xl font-semibold text-text-primary">
-              Why it matters
-            </h3>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
-              Agentic AI only delivers value when it can act on real data, respect governance
-              constraints, and fit the operational context of your business. AB Kinetics does
-              not only advise on AI strategy and does not only build isolated demos—we connect
-              strategy, architecture, governance, data, tooling, and operational environments
-              into systems your teams can run in production.
+          <blockquote className="mt-16 border-l-2 border-amber-action/70 pl-6 lg:mt-20 lg:pl-8">
+            <p className="font-heading text-lg font-medium leading-relaxed text-text-primary lg:text-xl">
+              Agentic AI only pays off when it can act on real data, respect governance, and fit
+              how your teams actually work—not when it lives in a demo sandbox.
             </p>
-          </AnimatedCard>
+          </blockquote>
         </Container>
       </section>
 
-      <section className="border-t border-slate-border bg-slate-deep/30 py-20 lg:py-28">
+      <section className="border-t divider-subtle bg-slate-deep/40 py-20 lg:py-28">
         <Container>
-          <SectionHeading
-            eyebrow="Leadership"
-            title={`Meet ${founderBio.name}`}
-            description={founderBio.title}
-            className="mb-10"
-          />
-          <AnimatedCard delay={0.1}>
-            <div className="space-y-5 text-lg leading-relaxed text-text-muted">
-              {founderBio.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-              ))}
+          <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-2xl bg-slate-card lg:mx-0">
+              <Image
+                src="/images/founder.jpg"
+                alt={`Portrait of ${founderBio.name}, founder of AB Kinetics`}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 280px, 280px"
+                priority
+              />
             </div>
-          </AnimatedCard>
+
+            <div>
+              <SectionHeading
+                eyebrow="Leadership"
+                title={founderBio.name}
+                description={founderBio.title}
+                className="mb-8"
+              />
+
+              {founderBio.quote && (
+                <p className="mb-6 font-heading text-lg italic text-text-primary/90">
+                  &ldquo;{founderBio.quote}&rdquo;
+                </p>
+              )}
+
+              <div className="space-y-4 text-[0.9375rem] leading-relaxed text-text-muted">
+                {founderBio.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
         </Container>
       </section>
 

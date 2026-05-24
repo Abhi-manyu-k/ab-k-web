@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "AB Kinetics",
   url: "https://www.abkinetics.com",
-  ogImage: "https://www.abkinetics.com/og.jpg",
+  ogImage: "/og.svg",
   description: "Enterprise AI Architecture & Agentic Workflow Orchestration.",
   links: {
     linkedin: "https://www.linkedin.com/in/your-profile",

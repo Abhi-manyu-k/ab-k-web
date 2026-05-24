@@ -15,16 +15,16 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-electric to-cyan-neon text-onyx font-semibold hover:shadow-[0_0_30px_rgba(34,211,238,0.35)]",
+    "bg-electric text-onyx font-semibold hover:bg-cyan-neon",
   secondary:
-    "border border-slate-border bg-slate-card/50 text-text-primary hover:border-cyan-neon/50 hover:bg-slate-card",
-  ghost: "text-text-muted hover:text-cyan-neon",
+    "border border-slate-border/80 bg-slate-card/40 text-text-primary hover:border-cyan-neon/40 hover:bg-slate-card/70",
+  ghost: "text-text-muted hover:text-text-primary",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
   md: "px-6 py-3 text-sm",
-  lg: "px-8 py-4 text-base",
+  lg: "px-7 py-3.5 text-[0.9375rem]",
 };
 
 export function Button({
@@ -36,7 +36,7 @@ export function Button({
   external,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+    "inline-flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
     variantStyles[variant],
     sizeStyles[size],
     className,

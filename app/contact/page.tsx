@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="section-glow pt-32 pb-16 lg:pt-40 lg:pb-24">
+      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
           <SectionHeading
-            eyebrow="Get in Touch"
+            eyebrow="Get in touch"
             title={siteConfig.contact.formTitle}
-            description="Tell us where you are in your AI journey. We'll respond with a focused conversation on strategy, architecture, or operational integration—whichever moves you forward fastest."
+            description="Tell us where you are in your AI journey. We'll respond with a focused conversation on whatever moves you forward fastest."
           />
         </Container>
       </section>
@@ -29,7 +29,7 @@ export default function ContactPage() {
             <div className="lg:col-span-2">
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-electric/20 text-cyan-neon">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
                     <Mail className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
@@ -43,11 +43,11 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-electric/20 text-cyan-neon">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
                     <MapPin className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
-                    <p className="font-medium text-text-primary">Engagement Model</p>
+                    <p className="font-medium text-text-primary">Engagement model</p>
                     <p className="text-text-muted">
                       Remote-first with on-site availability for industrial and operational
                       contexts.
@@ -57,7 +57,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="glow-border rounded-2xl border border-slate-border bg-slate-card/40 p-8 lg:col-span-3">
+            <div className="surface-elevated p-8 lg:col-span-3">
               <ContactForm />
             </div>
           </div>

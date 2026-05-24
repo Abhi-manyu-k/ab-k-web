@@ -1,25 +1,24 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
 import { siteConfig } from "@/lib/site";
 
 export function CTASection() {
   return (
-    <section className="section-glow py-20 lg:py-28">
+    <section className="border-t divider-subtle bg-slate-deep/30 py-20 lg:py-28">
       <Container>
-        <div className="glow-border rounded-3xl border border-slate-border bg-slate-card/40 p-10 text-center lg:p-16">
+        <div className="surface-elevated mx-auto max-w-3xl px-8 py-12 text-center lg:px-14 lg:py-16">
           <SectionHeading
-            title="Accelerate Your AI Transition"
-            description="Whether you're defining strategy, architecting agentic systems, or connecting operational data—let's map the path from passive experimentation to active leverage."
+            title="Ready to move past the pilot?"
+            description="Whether you're defining strategy, architecting agents, or wiring operational data—we'll map a path from experiment to production."
             align="center"
           />
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="/contact" size="lg">
               {siteConfig.contact.formTitle}
             </Button>
             <Button href="/case-studies" variant="secondary" size="lg">
-              View Track Record
+              View track record
             </Button>
           </div>
         </div>

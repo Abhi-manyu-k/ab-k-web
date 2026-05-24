@@ -3,7 +3,7 @@ export const services = [
     id: "strategy",
     title: "Enterprise AI Strategy & ROI Alignment",
     summary:
-      "Define where agentic AI creates durable value—and where it does not—before capital and credibility are spent.",
+      "Define where agentic AI creates value—and where it doesn't—before capital and credibility are spent.",
     icon: "Target",
     capabilities: [
       "AI opportunity mapping across business units",
@@ -56,21 +56,21 @@ export const services = [
 export const caseStudyMetrics = [
   {
     value: "100+",
-    label: "Global Field Engineers Onboarded",
+    label: "Global field engineers onboarded",
     description:
-      "Successfully scaled proprietary agentic service assistants from localized prototypes to global daily use.",
+      "Scaled proprietary agentic service assistants from localized prototypes to daily global use.",
   },
   {
     value: "100%",
-    label: "Enterprise MCP Standardization",
+    label: "Enterprise MCP standardization",
     description:
-      "Architected secure, governed pipelines connecting live hardware telemetry directly to LLMs on Azure.",
+      "Governed pipelines connecting live hardware telemetry to LLMs on Azure.",
   },
   {
     value: "Zero",
-    label: "Vendor Lock-In",
+    label: "Vendor lock-in",
     description:
-      "Built custom LangGraph and n8n orchestration backends to protect enterprise IP and guarantee strict ROI.",
+      "Custom LangGraph and n8n orchestration to protect IP and keep ROI accountable.",
   },
 ] as const;
 
@@ -129,19 +129,19 @@ export const aboutPillars = [
   {
     title: "C-Suite Strategy & ROI",
     description:
-      "Board-ready narratives, investment cases, and adoption roadmaps that connect AI ambition to measurable business outcomes.",
+      "Board-ready narratives, investment cases, and adoption roadmaps tied to outcomes your leadership team can track.",
     icon: "Briefcase",
   },
   {
     title: "Software Architecture",
     description:
-      "Agentic system design, orchestration patterns, retrieval strategies, and integration blueprints built for enterprise constraints.",
+      "Agentic system design, orchestration patterns, retrieval strategies, and integration blueprints for enterprise constraints.",
     icon: "Layers",
   },
   {
     title: "Physical & Operational Reality",
     description:
-      "Live data streams, industrial workflows, hardware interfaces, and shop-floor contexts that most AI consultancies never touch.",
+      "Live data streams, industrial workflows, and shop-floor contexts that most AI consultancies never touch.",
     icon: "Factory",
   },
 ] as const;
@@ -149,10 +149,12 @@ export const aboutPillars = [
 export const founderBio = {
   name: "Abhimanyu Kanwar",
   title: "Founder, AB Kinetics",
+  quote:
+    "I work where the boardroom, the IDE, and the shop floor meet—because that's where agentic AI either ships or stalls.",
   paragraphs: [
-    "As the founder of AB Kinetics, Abhimanyu Kanwar represents a rare breed of Enterprise AI Architect: a vertical integrator who speaks the language of the boardroom, the IDE, and the shop floor.",
-    "With a foundation in Mechanical and Production Engineering from RWTH Aachen and advanced research in GraphRAG multi-agent systems at the University of Cambridge Service Alliance, Abhimanyu Kanwar bridges the critical gap between executive AI strategy and physical engineering realities. Rather than deploying passive chatbots, they specialize in architecting industrial-grade agentic workflows.",
-    "Most recently, Abhimanyu Kanwar led the end-to-end development of a proprietary AI Service Assistant for a leading semiconductor equipment manufacturer, scaling the system to over 100 global engineers. By standardizing Model Context Protocol (MCP) integrations on Azure and leveraging orchestration frameworks like LangGraph and n8n, Abhimanyu Kanwar helps enterprises escape prototype purgatory—deploying autonomous tools that query live databases, execute multi-step workflows, and drive measurable ROI.",
+    "I'm an enterprise AI architect with a mechanical engineering foundation from RWTH Aachen and research in GraphRAG multi-agent systems at the University of Cambridge Service Alliance.",
+    "Most recently I led a proprietary AI Service Assistant for a leading semiconductor equipment manufacturer—scaling it to 100+ field engineers with MCP integrations on Azure and orchestration via LangGraph and n8n.",
+    "AB Kinetics exists for teams stuck between strategy decks and demos that never reach production. We build governed systems your organization can run, extend, and measure.",
   ],
 } as const;
 
@@ -161,18 +163,18 @@ export const homeTeasers = [
     title: "Services",
     description: "Strategy, agentic architecture, integration, and production enablement.",
     href: "/services",
-    cta: "Explore Services",
+    cta: "Explore services",
   },
   {
-    title: "Vertical Integration",
+    title: "Vertical integration",
     description: "Why bridging strategy, software, and operations is our edge.",
     href: "/about",
-    cta: "Our Approach",
+    cta: "Our approach",
   },
   {
-    title: "Proven Impact",
+    title: "Proven impact",
     description: "Enterprise-scale outcomes across global rollouts and governed production systems.",
     href: "/case-studies",
-    cta: "View Track Record",
+    cta: "View track record",
   },
 ] as const;

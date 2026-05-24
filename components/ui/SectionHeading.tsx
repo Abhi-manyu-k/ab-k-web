@@ -1,6 +1,4 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -18,30 +16,23 @@ export function SectionHeading({
   align = "left",
   className,
 }: SectionHeadingProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <div
       className={cn(
         align === "center" && "mx-auto max-w-3xl text-center",
+        align === "center" && "[&_.eyebrow]:justify-center",
         className,
       )}
     >
-      {eyebrow && (
-        <p className="mb-3 font-heading text-sm font-medium uppercase tracking-[0.2em] text-cyan-neon">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="font-heading text-3xl font-bold tracking-tight text-text-primary sm:text-4xl lg:text-5xl">
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h2 className="display-heading text-3xl text-text-primary sm:text-4xl lg:text-[2.75rem]">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-lg leading-relaxed text-text-muted">{description}</p>
+        <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-text-muted sm:text-base">
+          {description}
+        </p>
       )}
-    </motion.div>
+    </div>
   );
 }

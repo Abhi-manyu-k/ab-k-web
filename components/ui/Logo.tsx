@@ -17,7 +17,7 @@ export function Logo({ showTagline = false, className }: LogoProps) {
       )}
     >
       <svg
-        className="h-8 w-auto text-cyan-neon transition-colors group-hover:text-electric"
+        className="h-8 w-auto text-cyan-neon/90 transition-colors group-hover:text-cyan-neon"
         viewBox="0 0 100 100"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"

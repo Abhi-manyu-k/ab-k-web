@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
@@ -14,11 +14,26 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-slate-border/50 bg-onyx/80 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between lg:h-20">
+    <header
+      className={cn(
+        "fixed top-0 z-50 w-full border-b transition-[background-color,border-color,backdrop-filter] duration-300",
+        scrolled
+          ? "border-slate-border/60 bg-onyx/95 backdrop-blur-md"
+          : "border-transparent bg-onyx/40 backdrop-blur-sm",
+      )}
+    >
+      <Container className="flex h-16 items-center justify-between lg:h-[4.5rem]">
         <Logo showTagline />
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
@@ -58,8 +73,8 @@ export function Header() {
             initial={shouldReduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={shouldReduceMotion ? undefined : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="border-t border-slate-border/50 bg-onyx/95 md:hidden"
+            transition={{ duration: 0.2 }}
+            className="border-t divider-subtle bg-onyx/98 md:hidden"
           >
             <Container className="flex flex-col gap-4 py-6">
               {navLinks.map((link) => (
@@ -78,7 +93,7 @@ export function Header() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-electric to-cyan-neon px-6 py-3 text-sm font-semibold text-onyx transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-electric px-6 py-3 text-sm font-semibold text-onyx transition-colors hover:bg-cyan-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon"
               >
                 {siteConfig.contact.formTitle}
               </Link>

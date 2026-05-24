@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CaseStudyCard } from "@/components/ui/CaseStudyCard";
+import { FeaturedCaseStudy } from "@/components/ui/FeaturedCaseStudy";
+import { SupportingCaseStudy } from "@/components/ui/SupportingCaseStudy";
 import { CaseStudyMetrics } from "@/components/ui/CaseStudyMetrics";
 import { CTASection } from "@/components/sections/CTASection";
 import { caseStudies } from "@/lib/content";
@@ -13,29 +14,32 @@ export const metadata: Metadata = {
 };
 
 export default function CaseStudiesPage() {
+  const [featured, ...supporting] = caseStudies;
+
   return (
     <>
-      <section className="section-glow pt-32 pb-16 lg:pt-40 lg:pb-24">
+      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
           <SectionHeading
-            eyebrow="Track Record"
-            title="Proven Impact"
-            description="NDA-compliant summaries of enterprise-scale engagements. Detailed references and project specifics are available in a strategy conversation."
+            eyebrow="Track record"
+            title="Proven impact"
+            description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
           />
         </Container>
       </section>
 
-      <section className="pb-12 lg:pb-16">
+      <section className="pb-8 lg:pb-12">
         <Container>
           <CaseStudyMetrics />
         </Container>
       </section>
 
       <section className="pb-20 lg:pb-28">
-        <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
-            {caseStudies.map((study, index) => (
-              <CaseStudyCard key={study.id} study={study} index={index} />
+        <Container className="space-y-12 lg:space-y-16">
+          <FeaturedCaseStudy study={featured} />
+          <div className="grid gap-0 lg:grid-cols-3 lg:gap-12">
+            {supporting.map((study) => (
+              <SupportingCaseStudy key={study.id} study={study} />
             ))}
           </div>
         </Container>
