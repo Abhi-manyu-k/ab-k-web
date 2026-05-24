@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CaseStudyCard } from "@/components/ui/CaseStudyCard";
+import { CaseStudyMetrics } from "@/components/ui/CaseStudyMetrics";
 import { CTASection } from "@/components/sections/CTASection";
 import { caseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Representative engagements and proven impact from AB Kinetics—detailed references available in strategy conversations.",
+    "Enterprise-scale impact from AB Kinetics—global rollouts, MCP standardization, and agentic orchestration at production scale.",
 };
 
 export default function CaseStudiesPage() {
@@ -19,8 +20,14 @@ export default function CaseStudiesPage() {
           <SectionHeading
             eyebrow="Track Record"
             title="Proven Impact"
-            description="Representative engagements across enterprise scale, production migration, agentic workflows, and industrial integration. Specific client references and metrics are available in a strategy conversation."
+            description="NDA-compliant summaries of enterprise-scale engagements. Detailed references and project specifics are available in a strategy conversation."
           />
+        </Container>
+      </section>
+
+      <section className="pb-12 lg:pb-16">
+        <Container>
+          <CaseStudyMetrics />
         </Container>
       </section>
 
@@ -31,11 +38,6 @@ export default function CaseStudiesPage() {
               <CaseStudyCard key={study.id} study={study} index={index} />
             ))}
           </div>
-
-          <p className="mt-10 text-center text-sm text-text-muted">
-            Impact metrics marked for replacement should be updated with verified outcomes
-            before public launch.
-          </p>
         </Container>
       </section>
 

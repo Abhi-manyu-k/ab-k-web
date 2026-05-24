@@ -112,12 +112,9 @@ Replace the following placeholders:
 
 | Item | Location |
 |------|----------|
-| Impact metrics in case studies | `lib/content.ts` — marked with `[Replace with real metric]` |
-| Contact email | `lib/site.ts` — `contactEmail` |
-| Site URL | `lib/site.ts` — `url` |
-| Logo | Header/Footer use text mark "AB" — swap for SVG/logo asset if available |
-| Founder bio | Add to About page if desired |
-| Tagline | `lib/site.ts` — `tagline` |
+| LinkedIn profile URL | `lib/site.ts` — `links.linkedin` |
+| Logo SVG paths | `components/ui/Logo.tsx` |
+| OG image asset | Add `public/og.jpg` and verify `siteConfig.ogImage` |
 
 ## Netlify Forms
 

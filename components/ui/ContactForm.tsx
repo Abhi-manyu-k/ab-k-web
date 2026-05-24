@@ -1,4 +1,4 @@
-import { projectStages } from "@/lib/site";
+import { projectStages, siteConfig } from "@/lib/site";
 
 export function ContactForm() {
   return (
@@ -117,7 +117,7 @@ export function ContactForm() {
         type="submit"
         className="w-full rounded-lg bg-gradient-to-r from-electric to-cyan-neon px-8 py-4 font-semibold text-onyx transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx sm:w-auto"
       >
-        Book a Strategy Sync
+        {siteConfig.contact.formTitle}
       </button>
     </form>
   );

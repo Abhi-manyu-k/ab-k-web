@@ -1,0 +1,42 @@
+import Link from "next/link";
+import { siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+interface LogoProps {
+  showTagline?: boolean;
+  className?: string;
+}
+
+export function Logo({ showTagline = false, className }: LogoProps) {
+  return (
+    <Link
+      href="/"
+      className={cn(
+        "group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+        className,
+      )}
+    >
+      <svg
+        className="h-8 w-auto text-cyan-neon transition-colors group-hover:text-electric"
+        viewBox="0 0 100 100"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        {/* Geometric AB monogram — replace paths when final SVG asset is ready */}
+        <path d="M12 18 H38 V42 H28 V82 H22 V42 H12 Z" />
+        <path d="M48 18 H88 V28 H58 V44 H82 V54 H58 V72 H88 V82 H48 Z" />
+      </svg>
+      <div className="flex flex-col">
+        <span className="font-logo text-xl font-bold tracking-tight text-text-primary">
+          {siteConfig.name}
+        </span>
+        {showTagline && (
+          <span className="hidden text-xs text-text-muted sm:block">
+            {siteConfig.description}
+          </span>
+        )}
+      </div>
+    </Link>
+  );
+}

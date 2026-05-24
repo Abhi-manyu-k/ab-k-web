@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Book a strategy sync with AB Kinetics to accelerate your AI transition.",
+  description: `${siteConfig.contact.formTitle} with AB Kinetics to accelerate your AI transition.`,
 };
 
 export default function ContactPage() {
@@ -17,7 +17,7 @@ export default function ContactPage() {
         <Container>
           <SectionHeading
             eyebrow="Get in Touch"
-            title="Book a Strategy Sync"
+            title={siteConfig.contact.formTitle}
             description="Tell us where you are in your AI journey. We'll respond with a focused conversation on strategy, architecture, or operational integration—whichever moves you forward fastest."
           />
         </Container>
@@ -35,10 +35,10 @@ export default function ContactPage() {
                   <div>
                     <p className="font-medium text-text-primary">Email</p>
                     <a
-                      href={`mailto:${siteConfig.contactEmail}`}
+                      href={`mailto:${siteConfig.contact.email}`}
                       className="text-text-muted transition-colors hover:text-cyan-neon"
                     >
-                      {siteConfig.contactEmail}
+                      {siteConfig.contact.email}
                     </a>
                   </div>
                 </div>

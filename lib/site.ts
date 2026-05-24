@@ -1,10 +1,15 @@
 export const siteConfig = {
   name: "AB Kinetics",
-  tagline: "Strategy to systems. Passive to active.",
-  description:
-    "AB Kinetics helps organizations move from passive AI experimentation to active, integrated, agentic systems that create measurable operational leverage.",
-  url: "https://abkinetics.com",
-  contactEmail: "hello@abkinetics.com",
+  url: "https://www.abkinetics.com",
+  ogImage: "https://www.abkinetics.com/og.jpg",
+  description: "Enterprise AI Architecture & Agentic Workflow Orchestration.",
+  links: {
+    linkedin: "https://www.linkedin.com/in/your-profile",
+  },
+  contact: {
+    email: "strategy@abkinetics.com",
+    formTitle: "Book a Strategy Sync",
+  },
 };
 
 export const navLinks = [

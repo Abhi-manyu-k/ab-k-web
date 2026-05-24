@@ -28,11 +28,6 @@ export function CaseStudyCard({ study, index = 0 }: CaseStudyCardProps) {
         <div>
           <p className="font-medium uppercase tracking-wider text-cyan-neon">Impact</p>
           <p className="mt-1 text-text-muted">{study.impact}</p>
-          {study.isPlaceholder && (
-            <p className="mt-2 text-xs italic text-amber-action/80">
-              Replace with real metric before public launch
-            </p>
-          )}
         </div>
       </div>
     </AnimatedCard>

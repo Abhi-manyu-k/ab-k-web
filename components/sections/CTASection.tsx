@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+import { siteConfig } from "@/lib/site";
+
 export function CTASection() {
   return (
     <section className="section-glow py-20 lg:py-28">
@@ -14,7 +16,7 @@ export function CTASection() {
           />
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button href="/contact" size="lg">
-              Book a Strategy Sync
+              {siteConfig.contact.formTitle}
             </Button>
             <Button href="/case-studies" variant="secondary" size="lg">
               View Track Record

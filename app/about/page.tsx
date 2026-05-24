@@ -9,7 +9,7 @@ import { AnimatedCard } from "@/components/ui/AnimatedCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTASection } from "@/components/sections/CTASection";
-import { aboutPillars } from "@/lib/content";
+import { aboutPillars, founderBio } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -66,6 +66,24 @@ export default function AboutPage() {
               strategy, architecture, governance, data, tooling, and operational environments
               into systems your teams can run in production.
             </p>
+          </AnimatedCard>
+        </Container>
+      </section>
+
+      <section className="border-t border-slate-border bg-slate-deep/30 py-20 lg:py-28">
+        <Container>
+          <SectionHeading
+            eyebrow="Leadership"
+            title={`Meet ${founderBio.name}`}
+            description={founderBio.title}
+            className="mb-10"
+          />
+          <AnimatedCard delay={0.1}>
+            <div className="space-y-5 text-lg leading-relaxed text-text-muted">
+              {founderBio.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </div>
           </AnimatedCard>
         </Container>
       </section>

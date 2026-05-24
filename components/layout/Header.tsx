@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 import { navLinks, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -18,22 +19,7 @@ export function Header() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-slate-border/50 bg-onyx/80 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between lg:h-20">
-        <Link
-          href="/"
-          className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-electric to-cyan-neon font-heading text-sm font-bold text-onyx transition-transform duration-300 group-hover:scale-105">
-            AB
-          </span>
-          <div className="flex flex-col">
-            <span className="font-heading text-lg font-bold tracking-tight text-text-primary">
-              {siteConfig.name}
-            </span>
-            <span className="hidden text-xs text-text-muted sm:block">
-              {siteConfig.tagline}
-            </span>
-          </div>
-        </Link>
+        <Logo showTagline />
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
@@ -51,7 +37,7 @@ export function Header() {
             </Link>
           ))}
           <Button href="/contact" size="sm">
-            Book a Strategy Sync
+            {siteConfig.contact.formTitle}
           </Button>
         </nav>
 
@@ -94,7 +80,7 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-electric to-cyan-neon px-6 py-3 text-sm font-semibold text-onyx transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx"
               >
-                Book a Strategy Sync
+                {siteConfig.contact.formTitle}
               </Link>
             </Container>
           </motion.div>

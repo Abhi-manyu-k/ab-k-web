@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { NetworkBackground } from "@/components/ui/NetworkBackground";
 
+import { siteConfig } from "@/lib/site";
+
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -38,7 +40,7 @@ export function HeroSection() {
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button href="/contact" size="lg">
-              Book a Strategy Sync
+              {siteConfig.contact.formTitle}
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </Button>
             <Button href="/services" variant="secondary" size="lg">
