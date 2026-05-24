@@ -29,7 +29,7 @@ export function HeroSection() {
             </h1>
 
             <p className="mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-text-muted sm:text-base">
-              We help enterprises design agentic workflows—tool-calling agents, governed
+              We help enterprises design agentic workflows: tool-calling agents, governed
               integrations, and production paths that connect strategy to shop-floor data.
             </p>
 

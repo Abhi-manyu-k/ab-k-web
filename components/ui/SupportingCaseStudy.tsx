@@ -12,7 +12,7 @@ export function SupportingCaseStudy({ study }: SupportingCaseStudyProps) {
       <h3 className="font-heading text-lg font-semibold text-text-primary">{study.title}</h3>
       <p className="mt-2 text-sm text-text-muted">{study.context}</p>
       <p className="mt-4 text-sm leading-relaxed text-text-primary">
-        <span className="text-amber-action">Impact — </span>
+        <span className="text-amber-action">Impact: </span>
         {study.impact}
       </p>
     </article>

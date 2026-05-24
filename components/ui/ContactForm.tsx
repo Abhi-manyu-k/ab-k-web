@@ -1,4 +1,7 @@
 import { projectStages, siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+const fieldClass = "form-field";
 
 export function ContactForm() {
   return (
@@ -27,7 +30,7 @@ export function ContactForm() {
             id="name"
             name="name"
             required
-            className="w-full rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary placeholder:text-text-muted/50 focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+            className={fieldClass}
             placeholder="Your name"
           />
         </div>
@@ -40,7 +43,7 @@ export function ContactForm() {
             id="email"
             name="email"
             required
-            className="w-full rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary placeholder:text-text-muted/50 focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+            className={fieldClass}
             placeholder="you@company.com"
           />
         </div>
@@ -55,7 +58,7 @@ export function ContactForm() {
             type="text"
             id="company"
             name="company"
-            className="w-full rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary placeholder:text-text-muted/50 focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+            className={fieldClass}
             placeholder="Company name"
           />
         </div>
@@ -67,7 +70,7 @@ export function ContactForm() {
             type="text"
             id="role"
             name="role"
-            className="w-full rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary placeholder:text-text-muted/50 focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+            className={fieldClass}
             placeholder="Your role"
           />
         </div>
@@ -75,12 +78,13 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="project-stage" className="mb-2 block text-sm font-medium text-text-primary">
-          Project Stage
+          Project stage
         </label>
         <select
           id="project-stage"
           name="project-stage"
-          className="w-full rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+          required
+          className={cn(fieldClass, "form-select")}
           defaultValue=""
         >
           <option value="" disabled>
@@ -103,7 +107,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full resize-y rounded-lg border border-slate-border bg-slate-deep px-4 py-3 text-text-primary placeholder:text-text-muted/50 focus:border-cyan-neon focus:outline-none focus:ring-1 focus:ring-cyan-neon"
+          className={cn(fieldClass, "resize-y")}
           placeholder="Tell us about your AI initiative, constraints, and goals."
         />
       </div>

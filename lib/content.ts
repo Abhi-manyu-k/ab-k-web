@@ -3,7 +3,7 @@ export const services = [
     id: "strategy",
     title: "Enterprise AI Strategy & ROI Alignment",
     summary:
-      "Define where agentic AI creates value—and where it doesn't—before capital and credibility are spent.",
+      "Define where agentic AI creates value and where it doesn't, before capital and credibility are spent.",
     icon: "Target",
     capabilities: [
       "AI opportunity mapping across business units",
@@ -150,10 +150,10 @@ export const founderBio = {
   name: "Abhimanyu Kanwar",
   title: "Founder, AB Kinetics",
   quote:
-    "I work where the boardroom, the IDE, and the shop floor meet—because that's where agentic AI either ships or stalls.",
+    "I work where the boardroom, the IDE, and the shop floor meet. That's where agentic AI either ships or stalls.",
   paragraphs: [
     "I'm an enterprise AI architect with a mechanical engineering foundation from RWTH Aachen and research in GraphRAG multi-agent systems at the University of Cambridge Service Alliance.",
-    "Most recently I led a proprietary AI Service Assistant for a leading semiconductor equipment manufacturer—scaling it to 100+ field engineers with MCP integrations on Azure and orchestration via LangGraph and n8n.",
+    "Most recently I led a proprietary AI Service Assistant for a leading semiconductor equipment manufacturer, scaling it to 100+ field engineers with MCP integrations on Azure and orchestration via LangGraph and n8n.",
     "AB Kinetics exists for teams stuck between strategy decks and demos that never reach production. We build governed systems your organization can run, extend, and measure.",
   ],
 } as const;

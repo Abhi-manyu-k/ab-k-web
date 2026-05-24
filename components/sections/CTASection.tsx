@@ -10,7 +10,7 @@ export function CTASection() {
         <div className="surface-elevated mx-auto max-w-3xl px-8 py-12 text-center lg:px-14 lg:py-16">
           <SectionHeading
             title="Ready to move past the pilot?"
-            description="Whether you're defining strategy, architecting agents, or wiring operational data—we'll map a path from experiment to production."
+            description="Whether you're defining strategy, architecting agents, or wiring operational data, we'll map a path from experiment to production."
             align="center"
           />
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

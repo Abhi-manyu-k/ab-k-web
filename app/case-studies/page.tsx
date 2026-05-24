@@ -10,7 +10,7 @@ import { caseStudies } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Enterprise-scale impact from AB Kinetics—global rollouts, MCP standardization, and agentic orchestration at production scale.",
+    "Enterprise-scale impact from AB Kinetics: global rollouts, MCP standardization, and agentic orchestration at production scale.",
 };
 
 export default function CaseStudiesPage() {

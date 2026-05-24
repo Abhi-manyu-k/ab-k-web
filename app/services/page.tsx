@@ -19,7 +19,7 @@ export default function ServicesPage() {
           <SectionHeading
             eyebrow="Capabilities"
             title="Services built for motion"
-            description="From executive alignment to production-grade agentic systems—clear milestones, governance, and technical depth at each stage."
+            description="From executive alignment to production-grade agentic systems, with clear milestones, governance, and technical depth at each stage."
           />
         </Container>
       </section>

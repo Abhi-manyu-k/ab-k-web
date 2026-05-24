@@ -14,7 +14,7 @@ import { aboutPillars, founderBio } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "AB Kinetics bridges C-suite strategy, software architecture, and physical operational reality—the vertical integration advantage.",
+    "AB Kinetics bridges C-suite strategy, software architecture, and physical operational reality. That vertical integration is our advantage.",
 };
 
 const iconMap: Record<string, LucideIcon> = {
@@ -31,7 +31,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Our edge"
             title="The vertical integration advantage"
-            description="Most AI consultancies stop at strategy decks or isolated demos. We connect boardroom intent to agentic architecture and shop-floor data—so investments hold up in production."
+            description="Most AI consultancies stop at strategy decks or isolated demos. We connect boardroom intent to agentic architecture and shop-floor data so investments hold up in production."
           />
         </Container>
       </section>
@@ -68,7 +68,7 @@ export default function AboutPage() {
           <blockquote className="mt-16 border-l-2 border-amber-action/70 pl-6 lg:mt-20 lg:pl-8">
             <p className="font-heading text-lg font-medium leading-relaxed text-text-primary lg:text-xl">
               Agentic AI only pays off when it can act on real data, respect governance, and fit
-              how your teams actually work—not when it lives in a demo sandbox.
+              how your teams actually work, not when it lives in a demo sandbox.
             </p>
           </blockquote>
         </Container>
@@ -76,14 +76,14 @@ export default function AboutPage() {
 
       <section className="border-t divider-subtle bg-slate-deep/40 py-20 lg:py-28">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-2xl bg-slate-card lg:mx-0">
+          <div className="grid gap-12 lg:grid-cols-[200px_1fr] lg:gap-14">
+            <div className="relative mx-auto aspect-square w-full max-w-[168px] shrink-0 overflow-hidden rounded-xl bg-slate-card sm:max-w-[180px] lg:mx-0 lg:max-w-[200px]">
               <Image
                 src="/images/founder.jpg"
                 alt={`Portrait of ${founderBio.name}, founder of AB Kinetics`}
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 1024px) 280px, 280px"
+                sizes="200px"
                 priority
               />
             </div>

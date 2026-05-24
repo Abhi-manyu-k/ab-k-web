@@ -13,7 +13,7 @@ export function TeaserSections() {
         <SectionHeading
           eyebrow="What we do"
           title="End-to-end AI kinetics"
-          description="Executive intent, technical execution, and operational context—connected so investments create motion, not shelfware."
+          description="Executive intent, technical execution, and operational context, connected so investments create motion, not shelfware."
           className="mb-12 lg:mb-14"
         />
 
