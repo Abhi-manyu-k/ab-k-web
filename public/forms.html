@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Form</title>
+  </head>
+  <body>
+    <!-- Hidden form for Netlify Forms detection at build time -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <input type="text" name="role" />
+      <select name="project-stage">
+        <option value="AI strategy">AI strategy</option>
+        <option value="Prototype">Prototype</option>
+        <option value="Production rollout">Production rollout</option>
+        <option value="Industrial integration">Industrial integration</option>
+        <option value="Other">Other</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
