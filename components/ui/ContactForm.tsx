@@ -119,7 +119,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-electric px-8 py-3.5 text-sm font-semibold text-onyx transition-colors hover:bg-cyan-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx sm:w-auto"
+        className="w-full rounded-lg bg-amber-action px-8 py-3.5 text-sm font-semibold text-onyx transition-colors hover:bg-amber-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx sm:w-auto"
       >
         {siteConfig.contact.formTitle}
       </button>

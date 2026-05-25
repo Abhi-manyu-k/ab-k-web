@@ -4,6 +4,7 @@ interface CardProps {
   children: React.ReactNode;
   className?: string;
   variant?: "default" | "elevated" | "muted";
+  trace?: boolean;
 }
 
 const variantStyles = {
@@ -12,8 +13,22 @@ const variantStyles = {
   muted: "rounded-2xl bg-slate-deep/50",
 };
 
-export function Card({ children, className, variant = "default" }: CardProps) {
+export function Card({
+  children,
+  className,
+  variant = "default",
+  trace = true,
+}: CardProps) {
   return (
-    <div className={cn(variantStyles[variant], "p-6 lg:p-8", className)}>{children}</div>
+    <div
+      className={cn(
+        variantStyles[variant],
+        trace && "card-trace",
+        "p-6 lg:p-8",
+        className,
+      )}
+    >
+      {children}
+    </div>
   );
 }

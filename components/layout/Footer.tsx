@@ -18,7 +18,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-text-muted transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon"
+                  className="text-sm text-text-muted transition-colors hover:text-amber-action focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
                 >
                   {link.label}
                 </Link>
@@ -32,13 +32,13 @@ export function Footer() {
             </p>
             <Link
               href="/contact"
-              className="mt-3 inline-block text-sm font-medium text-cyan-neon transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon"
+              className="mt-3 inline-block text-sm font-medium text-amber-action transition-colors hover:text-amber-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
             >
               {siteConfig.contact.formTitle}
             </Link>
             <Link
               href={`mailto:${siteConfig.contact.email}`}
-              className="mt-2 block text-sm text-text-muted transition-colors hover:text-cyan-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon md:ml-auto md:w-fit"
+              className="mt-2 block text-sm text-text-muted transition-colors hover:text-amber-action focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action md:ml-auto md:w-fit"
             >
               {siteConfig.contact.email}
             </Link>
@@ -46,7 +46,7 @@ export function Footer() {
               href={siteConfig.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 block text-sm text-text-muted transition-colors hover:text-cyan-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon md:ml-auto md:w-fit"
+              className="mt-2 block text-sm text-text-muted transition-colors hover:text-amber-action focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action md:ml-auto md:w-fit"
             >
               LinkedIn
             </Link>

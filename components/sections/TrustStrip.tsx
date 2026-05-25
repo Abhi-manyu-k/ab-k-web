@@ -12,7 +12,7 @@ export function TrustStrip() {
               className="flex min-w-[200px] flex-1 flex-col sm:max-w-[240px] lg:max-w-none"
             >
               <div className="flex items-baseline gap-3">
-                <span className="font-heading text-sm font-semibold tabular-nums text-amber-action">
+                <span className="font-mono text-sm font-semibold tabular-nums text-amber-action">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="font-heading text-sm font-semibold text-text-primary">

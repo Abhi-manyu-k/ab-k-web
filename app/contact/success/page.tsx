@@ -23,7 +23,7 @@ export default function ContactSuccessPage() {
         </div>
         <p className="mt-6 text-sm text-text-muted">
           Or explore our{" "}
-          <Link href="/services" className="text-cyan-neon hover:underline">
+          <Link href="/services" className="text-amber-action hover:underline">
             services
           </Link>{" "}
           while you wait.

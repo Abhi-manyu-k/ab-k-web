@@ -42,10 +42,10 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+                "text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
                 pathname === link.href
-                  ? "text-cyan-neon"
-                  : "text-text-muted hover:text-text-primary",
+                  ? "text-amber-action"
+                  : "text-text-muted hover:text-amber-action",
               )}
             >
               {link.label}
@@ -58,7 +58,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-text-primary md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-text-primary md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -84,7 +84,7 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   className={cn(
                     "text-base font-medium transition-colors",
-                    pathname === link.href ? "text-cyan-neon" : "text-text-muted",
+                    pathname === link.href ? "text-amber-action" : "text-text-muted",
                   )}
                 >
                   {link.label}
@@ -93,7 +93,7 @@ export function Header() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-electric px-6 py-3 text-sm font-semibold text-onyx transition-colors hover:bg-cyan-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-amber-action px-6 py-3 text-sm font-semibold text-onyx transition-colors hover:bg-amber-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
               >
                 {siteConfig.contact.formTitle}
               </Link>

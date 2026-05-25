@@ -7,6 +7,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTASection } from "@/components/sections/CTASection";
 import { aboutPillars, founderBio } from "@/lib/content";
@@ -28,11 +29,13 @@ export default function AboutPage() {
     <>
       <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
-          <SectionHeading
-            eyebrow="Our edge"
-            title="The vertical integration advantage"
-            description="Most AI consultancies stop at strategy decks or isolated demos. We connect boardroom intent to agentic architecture and shop-floor data so investments hold up in production."
-          />
+          <FadeInOnScroll>
+            <SectionHeading
+              eyebrow="Our edge"
+              title="The vertical integration advantage"
+              description="Most AI consultancies stop at strategy decks or isolated demos. We connect boardroom intent to agentic architecture and shop-floor data so investments hold up in production."
+            />
+          </FadeInOnScroll>
         </Container>
       </section>
 
@@ -47,10 +50,10 @@ export default function AboutPage() {
                   className="grid gap-6 border-t divider-subtle py-10 first:border-t-0 first:pt-0 lg:grid-cols-[auto_1fr] lg:gap-12 lg:py-14"
                 >
                   <div className="flex items-start gap-4">
-                    <span className="font-heading text-2xl font-bold tabular-nums text-amber-action/80">
+                    <span className="font-mono text-2xl font-bold tabular-nums text-amber-action/80">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </div>
                   </div>

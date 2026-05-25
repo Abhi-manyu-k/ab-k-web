@@ -8,11 +8,11 @@ interface SupportingCaseStudyProps {
 
 export function SupportingCaseStudy({ study }: SupportingCaseStudyProps) {
   return (
-    <article className="border-t divider-subtle py-8 first:border-t-0 first:pt-0 lg:py-10">
+    <article className="card-trace surface-card border-t divider-subtle p-6 py-8 first:border-t-0 first:pt-0 lg:py-10">
       <h3 className="font-heading text-lg font-semibold text-text-primary">{study.title}</h3>
       <p className="mt-2 text-sm text-text-muted">{study.context}</p>
       <p className="mt-4 text-sm leading-relaxed text-text-primary">
-        <span className="text-amber-action">Impact: </span>
+        <span className="font-mono text-xs text-amber-action">impact: </span>
         {study.impact}
       </p>
     </article>

@@ -12,18 +12,17 @@ export function Logo({ showTagline = false, className }: LogoProps) {
     <Link
       href="/"
       className={cn(
-        "group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+        "group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
         className,
       )}
     >
       <svg
-        className="h-8 w-auto text-cyan-neon/90 transition-colors group-hover:text-cyan-neon"
+        className="h-8 w-auto text-amber-action/90 transition-colors group-hover:text-amber-action"
         viewBox="0 0 100 100"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        {/* Geometric AB monogram — replace paths when final SVG asset is ready */}
         <path d="M12 18 H38 V42 H28 V82 H22 V42 H12 Z" />
         <path d="M48 18 H88 V28 H58 V44 H82 V54 H58 V72 H88 V82 H48 Z" />
       </svg>

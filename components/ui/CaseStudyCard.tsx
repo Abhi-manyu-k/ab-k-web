@@ -13,15 +13,15 @@ export function CaseStudyCard({ study }: CaseStudyCardProps) {
       </h3>
       <div className="mt-5 space-y-4 text-sm">
         <div>
-          <p className="text-xs font-medium text-cyan-neon">Context</p>
+          <p className="font-mono text-xs text-cyan-info">context</p>
           <p className="mt-1 text-text-muted">{study.context}</p>
         </div>
         <div>
-          <p className="text-xs font-medium text-cyan-neon">Challenge</p>
+          <p className="font-mono text-xs text-cyan-info">challenge</p>
           <p className="mt-1 text-text-muted">{study.challenge}</p>
         </div>
         <div>
-          <p className="text-xs font-medium text-cyan-neon">Intervention</p>
+          <p className="font-mono text-xs text-cyan-info">intervention</p>
           <p className="mt-1 text-text-muted">{study.intervention}</p>
         </div>
         <div>

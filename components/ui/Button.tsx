@@ -15,10 +15,10 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-electric text-onyx font-semibold hover:bg-cyan-neon",
+    "bg-amber-action text-onyx font-semibold hover:bg-amber-hover",
   secondary:
-    "border border-slate-border/80 bg-slate-card/40 text-text-primary hover:border-cyan-neon/40 hover:bg-slate-card/70",
-  ghost: "text-text-muted hover:text-text-primary",
+    "border border-amber-action/50 bg-transparent text-amber-action hover:bg-amber-action/10",
+  ghost: "text-text-muted hover:text-amber-action",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -36,7 +36,7 @@ export function Button({
   external,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-neon focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+    "inline-flex items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
     variantStyles[variant],
     sizeStyles[size],
     className,

@@ -4,7 +4,7 @@ export const siteConfig = {
   ogImage: "/og.svg",
   description: "Enterprise AI Architecture & Agentic Workflow Orchestration.",
   links: {
-    linkedin: "https://www.linkedin.com/in/your-profile",
+    linkedin: "https://www.linkedin.com/in/abhimanyu-kanwar-792721180",
   },
   contact: {
     email: "strategy@abkinetics.com",

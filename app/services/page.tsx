@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
+import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceBlock } from "@/components/ui/ServiceBlock";
 import { CTASection } from "@/components/sections/CTASection";
@@ -16,11 +17,13 @@ export default function ServicesPage() {
     <>
       <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
-          <SectionHeading
-            eyebrow="Capabilities"
-            title="Services built for motion"
-            description="From executive alignment to production-grade agentic systems, with clear milestones, governance, and technical depth at each stage."
-          />
+          <FadeInOnScroll>
+            <SectionHeading
+              eyebrow="Capabilities"
+              title="Services built for motion"
+              description="From executive alignment to production-grade agentic systems, with clear milestones, governance, and technical depth at each stage."
+            />
+          </FadeInOnScroll>
         </Container>
       </section>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
+import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FeaturedCaseStudy } from "@/components/ui/FeaturedCaseStudy";
 import { SupportingCaseStudy } from "@/components/ui/SupportingCaseStudy";
@@ -20,11 +21,13 @@ export default function CaseStudiesPage() {
     <>
       <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
-          <SectionHeading
-            eyebrow="Track record"
-            title="Proven impact"
-            description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
-          />
+          <FadeInOnScroll>
+            <SectionHeading
+              eyebrow="Track record"
+              title="Proven impact"
+              description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
+            />
+          </FadeInOnScroll>
         </Container>
       </section>
 

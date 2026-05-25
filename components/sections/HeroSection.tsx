@@ -1,11 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { HeroAccent } from "@/components/ui/HeroAccent";
 import { siteConfig } from "@/lib/site";
 
 export function HeroSection() {
@@ -25,7 +25,7 @@ export function HeroSection() {
 
             <h1 className="display-heading text-4xl text-text-primary sm:text-5xl lg:text-6xl">
               From passive pilots to{" "}
-              <span className="gradient-text">systems that ship</span>
+              <span className="text-amber-action">systems that ship</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-text-muted sm:text-base">
@@ -49,7 +49,28 @@ export function HeroSection() {
             </p>
           </motion.div>
 
-          <HeroAccent />
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+            className="relative pb-8 lg:pb-24"
+          >
+            <div className="overflow-hidden rounded-xl border border-slate-border/60 bg-slate-deep">
+              <Image
+                src="/images/hero-artifact.png"
+                alt="Split view: VS Code with equipment agent code on the left, field engineer with tablet in front of heavy machinery on the right"
+                width={800}
+                height={500}
+                className="h-auto w-full object-cover"
+                priority
+              />
+            </div>
+            <p className="mt-3 font-mono text-xs text-text-muted">
+              <span className="text-cyan-info">equipment_agent.py</span>
+              {" | "}
+              live field diagnostics
+            </p>
+          </motion.div>
         </div>
       </Container>
     </section>

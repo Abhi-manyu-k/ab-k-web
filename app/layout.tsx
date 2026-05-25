@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Syncopate } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk, Syncopate } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site";
@@ -22,6 +22,13 @@ const syncopate = Syncopate({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-syncopate",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -54,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${syncopate.variable}`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${syncopate.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen antialiased">
         <Header />

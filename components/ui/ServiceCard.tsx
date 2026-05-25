@@ -24,7 +24,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
 
   return (
     <Card className="flex h-full flex-col">
-      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-deep text-cyan-neon">
+      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-deep text-amber-action">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </div>
       <h3 className="font-heading text-xl font-semibold text-text-primary">

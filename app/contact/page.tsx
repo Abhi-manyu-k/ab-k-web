@@ -29,21 +29,21 @@ export default function ContactPage() {
             <div className="lg:col-span-2">
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
                     <Mail className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="font-medium text-text-primary">Email</p>
                     <a
                       href={`mailto:${siteConfig.contact.email}`}
-                      className="text-text-muted transition-colors hover:text-cyan-neon"
+                      className="text-text-muted transition-colors hover:text-amber-action"
                     >
                       {siteConfig.contact.email}
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-cyan-neon">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
                     <MapPin className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
