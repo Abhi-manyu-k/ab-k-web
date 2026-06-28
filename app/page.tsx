@@ -1,6 +1,10 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustStrip } from "@/components/sections/TrustStrip";
-import { TeaserSections } from "@/components/sections/TeaserSections";
+import { CoreConceptSection } from "@/components/sections/CoreConceptSection";
+import { PlatformArchitectureSection } from "@/components/sections/PlatformArchitectureSection";
+import { UseCasesSection } from "@/components/sections/UseCasesSection";
+import { LegacyExpertiseSection } from "@/components/sections/LegacyExpertiseSection";
+import { TrustComplianceSection } from "@/components/sections/TrustComplianceSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -8,7 +12,11 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TrustStrip />
-      <TeaserSections />
+      <CoreConceptSection />
+      <PlatformArchitectureSection />
+      <UseCasesSection />
+      <LegacyExpertiseSection />
+      <TrustComplianceSection />
       <CTASection />
     </>
   );

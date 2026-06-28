@@ -1,5 +1,5 @@
 interface TerminalBlockProps {
-  lines: { type: "prompt" | "output" | "status" | "plain"; text: string }[];
+  lines: readonly { type: "prompt" | "output" | "status" | "plain"; text: string }[];
   className?: string;
 }
 

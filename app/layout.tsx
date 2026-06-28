@@ -34,7 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} | Agentic AI Consulting`,
+    default: `${siteConfig.name} | Virtual Employees for German Enterprises`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,

@@ -11,16 +11,16 @@ export function CTASection() {
         <FadeInOnScroll>
           <div className="card-trace surface-elevated mx-auto max-w-3xl px-8 py-12 text-center lg:px-14 lg:py-16">
             <SectionHeading
-              title="Ready to move past the pilot?"
-              description="Whether you're defining strategy, architecting agents, or wiring operational data, we'll map a path from experiment to production."
+              title="Deploy Virtual Employees with confidence"
+              description="Whether you're evaluating platform architecture, scoping a pilot department, or planning enterprise-wide rollout — we'll map a governed path from strategy to production."
               align="center"
             />
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button href="/contact" size="lg">
                 {siteConfig.contact.formTitle}
               </Button>
-              <Button href="/case-studies" variant="secondary" size="lg">
-                View track record
+              <Button href="/contact" variant="secondary" size="lg">
+                {siteConfig.contact.secondaryCta}
               </Button>
             </div>
           </div>

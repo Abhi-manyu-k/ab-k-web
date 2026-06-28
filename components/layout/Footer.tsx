@@ -28,7 +28,7 @@ export function Footer() {
 
           <div className="md:text-right">
             <p className="text-sm text-text-muted">
-              Questions about strategy, architecture, or production rollout?
+              Ready to deploy governed Virtual Employees in your organization?
             </p>
             <Link
               href="/contact"
