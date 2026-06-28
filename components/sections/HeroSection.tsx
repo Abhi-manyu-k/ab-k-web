@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { VirtualEmployeeMark } from "@/components/ui/VirtualEmployeeMark";
+import { HeroParticleBust } from "@/components/three/HeroParticleBust";
 import { siteConfig } from "@/lib/site";
 
 export function HeroSection() {
@@ -50,11 +50,10 @@ export function HeroSection() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="relative flex items-center justify-center pb-12 lg:pb-16"
+            className="relative pb-12 lg:pb-16"
           >
-            <div className="relative flex aspect-square w-full max-w-sm items-center justify-center overflow-hidden rounded-2xl border border-slate-border/40 bg-gradient-to-b from-slate-deep/90 to-onyx">
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(46,46,56,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(46,46,56,0.25)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
-              <VirtualEmployeeMark size="lg" className="p-8" />
+            <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-slate-border/40 lg:ml-auto">
+              <HeroParticleBust className="h-full w-full" />
             </div>
           </motion.div>
         </div>
