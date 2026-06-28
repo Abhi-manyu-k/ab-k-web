@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { HeroParticleBust } from "@/components/three/HeroParticleBust";
+import { NeuralNetworkVisual } from "@/components/ui/NeuralNetworkVisual";
 import { siteConfig } from "@/lib/site";
 
 export function HeroSection() {
@@ -53,7 +53,7 @@ export function HeroSection() {
             className="relative pb-12 lg:pb-16"
           >
             <div className="relative aspect-square w-full min-h-[280px] max-w-sm overflow-hidden rounded-2xl border border-slate-border/40 lg:ml-auto">
-              <HeroParticleBust className="h-full w-full" />
+              <NeuralNetworkVisual className="h-full w-full" size="lg" />
             </div>
           </motion.div>
         </div>

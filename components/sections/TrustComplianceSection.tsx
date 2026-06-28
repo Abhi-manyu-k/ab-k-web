@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
-import { VirtualEmployeeMark } from "@/components/ui/VirtualEmployeeMark";
+import { NeuralNetworkVisual } from "@/components/ui/NeuralNetworkVisual";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { complianceFeatures } from "@/lib/content";
 
@@ -28,7 +28,7 @@ export function TrustComplianceSection() {
           <FadeInOnScroll className="order-2 lg:order-1">
             <div className="relative mx-auto max-w-sm lg:max-w-none">
               <div className="overflow-hidden rounded-xl border border-slate-border/60 bg-slate-deep/60 p-6 lg:p-10">
-                <VirtualEmployeeMark size="md" />
+                <NeuralNetworkVisual size="sm" />
               </div>
               <div className="absolute -right-2 -top-2 rounded-md border border-amber-action/30 bg-onyx px-3 py-1.5 font-mono text-xs text-amber-action">
                 EU / DE
