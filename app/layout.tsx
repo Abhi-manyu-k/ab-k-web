@@ -34,7 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} | Virtual Employees for German Enterprises`,
+    default: `${siteConfig.name} | Virtual Employees`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,

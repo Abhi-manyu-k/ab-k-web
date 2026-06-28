@@ -1,16 +1,17 @@
 export const siteConfig = {
   name: "AB Kinetics",
+  tagline: "Virtual Employees for the Enterprise",
   url: "https://www.ab-k.com",
   ogImage: "/og.svg",
   description:
-    "Virtual Employees for German Enterprises — organigram-level agentic AI with GDPR governance, model routing, and enterprise harnesses.",
+    "Governed Virtual Employees for German enterprises — organigram-level AI with GDPR-native controls and model routing.",
   links: {
     linkedin: "https://www.linkedin.com/in/abhimanyu-kanwar-792721180",
   },
   contact: {
-    email: "strategy@abkinetics.com",
-    formTitle: "Request a Platform Demo",
-    secondaryCta: "Discuss Enterprise Integration",
+    email: "strategy@ab-k.com",
+    formTitle: "Request a Demo",
+    secondaryCta: "Discuss Integration",
   },
 };
 
@@ -23,22 +24,10 @@ export const navLinks = [
 ] as const;
 
 export const trustStripItems = [
-  {
-    title: "Organigram-Level Placement",
-    description: "Agents assigned to roles, departments, and reporting lines — not floating chat widgets.",
-  },
-  {
-    title: "GDPR-Native Governance",
-    description: "Data sovereignty, audit logs, and memory scoping built into the platform layer.",
-  },
-  {
-    title: "Model-Agnostic Routing",
-    description: "Route tasks to OpenAI, Anthropic, Mistral, or on-prem Llama — your data, your rules.",
-  },
-  {
-    title: "Production-Proven",
-    description: "Deployed at scale across 100+ engineers with governed MCP pipelines on Azure.",
-  },
+  "Organigram-level",
+  "GDPR-native",
+  "Model routing",
+  "Production-proven",
 ] as const;
 
 export const projectStages = [

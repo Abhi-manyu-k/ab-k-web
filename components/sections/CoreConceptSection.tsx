@@ -18,14 +18,14 @@ const iconMap: Record<string, LucideIcon> = {
 
 export function CoreConceptSection() {
   return (
-    <section className="border-b divider-subtle py-20 lg:py-28">
+    <section className="border-b divider-subtle py-16 lg:py-20">
       <Container>
         <FadeInOnScroll>
           <SectionHeading
             eyebrow="The shift"
             title="From tools to teammates"
-            description="GenAI pilots stall because chatbots sit outside organizational structure. Virtual Employees are placed on the org chart — with defined roles, scoped access, and accountability to the teams they serve."
-            className="mb-12 lg:mb-16"
+            description="AI on the org chart — with roles, scoped access, and accountability."
+            className="mb-10"
           />
         </FadeInOnScroll>
 

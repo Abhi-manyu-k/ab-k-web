@@ -32,7 +32,7 @@ export function Logo({ showTagline = false, className }: LogoProps) {
         </span>
         {showTagline && (
           <span className="hidden text-xs text-text-muted sm:block">
-            {siteConfig.description}
+            {siteConfig.tagline}
           </span>
         )}
       </div>

@@ -3,23 +3,15 @@ import { trustStripItems } from "@/lib/site";
 
 export function TrustStrip() {
   return (
-    <section className="border-b divider-subtle bg-slate-deep/40 py-8 lg:py-10">
+    <section className="border-b divider-subtle bg-slate-deep/40 py-5">
       <Container>
-        <ul className="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between lg:gap-8">
-          {trustStripItems.map((item, index) => (
+        <ul className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {trustStripItems.map((item) => (
             <li
-              key={item.title}
-              className="flex min-w-[200px] flex-1 flex-col sm:max-w-[240px] lg:max-w-none"
+              key={item}
+              className="rounded-full border border-slate-border/50 bg-slate-deep/80 px-3.5 py-1.5 text-xs font-medium text-text-muted"
             >
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-semibold tabular-nums text-amber-action">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-heading text-sm font-semibold text-text-primary">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="mt-1.5 pl-8 text-sm text-text-muted">{item.description}</p>
+              {item}
             </li>
           ))}
         </ul>

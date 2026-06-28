@@ -6,16 +6,16 @@ import { siteConfig } from "@/lib/site";
 
 export function CTASection() {
   return (
-    <section className="border-t divider-subtle bg-slate-deep/30 py-20 lg:py-28">
+    <section className="border-t divider-subtle bg-slate-deep/30 py-16 lg:py-20">
       <Container>
         <FadeInOnScroll>
-          <div className="card-trace surface-elevated mx-auto max-w-3xl px-8 py-12 text-center lg:px-14 lg:py-16">
+          <div className="card-trace surface-elevated mx-auto max-w-2xl px-8 py-10 text-center lg:px-12 lg:py-12">
             <SectionHeading
-              title="Deploy Virtual Employees with confidence"
-              description="Whether you're evaluating platform architecture, scoping a pilot department, or planning enterprise-wide rollout — we'll map a governed path from strategy to production."
+              title="Ready to deploy?"
+              description="Book a demo. We'll map a governed path from pilot to production."
               align="center"
             />
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button href="/contact" size="lg">
                 {siteConfig.contact.formTitle}
               </Button>

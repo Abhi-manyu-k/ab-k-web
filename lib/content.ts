@@ -160,21 +160,18 @@ export const founderBio = {
 
 export const coreConceptPoints = [
   {
-    title: "On the org chart, not in a sidebar",
-    description:
-      "Virtual Employees are assigned to departments, roles, and workflows — with scoped permissions, defined responsibilities, and accountable outputs.",
+    title: "On the org chart",
+    description: "Assigned to roles and departments — not floating in a sidebar.",
     icon: "Users",
   },
   {
-    title: "Multiplayer by design",
-    description:
-      "Agents live where your teams work: Slack, Microsoft Teams, internal tools, and ticketing systems. They remember context, collaborate asynchronously, and hand off to humans when judgment is required.",
+    title: "Lives in your workflows",
+    description: "Slack, Teams, internal tools. Async collaboration with your teams.",
     icon: "MessageSquare",
   },
   {
-    title: "Persistent teammates, not one-off chats",
-    description:
-      "Long-term memory builds institutional knowledge over months — without leaking context across departmental boundaries or violating data classification policies.",
+    title: "Memory that stays scoped",
+    description: "Long-term context without cross-department leakage.",
     icon: "Brain",
   },
 ] as const;
@@ -182,79 +179,27 @@ export const coreConceptPoints = [
 export const platformPillars = [
   {
     id: "harnesses",
-    title: "Custom Harnesses & Tools",
-    summary:
-      "Deep integration into your internal APIs, codebases, ERP systems, and operational databases — not generic plugins.",
-    capabilities: [
-      "MCP-style tool interfaces for enterprise systems",
-      "Custom agent harnesses tailored to departmental workflows",
-      "Human-in-the-loop approval gates and escalation paths",
-      "Integration with Slack, Teams, Jira, ServiceNow, and internal portals",
-    ],
+    title: "Custom Harnesses",
+    summary: "Deep hooks into your APIs, ERP, and internal systems.",
     icon: "Wrench",
-    terminal: [
-      { type: "prompt" as const, text: "> harness.register(dept='finance', tools=[erp, bi])" },
-      { type: "output" as const, text: "tools_bound: 14" },
-      { type: "output" as const, text: "approval_gates: enabled" },
-      { type: "status" as const, text: "status: production" },
-    ],
   },
   {
     id: "gateway",
-    title: "Model Gateway & Routing",
-    summary:
-      "Agnostic routing to the right model for the right task — ensuring sensitive data never reaches an unauthorized endpoint.",
-    capabilities: [
-      "Policy-driven routing across OpenAI, Anthropic, Mistral, and Llama",
-      "Task-level model selection based on sensitivity and latency requirements",
-      "EU-hosted and on-premises deployment options",
-      "Token spend management and per-department budgets",
-    ],
+    title: "Model Gateway",
+    summary: "Route to the right model. Sensitive data stays where it belongs.",
     icon: "GitBranch",
-    terminal: [
-      { type: "prompt" as const, text: "> gateway.route(task='pii_analysis', policy='eu_only')" },
-      { type: "output" as const, text: "model: mistral-large-eu" },
-      { type: "output" as const, text: "data_residency: confirmed" },
-      { type: "status" as const, text: "status: routed" },
-    ],
   },
   {
     id: "governance",
-    title: "Enterprise Governance & GDPR",
-    summary:
-      "Strict access controls, compartmentalized memory, and full audit trails — designed for German Mittelstand and enterprise compliance teams.",
-    capabilities: [
-      "Role-based access and department-scoped memory boundaries",
-      "Immutable audit logs for every agent action and model call",
-      "GDPR-compliant data handling with right-to-erasure support",
-      "Data Processing Agreement (DPA) and subprocessors transparency",
-    ],
+    title: "GDPR Governance",
+    summary: "Access controls, audit logs, and department-scoped memory.",
     icon: "Shield",
-    terminal: [
-      { type: "prompt" as const, text: "> governance.audit(scope='finance', period='30d')" },
-      { type: "output" as const, text: "actions_logged: 12,847" },
-      { type: "output" as const, text: "policy_violations: 0" },
-      { type: "status" as const, text: "status: compliant" },
-    ],
   },
   {
     id: "memory",
-    title: "Context Compaction & Memory",
-    summary:
-      "Persistent, long-term memory that accumulates tacit organizational knowledge — without cross-departmental data leakage.",
-    capabilities: [
-      "Hierarchical knowledge graphs for structured enterprise memory",
-      "Context compaction to maintain relevance over extended interactions",
-      "Department-isolated memory stores with explicit sharing policies",
-      "Evaluator agents that detect hallucinations before responses ship",
-    ],
+    title: "Context & Memory",
+    summary: "Persistent knowledge graphs without cross-team leakage.",
     icon: "Database",
-    terminal: [
-      { type: "prompt" as const, text: "> memory.compact(agent='virtual_analyst', window='90d')" },
-      { type: "output" as const, text: "knowledge_nodes: 3,204" },
-      { type: "output" as const, text: "cross_dept_leaks: 0" },
-      { type: "status" as const, text: "status: grounded" },
-    ],
   },
 ] as const;
 
