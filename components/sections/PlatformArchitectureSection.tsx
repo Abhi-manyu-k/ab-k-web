@@ -12,7 +12,6 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { VirtualEmployeeMark } from "@/components/ui/VirtualEmployeeMark";
 import { enterpriseUseCases, platformPillars } from "@/lib/content";
 
 const pillarIcons: Record<string, LucideIcon> = {
@@ -39,12 +38,6 @@ export function PlatformArchitectureSection() {
               title="Governed from the ground up"
               description="Harnesses, model routing, GDPR controls, and scoped memory — one stack, not a chat wrapper."
             />
-          </FadeInOnScroll>
-
-          <FadeInOnScroll delay={80} className="hidden justify-center lg:flex">
-            <div className="flex h-48 w-48 items-center justify-center rounded-2xl border border-slate-border/30 bg-onyx/50">
-              <VirtualEmployeeMark size="md" />
-            </div>
           </FadeInOnScroll>
         </div>
 

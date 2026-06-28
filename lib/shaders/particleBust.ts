@@ -97,8 +97,8 @@ export const particleBustVertexShader = /* glsl */ `
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
 
-    float size = 1.6 + vNoise * 1.2 + influence * 4.0 + aRandom * 0.8;
-    gl_PointSize = size * (280.0 / -mvPosition.z);
+    float size = 2.8 + vNoise * 1.8 + influence * 5.0 + aRandom * 1.2;
+    gl_PointSize = size * (320.0 / max(-mvPosition.z, 0.1));
   }
 `;
 
@@ -114,20 +114,31 @@ export const particleBustFragmentShader = /* glsl */ `
     float dist = length(uv);
     if (dist > 0.5) discard;
 
-    float soft = 1.0 - smoothstep(0.18, 0.5, dist);
+    float soft = 1.0 - smoothstep(0.12, 0.5, dist);
 
-    vec3 baseColor = vec3(0.38, 0.44, 0.52);
+    vec3 baseColor = vec3(0.55, 0.62, 0.72);
     vec3 cyan = vec3(0.4, 0.91, 0.98);
     vec3 amber = vec3(0.96, 0.62, 0.04);
 
     float neural = sin(uTime * 2.0 + vRandom * 12.0 + vNoise * 4.0) * 0.5 + 0.5;
-    float fire = smoothstep(0.15, 0.75, vNoise + neural * 0.35);
+    float fire = smoothstep(0.1, 0.7, vNoise + neural * 0.35);
     vec3 accent = mix(cyan, amber, neural);
 
-    float glow = fire * 0.75 + vInfluence * 1.2;
+    float glow = fire * 0.85 + vInfluence * 1.4;
     vec3 color = mix(baseColor, accent, clamp(glow, 0.0, 1.0));
 
-    float alpha = soft * (0.45 + glow * 0.55);
+    float alpha = soft * (0.6 + glow * 0.4);
     gl_FragColor = vec4(color, alpha);
   }
 `;
+
+// WebGL2 / Three.js r163+ uses GLSL3 — gl_FragColor is invalid there.
+export const particleBustVertexShaderGLSL3 = particleBustVertexShader
+  .replace("attribute float aRandom;", "in float aRandom;")
+  .replace("attribute vec3 aNormal;", "in vec3 aNormal;")
+  .replace(/varying /g, "out ");
+
+export const particleBustFragmentShaderGLSL3 = particleBustFragmentShader
+  .replace(/varying /g, "in ")
+  .replace("void main() {", "out vec4 fragColor;\n\nvoid main() {")
+  .replace("gl_FragColor", "fragColor");

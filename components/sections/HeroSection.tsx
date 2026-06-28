@@ -52,7 +52,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
             className="relative pb-12 lg:pb-16"
           >
-            <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-slate-border/40 lg:ml-auto">
+            <div className="relative aspect-square w-full min-h-[280px] max-w-sm overflow-hidden rounded-2xl border border-slate-border/40 lg:ml-auto">
               <HeroParticleBust className="h-full w-full" />
             </div>
           </motion.div>

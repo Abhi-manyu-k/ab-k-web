@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "framer-motion";
-import { VirtualEmployeeMark } from "@/components/ui/VirtualEmployeeMark";
 
 const ParticleBustCanvas = dynamic(
   () =>
@@ -10,7 +9,7 @@ const ParticleBustCanvas = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-full w-full bg-[#0a0a0c]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#0a0a0c]" aria-hidden="true" />
     ),
   },
 );
@@ -22,13 +21,11 @@ interface HeroParticleBustProps {
 export function HeroParticleBust({ className }: HeroParticleBustProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  if (shouldReduceMotion) {
-    return (
-      <div className={className}>
-        <VirtualEmployeeMark size="lg" animated={false} className="p-8" />
-      </div>
-    );
-  }
-
-  return <ParticleBustCanvas className={className} interactive />;
+  return (
+    <ParticleBustCanvas
+      className={className}
+      interactive={!shouldReduceMotion}
+      lowMotion={!!shouldReduceMotion}
+    />
+  );
 }

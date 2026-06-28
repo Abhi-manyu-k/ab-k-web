@@ -10,8 +10,8 @@ import {
   type BustPointCloud,
 } from "@/lib/three/bustPointCloud";
 import {
-  particleBustFragmentShader,
-  particleBustVertexShader,
+  particleBustFragmentShaderGLSL3,
+  particleBustVertexShaderGLSL3,
 } from "@/lib/shaders/particleBust";
 
 const BUST_MODEL_PATH = "/models/bust-head.glb";
@@ -20,6 +20,23 @@ const INTERACTION_SPHERE = new THREE.Sphere(new THREE.Vector3(0, 0.28, 0), 0.72)
 
 interface ParticleBustProps {
   interactive?: boolean;
+  lowMotion?: boolean;
+}
+
+function createParticleMaterial() {
+  return new THREE.ShaderMaterial({
+    glslVersion: THREE.GLSL3,
+    uniforms: {
+      uTime: { value: 0 },
+      uMouseWorld: { value: new THREE.Vector3(0, 0.28, 0.5) },
+      uMouseStrength: { value: 0 },
+    },
+    vertexShader: particleBustVertexShaderGLSL3,
+    fragmentShader: particleBustFragmentShaderGLSL3,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
 }
 
 function buildGeometry(cloud: BustPointCloud) {
@@ -33,9 +50,11 @@ function buildGeometry(cloud: BustPointCloud) {
 function ParticleBustPoints({
   cloud,
   interactive = true,
+  lowMotion = false,
 }: {
   cloud: BustPointCloud;
   interactive?: boolean;
+  lowMotion?: boolean;
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
@@ -47,23 +66,7 @@ function ParticleBustPoints({
   const smoothMouse = useMemo(() => new THREE.Vector3(0, 0.28, 0.5), []);
 
   const geometry = useMemo(() => buildGeometry(cloud), [cloud]);
-
-  const material = useMemo(
-    () =>
-      new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uMouseWorld: { value: new THREE.Vector3(0, 0.28, 0.5) },
-          uMouseStrength: { value: 0 },
-        },
-        vertexShader: particleBustVertexShader,
-        fragmentShader: particleBustFragmentShader,
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      }),
-    [],
-  );
+  const material = useMemo(() => createParticleMaterial(), []);
 
   useEffect(() => {
     materialRef.current = material;
@@ -76,7 +79,9 @@ function ParticleBustPoints({
   useFrame((state, delta) => {
     if (!groupRef.current || !materialRef.current) return;
 
-    groupRef.current.rotation.y += delta * 0.18;
+    if (!lowMotion) {
+      groupRef.current.rotation.y += delta * 0.18;
+    }
 
     materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
 
@@ -106,21 +111,34 @@ function ParticleBustPoints({
   );
 }
 
-function ParticleBustFromGLTF({ interactive }: ParticleBustProps) {
+function ParticleBustFromGLTF({
+  interactive,
+  lowMotion,
+}: ParticleBustProps) {
   const gltf = useGLTF(BUST_MODEL_PATH);
   const cloud = useMemo(
     () => extractPointCloudFromObject(gltf.scene, PARTICLE_COUNT),
     [gltf.scene],
   );
-  return <ParticleBustPoints cloud={cloud} interactive={interactive} />;
+  return (
+    <ParticleBustPoints cloud={cloud} interactive={interactive} lowMotion={lowMotion} />
+  );
 }
 
-function ParticleBustProcedural({ interactive }: ParticleBustProps) {
+function ParticleBustProcedural({
+  interactive,
+  lowMotion,
+}: ParticleBustProps) {
   const cloud = useMemo(() => createProceduralBustPointCloud(PARTICLE_COUNT), []);
-  return <ParticleBustPoints cloud={cloud} interactive={interactive} />;
+  return (
+    <ParticleBustPoints cloud={cloud} interactive={interactive} lowMotion={lowMotion} />
+  );
 }
 
-export function ParticleBust({ interactive = true }: ParticleBustProps) {
+export function ParticleBust({
+  interactive = true,
+  lowMotion = false,
+}: ParticleBustProps) {
   const [modelReady, setModelReady] = useState(false);
 
   useEffect(() => {
@@ -137,11 +155,15 @@ export function ParticleBust({ interactive = true }: ParticleBustProps) {
 
   if (modelReady) {
     return (
-      <Suspense fallback={<ParticleBustProcedural interactive={interactive} />}>
-        <ParticleBustFromGLTF interactive={interactive} />
+      <Suspense
+        fallback={
+          <ParticleBustProcedural interactive={interactive} lowMotion={lowMotion} />
+        }
+      >
+        <ParticleBustFromGLTF interactive={interactive} lowMotion={lowMotion} />
       </Suspense>
     );
   }
 
-  return <ParticleBustProcedural interactive={interactive} />;
+  return <ParticleBustProcedural interactive={interactive} lowMotion={lowMotion} />;
 }
