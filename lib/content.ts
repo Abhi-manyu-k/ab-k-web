@@ -207,28 +207,25 @@ export const enterpriseUseCases = [
   {
     id: "analyst",
     title: "Virtual Data Analyst",
-    department: "Finance & Controlling",
-    description:
-      "Queries live ERP and BI systems, generates variance reports, and flags anomalies — with citations back to source records and approval gates before any data leaves the department boundary.",
-    capabilities: ["ERP integration", "Automated reporting", "Anomaly detection"],
+    department: "Finance",
+    description: "Queries ERP and BI systems, flags anomalies, cites source records.",
+    capabilities: ["ERP integration", "Reporting", "Anomaly detection"],
     icon: "BarChart3",
   },
   {
     id: "engineer",
     title: "Virtual Support Engineer",
-    department: "IT & Operations",
-    description:
-      "Triages tickets, searches internal runbooks and knowledge bases, executes approved remediation scripts, and escalates to human engineers with full context and audit trail.",
-    capabilities: ["Ticket triage", "Runbook execution", "Escalation workflows"],
+    department: "IT & Ops",
+    description: "Triages tickets, runs approved playbooks, escalates with full context.",
+    capabilities: ["Ticket triage", "Runbooks", "Escalation"],
     icon: "Headphones",
   },
   {
     id: "compliance",
     title: "Virtual Compliance Officer",
     department: "Legal & Risk",
-    description:
-      "Monitors regulatory changes, reviews internal policies against GDPR requirements, and produces audit-ready documentation — routed exclusively to EU-hosted models with zero external data exposure.",
-    capabilities: ["Policy review", "Regulatory monitoring", "Audit documentation"],
+    description: "Reviews policies against GDPR, monitors regulatory change, produces audit docs.",
+    capabilities: ["Policy review", "Regulatory monitoring", "Audit docs"],
     icon: "Scale",
   },
 ] as const;
