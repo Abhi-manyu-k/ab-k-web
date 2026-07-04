@@ -42,7 +42,7 @@ export default function AboutPage() {
       <section className="py-20 lg:py-28">
         <Container>
           <ol className="space-y-0">
-            {aboutPillars.map((pillar, index) => {
+            {aboutPillars.map((pillar) => {
               const Icon = iconMap[pillar.icon] ?? Briefcase;
               return (
                 <li
