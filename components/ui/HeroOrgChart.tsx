@@ -21,7 +21,7 @@ const Node = ({
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
     className={cn(
-      "relative flex w-24 sm:w-32 flex-col items-center gap-2 sm:gap-3 rounded-xl border bg-onyx/90 p-3 sm:p-4 backdrop-blur-md transition-colors",
+      "relative flex w-[104px] sm:w-32 flex-col items-center gap-2 sm:gap-3 rounded-xl border bg-onyx/90 p-2 sm:p-4 backdrop-blur-md transition-colors",
       glow
         ? "border-amber-action/50 shadow-[0_0_25px_rgba(245,158,11,0.15)]"
         : "border-slate-border/50",
@@ -43,7 +43,7 @@ const Node = ({
     </div>
     <span
       className={cn(
-        "text-center font-mono text-[0.55rem] sm:text-[0.6875rem] font-semibold tracking-wider",
+        "text-center font-mono text-[0.6rem] sm:text-[0.6875rem] font-semibold tracking-wider",
         glow ? "text-warm-white" : "text-text-muted",
       )}
     >
@@ -83,7 +83,7 @@ export function HeroOrgChart() {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 0.9, ease: "easeInOut" }}
-            className="absolute bottom-0 h-px bg-amber-action/50 origin-center -left-[108px] -right-[108px] sm:-left-[152px] sm:-right-[152px]"
+            className="absolute bottom-0 h-px bg-amber-action/50 origin-center -left-[116px] -right-[116px] sm:-left-[152px] sm:-right-[152px]"
           />
         </motion.div>
 
