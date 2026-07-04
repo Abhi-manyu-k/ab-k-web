@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Shield, Zap, Database, GitMerge, FileText } from "lucide-react";
+import { Activity, Shield, Zap, Database, GitMerge, FileText, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ const Node = ({
   delay = 0,
 }: {
   title: string;
-  icon: any;
+  icon: LucideIcon;
   glow?: boolean;
   delay?: number;
 }) => (
