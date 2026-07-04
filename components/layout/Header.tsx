@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { navLinks, siteConfig } from "@/lib/site";
@@ -29,12 +28,12 @@ export function Header() {
       className={cn(
         "fixed top-0 z-50 w-full border-b transition-[background-color,border-color,backdrop-filter] duration-300",
         scrolled
-          ? "border-slate-border/60 bg-onyx/95 backdrop-blur-md"
-          : "border-transparent bg-onyx/40 backdrop-blur-sm",
+          ? "border-slate-border/40 bg-onyx/95 backdrop-blur-md"
+          : "border-transparent bg-transparent",
       )}
     >
       <Container className="flex h-16 items-center justify-between lg:h-[4.5rem]">
-        <Logo showTagline />
+        <Logo />
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
@@ -42,18 +41,15 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
+                "text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx",
                 pathname === link.href
-                  ? "text-amber-action"
-                  : "text-text-muted hover:text-amber-action",
+                  ? "text-warm-white"
+                  : "text-text-muted hover:text-warm-white",
               )}
             >
               {link.label}
             </Link>
           ))}
-          <Button href="/contact" size="sm">
-            {siteConfig.contact.formTitle}
-          </Button>
         </nav>
 
         <button
@@ -83,8 +79,8 @@ export function Header() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className={cn(
-                    "text-base font-medium transition-colors",
-                    pathname === link.href ? "text-amber-action" : "text-text-muted",
+                    "text-base transition-colors",
+                    pathname === link.href ? "text-warm-white" : "text-text-muted",
                   )}
                 >
                   {link.label}

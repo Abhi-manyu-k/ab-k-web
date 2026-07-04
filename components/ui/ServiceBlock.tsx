@@ -43,7 +43,7 @@ interface ServiceBlockProps {
 function ServiceArtifact({ serviceId }: { serviceId: string }) {
   if (serviceId === "agentic") {
     return (
-      <div className="overflow-hidden rounded-xl border border-slate-border/60 bg-white">
+      <div className="overflow-hidden border border-slate-border/50">
         <Image
           src="/images/rag-whiteboard.png"
           alt="Whiteboard diagram of Agentic RAG with hierarchical keyword, sentence, and chunk retrieval system"
@@ -57,7 +57,7 @@ function ServiceArtifact({ serviceId }: { serviceId: string }) {
 
   if (serviceId === "integration") {
     return (
-      <div className="overflow-hidden rounded-xl border border-slate-border/60">
+      <div className="overflow-hidden border border-slate-border/50">
         <Image
           src="/images/hero-artifact.png"
           alt="IDE with equipment agent code alongside field engineer on shop floor"
@@ -83,30 +83,30 @@ export function ServiceBlock({ service, index }: ServiceBlockProps) {
   return (
     <article
       className={cn(
-        "card-trace grid gap-8 border-t divider-subtle py-12 first:border-t-0 first:pt-0 lg:grid-cols-2 lg:items-start lg:gap-16 lg:py-16",
+        "grid gap-10 border-t divider-subtle py-16 first:border-t-0 first:pt-0 lg:grid-cols-2 lg:items-start lg:gap-20 lg:py-24",
       )}
     >
       <div>
         <div className="flex items-start gap-5">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-deep text-amber-action">
-            <Icon className="h-7 w-7" aria-hidden="true" />
+          <div className="pt-1 text-text-muted">
+            <Icon className="h-6 w-6" aria-hidden="true" />
           </div>
           <div>
-            <span className="font-mono text-xs font-medium tabular-nums text-amber-action">
+            <span className="mono-label block mb-2 text-amber-action/80">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-1 font-heading text-xl font-semibold text-text-primary lg:text-2xl">
+            <h3 className="serif-heading text-2xl text-warm-white lg:text-3xl">
               {service.title}
             </h3>
-            <p className="mt-3 text-text-muted">{service.summary}</p>
+            <p className="mt-4 leading-relaxed text-text-muted">{service.summary}</p>
           </div>
         </div>
 
-        <ul className="mt-8 space-y-3">
+        <ul className="mt-10 space-y-4">
           {service.capabilities.map((cap) => (
             <li
               key={cap}
-              className="flex items-start gap-3 border-l-2 border-amber-action/30 pl-4 text-sm text-text-muted"
+              className="flex items-start gap-3 border-l border-slate-border/50 pl-5 text-[0.9375rem] text-text-muted"
             >
               {cap}
             </li>
@@ -115,7 +115,7 @@ export function ServiceBlock({ service, index }: ServiceBlockProps) {
       </div>
 
       <div className="lg:pt-2">
-        <p className="mb-3 font-mono text-xs text-cyan-info">execution_artifact</p>
+        <p className="mono-label mb-4 text-text-muted">execution_artifact</p>
         <ServiceArtifact serviceId={service.id} />
       </div>
     </article>

@@ -1,4 +1,3 @@
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -20,16 +19,15 @@ export function SectionHeading({
     <div
       className={cn(
         align === "center" && "mx-auto max-w-3xl text-center",
-        align === "center" && "[&_.eyebrow]:justify-center",
         className,
       )}
     >
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="display-heading text-3xl text-text-primary sm:text-4xl lg:text-[2.75rem]">
+      {eyebrow && <p className="mono-label mb-4">{eyebrow}</p>}
+      <h2 className="serif-heading gradient-text text-[1.75rem] sm:text-4xl lg:text-[2.75rem]">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-text-muted sm:text-base">
+        <p className="mt-5 max-w-2xl text-[0.9375rem] leading-relaxed text-text-muted sm:text-base">
           {description}
         </p>
       )}

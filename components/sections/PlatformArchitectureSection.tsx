@@ -8,7 +8,6 @@ import {
   Scale,
   type LucideIcon,
 } from "lucide-react";
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -29,9 +28,9 @@ const useCaseIcons: Record<string, LucideIcon> = {
 
 export function PlatformArchitectureSection() {
   return (
-    <section className="border-b divider-subtle bg-slate-deep/20 py-16 lg:py-20">
+    <section className="border-t divider-subtle py-20 lg:py-32">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1fr_0.7fr] lg:items-center lg:gap-16">
+        <div className="mb-16">
           <FadeInOnScroll>
             <SectionHeading
               eyebrow="Platform"
@@ -41,70 +40,69 @@ export function PlatformArchitectureSection() {
           </FadeInOnScroll>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-12 sm:grid-cols-2 lg:gap-16">
           {platformPillars.map((pillar, index) => {
             const Icon = pillarIcons[pillar.icon] ?? Wrench;
             return (
               <FadeInOnScroll key={pillar.id} delay={index * 60}>
-                <Card className="flex h-full flex-row items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-base font-semibold text-text-primary">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 text-text-muted" aria-hidden="true" />
+                    <h3 className="serif-heading text-xl text-warm-white">
                       {pillar.title}
                     </h3>
-                    <p className="mt-1.5 text-sm text-text-muted">{pillar.summary}</p>
                   </div>
-                </Card>
+                  <p className="text-[0.9375rem] leading-relaxed text-text-muted pl-8">{pillar.summary}</p>
+                </div>
               </FadeInOnScroll>
             );
           })}
         </div>
 
-        <div className="mt-16 border-t divider-subtle pt-12">
+        <hr className="hr-editorial my-16 lg:my-24" />
+
+        <div className="mb-12">
           <FadeInOnScroll>
             <SectionHeading
               eyebrow="Examples"
               title="Virtual Employees in practice"
               description="Department-specific agents with scoped tools and governed memory."
-              className="mb-8"
             />
           </FadeInOnScroll>
+        </div>
 
-          <div className="grid gap-4 lg:grid-cols-3">
-            {enterpriseUseCases.map((useCase, index) => {
-              const Icon = useCaseIcons[useCase.icon] ?? BarChart3;
-              return (
-                <FadeInOnScroll key={useCase.id} delay={index * 60}>
-                  <Card className="flex h-full flex-col">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <span className="rounded-full border border-slate-border/50 bg-slate-deep px-2.5 py-0.5 font-mono text-[0.6875rem] text-cyan-info">
-                        {useCase.department}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 font-heading text-base font-semibold text-text-primary">
-                      {useCase.title}
-                    </h3>
-                    <p className="mt-2 flex-1 text-sm text-text-muted">{useCase.description}</p>
-                    <ul className="mt-4 flex flex-wrap gap-1.5">
-                      {useCase.capabilities.map((cap) => (
-                        <li
-                          key={cap}
-                          className="rounded-md border border-slate-border/40 bg-onyx/50 px-2 py-0.5 text-[0.6875rem] text-text-muted"
-                        >
-                          {cap}
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </FadeInOnScroll>
-              );
-            })}
-          </div>
+        <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
+          {enterpriseUseCases.map((useCase, index) => {
+            const Icon = useCaseIcons[useCase.icon] ?? BarChart3;
+            return (
+              <FadeInOnScroll key={useCase.id} delay={index * 60}>
+                <div className="flex h-full flex-col">
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <Icon className="h-5 w-5 text-text-muted" aria-hidden="true" />
+                    <span className="mono-label text-amber-action/80">
+                      {useCase.department}
+                    </span>
+                  </div>
+                  <h3 className="serif-heading text-xl text-warm-white">
+                    {useCase.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-text-muted">
+                    {useCase.description}
+                  </p>
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {useCase.capabilities.map((cap) => (
+                      <li
+                        key={cap}
+                        className="text-xs text-text-muted border border-slate-border/50 px-2 py-1 rounded-md"
+                      >
+                        {cap}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeInOnScroll>
+            );
+          })}
         </div>
       </Container>
     </section>

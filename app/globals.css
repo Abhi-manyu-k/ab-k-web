@@ -1,17 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-onyx: #09090b;
-  --color-slate-deep: #18181b;
-  --color-slate-card: #1c1c22;
-  --color-slate-border: #2e2e38;
+  /* ─── Palette ─── */
+  --color-onyx: #0e0e0e;
+  --color-slate-deep: #161618;
+  --color-slate-card: #1a1a1e;
+  --color-slate-border: #2a2a32;
   --color-amber-action: #f59e0b;
   --color-amber-hover: #fbbf24;
   --color-cyan-info: #67e8f9;
-  --color-text-primary: #fafafa;
-  --color-text-muted: #a1a1aa;
+  --color-warm-white: #f0e6e4;
+  --color-warm-muted: #b5a8a4;
+  --color-text-primary: #f0e6e4;
+  --color-text-muted: #9a908c;
+
+  /* ─── Typography ─── */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Georgia", serif;
   --font-logo: var(--font-syncopate), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
@@ -21,6 +27,8 @@
   initial-value: 0deg;
   inherits: false;
 }
+
+/* ─── Base ─── */
 
 html {
   scroll-behavior: smooth;
@@ -50,25 +58,78 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.15;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
 ::selection {
   background-color: color-mix(in srgb, var(--color-amber-action) 25%, transparent);
   color: var(--color-text-primary);
 }
+
+/* ─── Gradient text (NDEA-inspired warm gradient) ─── */
+
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #fde8e8 0%,
+    var(--color-warm-white) 25%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Serif heading ─── */
+
+.serif-heading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.28;
+}
+
+/* ─── Mono label (NDEA h4 style) ─── */
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  line-height: 1.8;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ─── Display heading (kept for non-homepage use) ─── */
+
+.display-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+/* ─── Eyebrow ─── */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--color-text-muted);
+  border-radius: 1px;
+}
+
+/* ─── Surfaces ─── */
 
 .surface-card {
   border-radius: 1rem;
@@ -89,35 +150,37 @@ body > * {
   border: 1px solid color-mix(in srgb, var(--color-slate-border) 60%, transparent);
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-heading);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-amber-action);
-}
-
-.eyebrow::before {
-  content: "";
-  display: block;
-  width: 1.25rem;
-  height: 2px;
-  background: var(--color-amber-action);
-  border-radius: 1px;
-}
-
-.display-heading {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-}
+/* ─── Dividers ─── */
 
 .divider-subtle {
-  border-color: color-mix(in srgb, var(--color-slate-border) 50%, transparent);
+  border-color: color-mix(in srgb, var(--color-slate-border) 40%, transparent);
 }
+
+.hr-editorial {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--color-slate-border) 50%, transparent) 20%,
+    color-mix(in srgb, var(--color-slate-border) 50%, transparent) 80%,
+    transparent
+  );
+}
+
+/* ─── Link underline (NDEA style) ─── */
+
+.link-underline {
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: border-color 0.2s ease;
+}
+
+.link-underline:hover {
+  border-bottom-color: transparent;
+}
+
+/* ─── Card trace animation (kept for non-homepage use) ─── */
 
 .card-trace {
   position: relative;
@@ -161,6 +224,8 @@ body > * {
   }
 }
 
+/* ─── Terminal block (kept for non-homepage use) ─── */
+
 .terminal-block {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
@@ -183,6 +248,8 @@ body > * {
 .terminal-block .status {
   color: var(--color-amber-action);
 }
+
+/* ─── Forms ─── */
 
 .form-field {
   width: 100%;

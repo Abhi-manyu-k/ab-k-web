@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
+      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
         <Container>
           <SectionHeading
             eyebrow="Get in touch"
@@ -23,41 +23,40 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="pb-20 lg:pb-28">
+      <section className="py-20 lg:py-32">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-5">
+          <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
             <div className="lg:col-span-2">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
-                    <Mail className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary">Email</p>
-                    <a
-                      href={`mailto:${siteConfig.contact.email}`}
-                      className="text-text-muted transition-colors hover:text-amber-action"
-                    >
-                      {siteConfig.contact.email}
-                    </a>
-                  </div>
+              <div className="space-y-10">
+                <div>
+                  <p className="mono-label mb-3 flex items-center gap-2">
+                     <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                     Email
+                  </p>
+                  <a
+                    href={`mailto:${siteConfig.contact.email}`}
+                    className="serif-heading text-2xl text-warm-white transition-colors hover:text-amber-action"
+                  >
+                    {siteConfig.contact.email}
+                  </a>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
-                    <MapPin className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary">Engagement model</p>
-                    <p className="text-text-muted">
-                      Remote-first with on-site availability for industrial and operational
-                      contexts.
-                    </p>
-                  </div>
+                
+                <hr className="hr-editorial" />
+                
+                <div>
+                  <p className="mono-label mb-3 flex items-center gap-2">
+                     <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                     Engagement model
+                  </p>
+                  <p className="text-[0.9375rem] leading-relaxed text-text-muted">
+                    Remote-first with on-site availability for industrial and operational
+                    contexts.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="surface-elevated p-8 lg:col-span-3">
+            <div className="lg:col-span-3 border-t divider-subtle lg:border-t-0 pt-12 lg:pt-0">
               <ContactForm />
             </div>
           </div>

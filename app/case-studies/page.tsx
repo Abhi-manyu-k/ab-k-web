@@ -19,7 +19,7 @@ export default function CaseStudiesPage() {
 
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
+      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
         <Container>
           <FadeInOnScroll>
             <SectionHeading
@@ -31,16 +31,19 @@ export default function CaseStudiesPage() {
         </Container>
       </section>
 
-      <section className="pb-8 lg:pb-12">
+      <section className="border-b divider-subtle">
         <Container>
           <CaseStudyMetrics />
         </Container>
       </section>
 
-      <section className="pb-20 lg:pb-28">
-        <Container className="space-y-12 lg:space-y-16">
+      <section className="py-20 lg:py-32">
+        <Container className="space-y-16 lg:space-y-24">
           <FeaturedCaseStudy study={featured} />
-          <div className="grid gap-0 lg:grid-cols-3 lg:gap-12">
+          
+          <hr className="hr-editorial" />
+
+          <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
             {supporting.map((study) => (
               <SupportingCaseStudy key={study.id} study={study} />
             ))}

@@ -27,7 +27,7 @@ const iconMap: Record<string, LucideIcon> = {
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
+      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
         <Container>
           <FadeInOnScroll>
             <SectionHeading
@@ -39,7 +39,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="pb-20 lg:pb-28">
+      <section className="py-20 lg:py-28">
         <Container>
           <ol className="space-y-0">
             {aboutPillars.map((pillar, index) => {
@@ -47,45 +47,42 @@ export default function AboutPage() {
               return (
                 <li
                   key={pillar.title}
-                  className="grid gap-6 border-t divider-subtle py-10 first:border-t-0 first:pt-0 lg:grid-cols-[auto_1fr] lg:gap-12 lg:py-14"
+                  className="grid gap-6 border-t divider-subtle py-12 first:border-t-0 first:pt-0 lg:grid-cols-[auto_1fr] lg:gap-12 lg:py-16"
                 >
-                  <div className="flex items-start gap-4">
-                    <span className="font-mono text-2xl font-bold tabular-nums text-amber-action/80">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-deep text-amber-action">
-                      <Icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
+                  <div className="flex items-start gap-4 text-text-muted pt-1">
+                    <Icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
-                    <h3 className="font-heading text-xl font-semibold text-text-primary lg:text-2xl">
+                    <h3 className="serif-heading text-2xl text-warm-white lg:text-3xl">
                       {pillar.title}
                     </h3>
-                    <p className="mt-3 max-w-2xl text-text-muted">{pillar.description}</p>
+                    <p className="mt-4 max-w-2xl leading-relaxed text-text-muted">{pillar.description}</p>
                   </div>
                 </li>
               );
             })}
           </ol>
 
-          <blockquote className="mt-16 border-l-2 border-amber-action/70 pl-6 lg:mt-20 lg:pl-8">
-            <p className="font-heading text-lg font-medium leading-relaxed text-text-primary lg:text-xl">
-              Agentic AI only pays off when it can act on real data, respect governance, and fit
-              how your teams actually work, not when it lives in a demo sandbox.
+          <hr className="hr-editorial my-16 lg:my-20" />
+
+          <blockquote className="border-l border-slate-border/50 pl-6 lg:pl-10">
+            <p className="serif-heading gradient-text text-[1.25rem] sm:text-[1.5rem] lg:text-[1.75rem]">
+              &ldquo;Agentic AI only pays off when it can act on real data, respect governance, and fit
+              how your teams actually work, not when it lives in a demo sandbox.&rdquo;
             </p>
           </blockquote>
         </Container>
       </section>
 
-      <section className="border-t divider-subtle bg-slate-deep/40 py-20 lg:py-28">
+      <section className="border-t divider-subtle py-20 lg:py-28">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[200px_1fr] lg:gap-14">
-            <div className="relative mx-auto aspect-square w-full max-w-[168px] shrink-0 overflow-hidden rounded-xl bg-slate-card sm:max-w-[180px] lg:mx-0 lg:max-w-[200px]">
+          <div className="grid gap-12 lg:grid-cols-[200px_1fr] lg:gap-16">
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-[168px] shrink-0 overflow-hidden lg:mx-0 lg:max-w-[200px]">
               <Image
                 src="/images/founder.jpg"
                 alt={`Portrait of ${founderBio.name}, founder of AB Kinetics`}
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top grayscale"
                 sizes="200px"
                 priority
               />
@@ -96,16 +93,16 @@ export default function AboutPage() {
                 eyebrow="Leadership"
                 title={founderBio.name}
                 description={founderBio.title}
-                className="mb-8"
+                className="mb-10"
               />
 
               {founderBio.quote && (
-                <p className="mb-6 font-heading text-lg italic text-text-primary/90">
-                  &ldquo;{founderBio.quote}&rdquo;
+                <p className="mb-8 serif-heading gradient-text text-xl lg:text-2xl">
+                  {founderBio.quote}
                 </p>
               )}
 
-              <div className="space-y-4 text-[0.9375rem] leading-relaxed text-text-muted">
+              <div className="space-y-5 text-[0.9375rem] leading-relaxed text-text-muted">
                 {founderBio.paragraphs.map((paragraph) => (
                   <p key={paragraph.slice(0, 48)}>{paragraph}</p>
                 ))}

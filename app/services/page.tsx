@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-12 lg:pt-40 lg:pb-16">
+      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
         <Container>
           <FadeInOnScroll>
             <SectionHeading
@@ -27,7 +27,7 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <section className="pb-20 lg:pb-28">
+      <section className="py-20 lg:py-32">
         <Container>
           {services.map((service, index) => (
             <ServiceBlock key={service.id} service={service} index={index} />
