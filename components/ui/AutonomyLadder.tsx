@@ -36,14 +36,14 @@ export function AutonomyLadder() {
                   aria-selected={active}
                   onClick={() => setSelected(i)}
                   className={cn(
-                    "group relative flex flex-1 flex-col justify-start border-t border-l border-ink px-2 pt-3 text-left transition-colors sm:px-3",
+                    "group relative flex min-w-0 flex-1 flex-col justify-start border-t border-l border-ink px-1.5 pt-3 text-left transition-colors sm:px-3",
                     i === autonomyLevels.length - 1 && "border-r",
                     active ? "bg-hatch" : "hover:bg-paper-2",
                   )}
                   style={{ height: `${28 + i * 18}%` }}
                 >
                   <span className={cn("font-mono text-xs", active ? "text-signal" : "text-muted")}>{l.level}</span>
-                  <span className="serif mt-1 text-base leading-tight text-ink sm:text-xl">{l.name}</span>
+                  <span className="serif mt-1 hyphens-auto break-words text-[13px] leading-tight text-ink sm:text-xl">{l.name}</span>
                 </button>
               );
             })}

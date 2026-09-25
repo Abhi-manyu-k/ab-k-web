@@ -13,7 +13,7 @@ export function CTASection() {
             <div>
               <p className="note mb-6">Release for production</p>
               <h2 className="display text-5xl sm:text-6xl lg:text-7xl">
-                Pick one machine. <em>One failure.</em> One quarter.
+                Pick one machine. <em>One failure.</em> <span className="drafted">One quarter.</span>
               </h2>
               <p className="lead mt-6 max-w-lg">
                 A 30-minute call is enough to find the first agent worth building — and the controls it will

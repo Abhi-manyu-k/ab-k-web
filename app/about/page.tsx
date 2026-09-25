@@ -6,6 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { CTASection } from "@/components/sections/CTASection";
 import { aboutPillars, careerRoute, credentials, founderBio } from "@/lib/content";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -51,34 +52,54 @@ export default function AboutPage() {
           <FadeInOnScroll>
             <SheetHeader
               sheet="02"
-              label="Founder"
-              title={founderBio.name}
-              intro={founderBio.title}
+              label="Drawn by"
+              title={
+                <>
+                  An engineer <em>first.</em>
+                </>
+              }
+              intro="AB Kinetics is a small, senior practice. The person scoping your agent is the person who has built them — and serviced the machines they run on."
             />
           </FadeInOnScroll>
 
-          <div className="mt-14 grid gap-12 lg:grid-cols-[300px_1fr] lg:gap-20">
-            <FadeInOnScroll>
-              <figure className="border border-ink bg-paper-3 p-2">
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image
-                    src="/images/founder.webp"
-                    alt={`Portrait of ${founderBio.name}, founder of AB Kinetics`}
-                    fill
-                    sizes="300px"
-                    className="object-cover object-top grayscale contrast-110 mix-blend-multiply"
-                  />
-                </div>
-                <figcaption className="flex justify-between px-1 pt-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
-                  <span>Fig. — Founder</span>
-                  <span>Aachen</span>
-                </figcaption>
-              </figure>
-            </FadeInOnScroll>
+          <FadeInOnScroll>
+            <dl className="mt-14 grid grid-cols-[auto_1fr] border border-ink font-mono text-[11px] uppercase tracking-[0.08em] sm:grid-cols-[auto_1fr_1fr_1fr]">
+              <div className="row-span-2 border-r border-ink p-2 sm:row-span-1">
+                <Image
+                  src="/images/founder.webp"
+                  alt={`Portrait of ${founderBio.name}`}
+                  width={72}
+                  height={88}
+                  className="h-[88px] w-[72px] object-cover object-top grayscale contrast-110 mix-blend-multiply"
+                />
+              </div>
+              <div className="border-b border-ink px-4 py-3 sm:border-b-0 sm:border-r">
+                <dt className="text-[9px] text-faint">Drawn by</dt>
+                <dd className="mt-1 text-ink">{founderBio.name}</dd>
+              </div>
+              <div className="px-4 py-3 sm:border-r sm:border-ink">
+                <dt className="text-[9px] text-faint">Role</dt>
+                <dd className="mt-1 normal-case tracking-normal text-ink">{founderBio.title}</dd>
+              </div>
+              <div className="col-span-2 border-t border-ink px-4 py-3 sm:col-span-1 sm:border-t-0">
+                <dt className="text-[9px] text-faint">Contact</dt>
+                <dd className="mt-1 normal-case tracking-normal">
+                  <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="link text-ink">
+                    LinkedIn ↗
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </FadeInOnScroll>
 
+          <div className="mt-14 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+            <FadeInOnScroll>
+              <p className="serif text-3xl leading-snug text-ink lg:text-4xl">
+                <em>&ldquo;{founderBio.quote}&rdquo;</em>
+              </p>
+            </FadeInOnScroll>
             <FadeInOnScroll delay={100}>
-              <p className="serif text-3xl italic leading-snug text-ink lg:text-4xl">&ldquo;{founderBio.quote}&rdquo;</p>
-              <div className="mt-10 max-w-2xl space-y-5 text-ink-2">
+              <div className="space-y-5 text-ink-2">
                 {founderBio.paragraphs.map((p) => (
                   <p key={p.slice(0, 40)}>{p}</p>
                 ))}

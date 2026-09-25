@@ -20,7 +20,7 @@ export function PageHero({ sheet, eyebrow, title, description, children }: PageH
             <span className="text-faint">Drawing no. ABK-{sheet}</span>
           </div>
           <div className="px-5 pt-16 pb-12 sm:px-10 lg:px-14 lg:pt-24 lg:pb-16">
-            <h1 className="display max-w-5xl text-[3.25rem] sm:text-7xl lg:text-[7rem]">{title}</h1>
+            <h1 className="display max-w-5xl text-[3rem] sm:text-7xl lg:text-[6rem]">{title}</h1>
             {description && <p className="lead mt-10 max-w-xl bg-paper/80">{description}</p>}
             {children}
           </div>
