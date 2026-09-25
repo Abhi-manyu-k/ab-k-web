@@ -35,7 +35,7 @@ export function HeroSection() {
                 <span className="text-signal">●</span>
                 {siteConfig.tagline}
               </p>
-              <h1 className="display text-[3.4rem] sm:text-[5.5rem] lg:text-[8rem]">
+              <h1 className="display text-[3.4rem] sm:text-[5.5rem] lg:text-[6.5rem] xl:text-[8rem]">
                 Agents that <em className="text-signal">act.</em>
                 <br />
                 Governance that <em>holds.</em>

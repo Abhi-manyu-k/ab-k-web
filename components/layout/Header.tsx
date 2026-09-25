@@ -29,7 +29,7 @@ export function Header() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex items-center gap-1.5 border-l rule px-4 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors last:border-r lg:px-5",
+                  "flex items-center gap-1.5 whitespace-nowrap border-l rule px-3 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors last:border-r lg:px-4 xl:px-5",
                   active ? "bg-ink text-paper" : "text-ink-2 hover:bg-paper-2",
                 )}
               >
@@ -40,7 +40,7 @@ export function Header() {
           })}
         </nav>
 
-        <Link href="/contact" className="btn btn-ink !hidden !py-2.5 !shadow-none lg:!inline-flex">
+        <Link href="/contact" className="btn btn-ink !hidden whitespace-nowrap !py-2.5 !shadow-none xl:!inline-flex">
           {siteConfig.contact.formTitle}
         </Link>
 
