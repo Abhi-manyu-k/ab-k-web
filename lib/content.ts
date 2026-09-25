@@ -285,3 +285,58 @@ export const homeTeasers = [
     cta: "View track record",
   },
 ] as const;
+
+export const marqueeItems = [
+  "Organigram-level",
+  "GDPR-native",
+  "EU-hosted models",
+  "Model routing",
+  "Scoped memory",
+  "Audit logs by default",
+  "Human approval gates",
+  "No vendor lock-in",
+] as const;
+
+export const orgChart = {
+  company: "Muster AG",
+  board: { name: "Executive Board", role: "Vorstand" },
+  departments: [
+    {
+      id: "analyst",
+      department: "Finance",
+      lead: { name: "K. Weber", role: "CFO" },
+      ve: { code: "VE-0142", title: "Data Analyst" },
+    },
+    {
+      id: "support",
+      department: "IT & Ops",
+      lead: { name: "J. Schmidt", role: "Head of IT" },
+      ve: { code: "VE-0217", title: "Support Engineer" },
+    },
+    {
+      id: "compliance",
+      department: "Legal & Risk",
+      lead: { name: "A. Yilmaz", role: "General Counsel" },
+      ve: { code: "VE-0309", title: "Compliance Officer" },
+    },
+  ],
+} as const;
+
+export const activityLog = [
+  { agent: "analyst", actor: "VE-0142", system: "SAP FI", text: "Flagged 3 anomalies in Q3 accruals · 12 sources cited" },
+  { agent: "gateway", actor: "Gateway", system: "Router", text: "PII detected → routed to EU-hosted model" },
+  { agent: "support", actor: "VE-0217", system: "ServiceNow", text: "INC-4821 triaged · runbook R-17 executed" },
+  { agent: "compliance", actor: "VE-0309", system: "Policy DB", text: "Art. 30 record updated · audit entry #9913" },
+  { agent: "analyst", actor: "VE-0142", system: "Teams", text: "Draft forecast sent to K. Weber for approval" },
+  { agent: "support", actor: "VE-0217", system: "Jira", text: "Escalated OPS-311 to J. Schmidt with full context" },
+  { agent: "gateway", actor: "Gateway", system: "Router", text: "Routine summary → cost-optimised model" },
+  { agent: "compliance", actor: "VE-0309", system: "EUR-Lex", text: "New AI Act guidance mapped to 4 internal policies" },
+] as const;
+
+export const comparisonRows = [
+  { dimension: "Where it lives", tool: "A sidebar someone has to open", teammate: "On the organigram, inside a department" },
+  { dimension: "Access", tool: "Whatever the user happens to see", teammate: "Scoped per role, least-privilege by default" },
+  { dimension: "Memory", tool: "Forgets — or leaks across teams", teammate: "Persistent, department-scoped context" },
+  { dimension: "Accountability", tool: "Nobody owns the output", teammate: "A named owner, audit log, approval gates" },
+  { dimension: "Works in", tool: "One chat window", teammate: "Slack, Teams, ERP, ticketing, your APIs" },
+] as const;

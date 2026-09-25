@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
-import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { FeaturedCaseStudy } from "@/components/ui/FeaturedCaseStudy";
 import { SupportingCaseStudy } from "@/components/ui/SupportingCaseStudy";
 import { CaseStudyMetrics } from "@/components/ui/CaseStudyMetrics";
@@ -19,34 +18,33 @@ export default function CaseStudiesPage() {
 
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
-        <Container>
-          <FadeInOnScroll>
-            <SectionHeading
-              eyebrow="Track record"
-              title="Proven impact"
-              description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
-            />
-          </FadeInOnScroll>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Track record"
+        title={
+          <>
+            Shipped, not <em className="accent-italic">demoed.</em>
+          </>
+        }
+        description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
+      />
 
-      <section className="border-b divider-subtle">
+      <section className="border-b hairline">
         <Container>
           <CaseStudyMetrics />
         </Container>
       </section>
 
       <section className="py-20 lg:py-32">
-        <Container className="space-y-16 lg:space-y-24">
+        <Container className="space-y-20 lg:space-y-28">
           <FeaturedCaseStudy study={featured} />
-          
-          <hr className="hr-editorial" />
 
-          <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
-            {supporting.map((study) => (
-              <SupportingCaseStudy key={study.id} study={study} />
-            ))}
+          <div>
+            <p className="label mb-8">More engagements</p>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {supporting.map((study, index) => (
+                <SupportingCaseStudy key={study.id} study={study} index={index + 2} />
+              ))}
+            </div>
           </div>
         </Container>
       </section>

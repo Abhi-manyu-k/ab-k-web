@@ -6,30 +6,33 @@ import { siteConfig } from "@/lib/site";
 
 export function CTASection() {
   return (
-    <section className="border-t divider-subtle py-20 lg:py-28">
+    <section className="py-20 lg:py-28">
       <Container>
         <FadeInOnScroll>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="serif-heading gradient-text text-[1.5rem] sm:text-[1.75rem] lg:text-[2rem]">
-              Ready to deploy?
-            </h2>
-            <p className="mt-5 text-[0.9375rem] leading-relaxed text-text-muted">
-              Book a demo. We&apos;ll map a governed path from pilot to production.
-            </p>
-            <div className="mt-8 flex items-center justify-center gap-8">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-sm font-medium text-warm-white transition-colors hover:text-amber-action focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
-              >
-                {siteConfig.contact.formTitle}
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
-              <Link
-                href={`mailto:${siteConfig.contact.email}`}
-                className="link-underline text-sm text-text-muted transition-colors hover:text-warm-white"
-              >
-                {siteConfig.contact.email}
-              </Link>
+          <div className="relative overflow-hidden rounded-[2rem] border hairline bg-ink-2 px-6 py-16 text-center sm:px-12 lg:py-24">
+            <div className="bg-grid pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
+            <div
+              className="glow-signal pointer-events-none absolute -bottom-40 left-1/2 h-[380px] w-[680px] -translate-x-1/2"
+              aria-hidden="true"
+            />
+            <div className="relative">
+              <p className="label mb-6">Open position · Starts immediately</p>
+              <h2 className="display mx-auto max-w-3xl text-5xl sm:text-6xl lg:text-7xl">
+                Hire your first <em className="accent-italic">Virtual Employee.</em>
+              </h2>
+              <p className="mx-auto mt-6 max-w-md text-muted">
+                A 30-minute call. We&apos;ll map one department, one role, and a governed path from pilot to
+                production.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                <Link href="/contact" className="btn btn-primary">
+                  {siteConfig.contact.formTitle}
+                  <ArrowRight className="arrow h-4 w-4" aria-hidden="true" />
+                </Link>
+                <a href={`mailto:${siteConfig.contact.email}`} className="btn btn-ghost">
+                  {siteConfig.contact.email}
+                </a>
+              </div>
             </div>
           </div>
         </FadeInOnScroll>

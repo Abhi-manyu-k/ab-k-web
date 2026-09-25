@@ -1,54 +1,83 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { HeroOrgChart } from "@/components/ui/HeroOrgChart";
-import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
+import { LiveOrganigram } from "@/components/ui/LiveOrganigram";
+import { marqueeItems } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden min-h-[90vh] flex items-center pt-24 pb-20">
-      <Container className="relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          <FadeInOnScroll>
-            <div className="max-w-2xl">
-              <p className="mono-label mb-6 text-amber-action/80">Virtual Employees</p>
+    <>
+      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-24">
+        <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div
+          className="glow-signal pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[820px] -translate-x-1/2 opacity-70"
+          aria-hidden="true"
+        />
 
-              <h1 className="serif-heading gradient-text text-4xl sm:text-5xl lg:text-[4rem] leading-[1.1]">
-                Governed AI teammates for German enterprises — on the organigram,
-                not in a sidebar.
-              </h1>
-
-              <hr className="hr-editorial my-10 max-w-sm" />
-
-              <p className="max-w-lg text-[1.0625rem] leading-relaxed text-text-muted">
-                GDPR controls, model routing, deep workflow integration. From pilot
-                to production with accountability built in.
+        <Container className="relative">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+            <div>
+              <p className="label mb-8 inline-flex items-center gap-3 rounded-full border hairline bg-ink-2/70 py-1.5 pl-2 pr-4">
+                <span className="rounded-full bg-signal px-2 py-0.5 text-[0.5625rem] font-medium text-ink">New</span>
+                Virtual Employees · made for German enterprise
               </p>
 
-              <div className="mt-12 flex items-center gap-8">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-warm-white transition-colors hover:text-amber-action focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action"
-                >
+              <h1 className="display text-[3.4rem] sm:text-7xl lg:text-[6rem]">
+                Your next hire
+                <br />
+                <em className="accent-italic">isn&apos;t human.</em>
+              </h1>
+
+              <p className="mt-8 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+                Governed AI teammates placed on your organigram — scoped to a department,
+                wired into your systems, and accountable like any other employee.
+              </p>
+
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link href="/contact" className="btn btn-primary">
                   {siteConfig.contact.formTitle}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  <ArrowRight className="arrow h-4 w-4" aria-hidden="true" />
                 </Link>
-                <Link
-                  href="/contact"
-                  className="link-underline text-sm text-text-muted transition-colors hover:text-warm-white"
-                >
-                  {siteConfig.contact.secondaryCta}
+                <Link href="/services" className="btn btn-ghost">
+                  See the platform
                 </Link>
               </div>
-            </div>
-          </FadeInOnScroll>
 
-          <FadeInOnScroll delay={300}>
-            <HeroOrgChart />
-          </FadeInOnScroll>
+              <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t hairline pt-6">
+                {[
+                  ["100+", "engineers served"],
+                  ["EU", "hosted & routed"],
+                  ["0", "vendor lock-in"],
+                ].map(([value, label]) => (
+                  <div key={label}>
+                    <dt className="sr-only">{label}</dt>
+                    <dd className="serif text-3xl text-paper">{value}</dd>
+                    <dd className="mt-1 text-xs text-faint">{label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <LiveOrganigram />
+          </div>
+        </Container>
+      </section>
+
+      <div className="marquee-mask overflow-hidden border-y hairline bg-ink-2/50 py-4" aria-hidden="true">
+        <div className="flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="flex shrink-0">
+              {marqueeItems.map((item) => (
+                <li key={item} className="flex items-center gap-8 pr-8 font-mono text-xs uppercase tracking-[0.16em] text-muted">
+                  {item}
+                  <span className="text-signal">✦</span>
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
-      </Container>
-    </section>
+      </div>
+    </>
   );
 }

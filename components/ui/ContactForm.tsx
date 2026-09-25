@@ -22,7 +22,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-2 block text-sm font-medium text-text-primary">
+          <label htmlFor="name" className="mb-2 block label !text-muted">
             Name *
           </label>
           <input
@@ -35,7 +35,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium text-text-primary">
+          <label htmlFor="email" className="mb-2 block label !text-muted">
             Email *
           </label>
           <input
@@ -51,7 +51,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="company" className="mb-2 block text-sm font-medium text-text-primary">
+          <label htmlFor="company" className="mb-2 block label !text-muted">
             Company
           </label>
           <input
@@ -63,7 +63,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="role" className="mb-2 block text-sm font-medium text-text-primary">
+          <label htmlFor="role" className="mb-2 block label !text-muted">
             Role
           </label>
           <input
@@ -77,7 +77,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="project-stage" className="mb-2 block text-sm font-medium text-text-primary">
+        <label htmlFor="project-stage" className="mb-2 block label !text-muted">
           Project stage
         </label>
         <select
@@ -99,7 +99,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-2 block text-sm font-medium text-text-primary">
+        <label htmlFor="message" className="mb-2 block label !text-muted">
           Message *
         </label>
         <textarea
@@ -112,14 +112,14 @@ export function ContactForm() {
         />
       </div>
 
-      <p className="text-xs text-text-muted">
+      <p className="text-xs text-faint">
         By submitting, you agree to be contacted about your inquiry. We do not share your
         information with third parties.
       </p>
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-amber-action px-8 py-3.5 text-sm font-semibold text-onyx transition-colors hover:bg-amber-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-action focus-visible:ring-offset-2 focus-visible:ring-offset-onyx sm:w-auto"
+        className="btn btn-primary w-full sm:w-auto"
       >
         {siteConfig.contact.formTitle}
       </button>

@@ -1,37 +1,55 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Palette ─── */
-  --color-onyx: #0e0e0e;
-  --color-slate-deep: #161618;
-  --color-slate-card: #1a1a1e;
-  --color-slate-border: #2a2a32;
-  --color-amber-action: #f59e0b;
-  --color-amber-hover: #fbbf24;
-  --color-cyan-info: #67e8f9;
-  --color-warm-white: #f0e6e4;
-  --color-warm-muted: #b5a8a4;
-  --color-text-primary: #f0e6e4;
-  --color-text-muted: #9a908c;
+  /* ─── Palette: ink, paper, one signal ─── */
+  --color-ink: #0b0b0c;
+  --color-ink-2: #121214;
+  --color-ink-3: #19191c;
+  --color-line: #25252a;
+  --color-line-strong: #34343b;
+  --color-paper: #efebe4;
+  --color-muted: #8e8982;
+  --color-faint: #5d5a55;
+  --color-signal: #ff6a3d;
+  --color-signal-soft: #ffb89f;
+  --color-live: #7ee2b8;
 
   /* ─── Typography ─── */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument-serif), "Georgia", serif;
-  --font-logo: var(--font-syncopate), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
-}
 
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-out infinite;
 }
 
 /* ─── Base ─── */
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,216 +66,252 @@ html {
   }
 }
 
-body {
-  background-color: var(--color-onyx);
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer components {
+/* ─── Type ─── */
 
-::selection {
-  background-color: color-mix(in srgb, var(--color-amber-action) 25%, transparent);
-  color: var(--color-text-primary);
-}
-
-/* ─── Gradient text (NDEA-inspired warm gradient) ─── */
-
-.gradient-text {
-  background: linear-gradient(
-    to right,
-    #fde8e8 0%,
-    var(--color-warm-white) 25%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ─── Serif heading ─── */
-
-.serif-heading {
+.serif {
   font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.serif em,
+em.serif {
   font-style: italic;
+}
+
+.display {
+  font-family: var(--font-serif);
   font-weight: 400;
-  line-height: 1.28;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
 }
 
-/* ─── Mono label (NDEA h4 style) ─── */
-
-.mono-label {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.6875rem;
-  line-height: 1.8;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-/* ─── Display heading (kept for non-homepage use) ─── */
-
-.display-heading {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-}
-
-/* ─── Eyebrow ─── */
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 400;
+  line-height: 1.6;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-muted);
 }
 
-.eyebrow::before {
-  content: "";
-  display: block;
-  width: 1.25rem;
-  height: 1px;
-  background: var(--color-text-muted);
-  border-radius: 1px;
+.accent-italic {
+  font-style: italic;
+  color: var(--color-signal);
+}
+
+/* ─── Backgrounds ─── */
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 75%);
+}
+
+.bg-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-line-strong) 90%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.glow-signal {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-signal) 22%, transparent), transparent);
+  filter: blur(20px);
 }
 
 /* ─── Surfaces ─── */
 
-.surface-card {
-  border-radius: 1rem;
-  background-color: color-mix(in srgb, var(--color-slate-card) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-slate-border) 50%, transparent);
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.surface-card:hover {
-  background-color: color-mix(in srgb, var(--color-slate-card) 95%, transparent);
-}
-
-.surface-elevated {
+.panel {
+  border: 1px solid var(--color-line);
+  background: linear-gradient(180deg, var(--color-ink-2), color-mix(in srgb, var(--color-ink-2) 60%, var(--color-ink)));
   border-radius: 1.25rem;
-  background-color: var(--color-slate-deep);
-  border: 1px solid color-mix(in srgb, var(--color-slate-border) 60%, transparent);
 }
 
-/* ─── Dividers ─── */
-
-.divider-subtle {
-  border-color: color-mix(in srgb, var(--color-slate-border) 40%, transparent);
+.hairline {
+  border-color: var(--color-line);
 }
 
-.hr-editorial {
-  border: none;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    color-mix(in srgb, var(--color-slate-border) 50%, transparent) 20%,
-    color-mix(in srgb, var(--color-slate-border) 50%, transparent) 80%,
-    transparent
-  );
+/* ─── Buttons ─── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.8rem 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* ─── Link underline (NDEA style) ─── */
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-signal);
+}
+
+.btn-ghost {
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-paper);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-paper);
+}
+
+.btn .arrow {
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
 
 .link-underline {
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  transition: border-color 0.2s ease;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
 }
 
 .link-underline:hover {
-  border-bottom-color: transparent;
+  background-size: 0% 1px;
+  background-position: 100% 100%;
 }
 
-/* ─── Card trace animation (kept for non-homepage use) ─── */
-
-.card-trace {
-  position: relative;
-  overflow: hidden;
 }
 
-.card-trace::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from var(--angle, 0deg),
-    transparent 55%,
-    var(--color-amber-action) 75%,
-    transparent 95%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
+/* ─── Motion ─── */
 
-.card-trace:hover::before {
-  opacity: 1;
-  animation: trace-spin 1.5s linear infinite;
-}
-
-@keyframes trace-spin {
+@keyframes marquee {
   to {
-    --angle: 360deg;
+    transform: translateX(-50%);
   }
 }
 
-/* ─── Terminal block (kept for non-homepage use) ─── */
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 55%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.flow-line {
+  stroke-dasharray: 4 8;
+  animation: dash-flow 1.2s linear infinite;
+}
+
+.log-in {
+  animation: log-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@layer components {
+/* ─── Badge (virtual employee ID card) ─── */
+
+.barcode {
+  height: 26px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-paper) 0 1px,
+    transparent 1px 3px,
+    var(--color-paper) 3px 5px,
+    transparent 5px 6px,
+    var(--color-paper) 6px 7px,
+    transparent 7px 11px
+  );
+  opacity: 0.55;
+}
+
+/* ─── Terminal ─── */
 
 .terminal-block {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  background-color: var(--color-onyx);
-  border: 1px solid var(--color-slate-border);
-  border-radius: 0.75rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+  background-color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
   padding: 1.25rem 1.5rem;
 }
 
 .terminal-block .prompt {
-  color: var(--color-amber-action);
+  color: var(--color-paper);
 }
 
 .terminal-block .output {
-  color: var(--color-cyan-info);
+  color: var(--color-muted);
 }
 
 .terminal-block .status {
-  color: var(--color-amber-action);
+  color: var(--color-live);
 }
 
 /* ─── Forms ─── */
 
 .form-field {
   width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-slate-border);
-  background-color: var(--color-slate-deep);
-  padding: 0.75rem 1rem;
-  color: var(--color-text-primary);
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-ink);
+  padding: 0.8rem 1rem;
+  color: var(--color-paper);
   font-size: 0.9375rem;
   line-height: 1.5;
   transition:
@@ -266,34 +320,32 @@ body {
 }
 
 .form-field::placeholder {
-  color: color-mix(in srgb, var(--color-text-muted) 55%, transparent);
+  color: var(--color-faint);
 }
 
 .form-field:focus {
   outline: none;
-  border-color: var(--color-amber-action);
-  box-shadow: 0 0 0 1px var(--color-amber-action);
+  border-color: var(--color-signal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-signal) 18%, transparent);
 }
 
 .form-select {
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
   padding-right: 2.75rem;
   cursor: pointer;
-  color-scheme: dark;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238e8982' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.875rem center;
   background-size: 1rem;
 }
 
-.form-select:invalid,
-.form-select option[value=""][disabled] {
-  color: color-mix(in srgb, var(--color-text-muted) 70%, transparent);
+.form-select:invalid {
+  color: var(--color-faint);
 }
 
 .form-select option {
-  background-color: var(--color-slate-deep);
-  color: var(--color-text-primary);
+  background-color: var(--color-ink-2);
+  color: var(--color-paper);
+}
 }

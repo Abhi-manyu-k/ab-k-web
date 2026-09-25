@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface CountUpProps {
@@ -30,11 +29,10 @@ export function CountUp({ value, className, duration = 800 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
   const { prefix, number, suffix } = parseValue(value);
 
   useEffect(() => {
-    if (shouldReduceMotion || hasAnimated) return;
+    if (hasAnimated || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const el = ref.current;
     if (!el) return;
@@ -72,10 +70,10 @@ export function CountUp({ value, className, duration = 800 }: CountUpProps) {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, number, prefix, suffix, duration, hasAnimated, shouldReduceMotion]);
+  }, [value, number, prefix, suffix, duration, hasAnimated]);
 
   return (
-    <span ref={ref} className={cn("font-mono tabular-nums", className)}>
+    <span ref={ref} className={cn("tabular-nums", className)}>
       {display}
     </span>
   );

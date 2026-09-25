@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk, Syncopate, Instrument_Serif } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site";
@@ -11,23 +11,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const syncopate = Syncopate({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-syncopate",
-  display: "swap",
-});
-
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
@@ -61,6 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0b0b0c",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${syncopate.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen antialiased">
         <Header />

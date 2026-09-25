@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { siteConfig } from "@/lib/site";
 
@@ -10,53 +9,56 @@ export const metadata: Metadata = {
   description: `${siteConfig.contact.formTitle} with AB Kinetics to accelerate your AI transition.`,
 };
 
+const nextSteps = [
+  ["Day 0", "You tell us about one department and one bottleneck."],
+  ["Day 2", "A 30-minute call to scope the role, systems, and governance needs."],
+  ["Week 2", "A pilot Virtual Employee, running on your data, under your controls."],
+] as const;
+
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b divider-subtle pt-32 pb-20 lg:pt-44 lg:pb-28">
-        <Container>
-          <SectionHeading
-            eyebrow="Get in touch"
-            title={siteConfig.contact.formTitle}
-            description="Tell us where you are in your AI journey. We'll respond with a focused conversation on whatever moves you forward fastest."
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Get in touch"
+        title={
+          <>
+            Let&apos;s staff your <em className="accent-italic">first role.</em>
+          </>
+        }
+        description="Tell us where you are in your AI journey. We'll respond with a focused conversation on whatever moves you forward fastest."
+      />
 
-      <section className="py-20 lg:py-32">
+      <section className="py-20 lg:py-28">
         <Container>
-          <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
+          <div className="grid gap-16 lg:grid-cols-5 lg:gap-20">
             <div className="lg:col-span-2">
-              <div className="space-y-10">
-                <div>
-                  <p className="mono-label mb-3 flex items-center gap-2">
-                     <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                     Email
-                  </p>
-                  <a
-                    href={`mailto:${siteConfig.contact.email}`}
-                    className="serif-heading text-2xl text-warm-white transition-colors hover:text-amber-action"
-                  >
-                    {siteConfig.contact.email}
-                  </a>
-                </div>
-                
-                <hr className="hr-editorial" />
-                
-                <div>
-                  <p className="mono-label mb-3 flex items-center gap-2">
-                     <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                     Engagement model
-                  </p>
-                  <p className="text-[0.9375rem] leading-relaxed text-text-muted">
-                    Remote-first with on-site availability for industrial and operational
-                    contexts.
-                  </p>
-                </div>
-              </div>
+              <p className="label mb-3">Email</p>
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="serif link-underline text-3xl text-paper transition-colors hover:text-signal"
+              >
+                {siteConfig.contact.email}
+              </a>
+
+              <p className="label mt-14 mb-6">What happens next</p>
+              <ol className="relative space-y-7 border-l hairline pl-7">
+                {nextSteps.map(([when, what], i) => (
+                  <li key={when} className="relative">
+                    <span
+                      className={`absolute -left-[2.05rem] top-1.5 h-2.5 w-2.5 rounded-full ${i === 0 ? "bg-signal" : "border border-line-strong bg-ink"}`}
+                    />
+                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-faint">{when}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-paper">{what}</p>
+                  </li>
+                ))}
+              </ol>
+
+              <p className="mt-14 text-sm leading-relaxed text-muted">
+                Remote-first, with on-site availability for industrial and operational contexts.
+              </p>
             </div>
 
-            <div className="lg:col-span-3 border-t divider-subtle lg:border-t-0 pt-12 lg:pt-0">
+            <div className="panel p-6 sm:p-10 lg:col-span-3">
               <ContactForm />
             </div>
           </div>
