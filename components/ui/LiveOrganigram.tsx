@@ -139,8 +139,8 @@ function HumanNode({ name, role, caption }: { name: string; role: string; captio
           {caption}
         </span>
       )}
-      <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-line bg-ink-2 px-2 py-2 sm:justify-start sm:px-3">
-        <span className="hidden h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-3 sm:flex font-mono text-[0.5625rem] text-muted" aria-hidden="true">
+      <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-line bg-ink-2 px-2 py-2 sm:px-3 xl:justify-start">
+        <span className="hidden h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-3 xl:flex font-mono text-[0.5625rem] text-muted" aria-hidden="true">
           {name
             .split(/[\s.]+/)
             .filter(Boolean)
@@ -148,9 +148,9 @@ function HumanNode({ name, role, caption }: { name: string; role: string; captio
             .join("")
             .slice(0, 2)}
         </span>
-        <span className="min-w-0 text-center sm:text-left">
-          <span className="block text-[0.6875rem] font-medium leading-tight text-paper sm:truncate sm:text-xs">{name}</span>
-          <span className="block text-[0.625rem] leading-tight text-faint sm:truncate">{role}</span>
+        <span className="min-w-0 text-center xl:text-left">
+          <span className="block text-[0.6875rem] font-medium leading-tight text-paper sm:text-xs xl:truncate">{name}</span>
+          <span className="block text-[0.625rem] leading-tight text-faint xl:truncate">{role}</span>
         </span>
       </div>
     </div>
