@@ -12,7 +12,7 @@ export function Container({
   as: Component = "div",
 }: ContainerProps) {
   return (
-    <Component className={cn("mx-auto w-full max-w-6xl px-6 lg:px-8", className)}>
+    <Component className={cn("mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12", className)}>
       {children}
     </Component>
   );

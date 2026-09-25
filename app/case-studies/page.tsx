@@ -1,51 +1,77 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
+import { CountUp } from "@/components/ui/CountUp";
+import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { PageHero } from "@/components/ui/PageHero";
-import { FeaturedCaseStudy } from "@/components/ui/FeaturedCaseStudy";
-import { SupportingCaseStudy } from "@/components/ui/SupportingCaseStudy";
-import { CaseStudyMetrics } from "@/components/ui/CaseStudyMetrics";
 import { CTASection } from "@/components/sections/CTASection";
-import { caseStudies } from "@/lib/content";
+import { caseStudies, fieldMetrics } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "Field notes",
   description:
-    "Enterprise-scale impact from AB Kinetics: global rollouts, MCP standardization, and agentic orchestration at production scale.",
+    "Production AI service assistants, action-taking service agents, and research on troubleshooting agents and AI governance — field notes from AB Kinetics.",
 };
 
 export default function CaseStudiesPage() {
-  const [featured, ...supporting] = caseStudies;
-
   return (
     <>
       <PageHero
-        eyebrow="Track record"
+        sheet="04"
+        eyebrow="Field notes"
         title={
           <>
-            Shipped, not <em className="accent-italic">demoed.</em>
+            Shipped, tested, <em>published.</em>
           </>
         }
-        description="NDA-compliant summaries of enterprise-scale work. Detailed references are available in a strategy conversation."
+        description="Notes from production and research. Client names are withheld; details are available in a conversation."
       />
 
-      <section className="border-b hairline">
+      <section className="py-16 lg:py-20">
         <Container>
-          <CaseStudyMetrics />
+          <dl className="grid border-t border-l border-ink sm:grid-cols-3">
+            {fieldMetrics.map((m, i) => (
+              <FadeInOnScroll key={m.label} delay={i * 100}>
+                <div className="h-full border-r border-b border-ink p-6 lg:p-8">
+                  <dd className="display text-7xl lg:text-8xl">
+                    <CountUp value={m.value} />
+                  </dd>
+                  <dt className="mt-4 max-w-xs text-sm text-ink-2">{m.label}</dt>
+                </div>
+              </FadeInOnScroll>
+            ))}
+          </dl>
         </Container>
       </section>
 
-      <section className="py-20 lg:py-32">
-        <Container className="space-y-20 lg:space-y-28">
-          <FeaturedCaseStudy study={featured} />
-
-          <div>
-            <p className="label mb-8">More engagements</p>
-            <div className="grid gap-4 lg:grid-cols-3">
-              {supporting.map((study, index) => (
-                <SupportingCaseStudy key={study.id} study={study} index={index + 2} />
-              ))}
-            </div>
-          </div>
+      <section className="pb-20 lg:pb-28">
+        <Container>
+          <ol className="border-t border-ink">
+            {caseStudies.map((c, i) => (
+              <FadeInOnScroll key={c.id}>
+                <li className="grid gap-6 border-b border-ink py-12 lg:grid-cols-[5rem_1fr_1.3fr] lg:gap-12 lg:py-16">
+                  <div className="flex items-baseline justify-between lg:block">
+                    <span className="font-mono text-xs text-faint">N-{String(i + 1).padStart(2, "0")}</span>
+                    <span
+                      className={`mt-2 inline-block border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] ${c.tag === "Now building" ? "border-signal text-signal" : "border-ink text-ink"}`}
+                    >
+                      {c.tag}
+                    </span>
+                  </div>
+                  <div>
+                    <h2 className="serif text-4xl text-ink lg:text-5xl">{c.title}</h2>
+                    <p className="mt-4 text-muted">{c.context}</p>
+                  </div>
+                  <div className="lg:pt-2">
+                    <p className="note mb-2">Intervention</p>
+                    <p className="text-ink-2">{c.intervention}</p>
+                    <p className="mt-6 border-l-2 border-signal pl-4 serif text-2xl italic leading-snug text-ink">
+                      {c.impact}
+                    </p>
+                  </div>
+                </li>
+              </FadeInOnScroll>
+            ))}
+          </ol>
         </Container>
       </section>
 

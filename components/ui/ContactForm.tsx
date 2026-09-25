@@ -22,7 +22,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-2 block label !text-muted">
+          <label htmlFor="name" className="note mb-1 block">
             Name *
           </label>
           <input
@@ -35,7 +35,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="mb-2 block label !text-muted">
+          <label htmlFor="email" className="note mb-1 block">
             Email *
           </label>
           <input
@@ -51,7 +51,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="company" className="mb-2 block label !text-muted">
+          <label htmlFor="company" className="note mb-1 block">
             Company
           </label>
           <input
@@ -63,7 +63,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="role" className="mb-2 block label !text-muted">
+          <label htmlFor="role" className="note mb-1 block">
             Role
           </label>
           <input
@@ -77,7 +77,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="project-stage" className="mb-2 block label !text-muted">
+        <label htmlFor="project-stage" className="note mb-1 block">
           Project stage
         </label>
         <select
@@ -99,7 +99,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-2 block label !text-muted">
+        <label htmlFor="message" className="note mb-1 block">
           Message *
         </label>
         <textarea
@@ -119,7 +119,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="btn btn-primary w-full sm:w-auto"
+        className="btn btn-ink w-full sm:w-auto"
       >
         {siteConfig.contact.formTitle}
       </button>

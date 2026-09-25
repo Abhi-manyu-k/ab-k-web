@@ -6,30 +6,40 @@ import { siteConfig } from "@/lib/site";
 
 export function CTASection() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-20 lg:py-32">
       <Container>
         <FadeInOnScroll>
-          <div className="relative overflow-hidden rounded-[2rem] border hairline bg-ink-2 px-6 py-16 text-center sm:px-12 lg:py-24">
-            <div className="bg-grid pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
-            <div
-              className="glow-signal pointer-events-none absolute -bottom-40 left-1/2 h-[380px] w-[680px] -translate-x-1/2"
-              aria-hidden="true"
-            />
-            <div className="relative">
-              <p className="label mb-6">Open position · Starts immediately</p>
-              <h2 className="display mx-auto max-w-3xl text-5xl sm:text-6xl lg:text-7xl">
-                Hire your first <em className="accent-italic">Virtual Employee.</em>
+          <div className="crop grid gap-12 border border-ink bg-paper-3 p-6 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:p-16">
+            <div>
+              <p className="note mb-6">Release for production</p>
+              <h2 className="display text-5xl sm:text-6xl lg:text-7xl">
+                Pick one machine. <em>One failure.</em> One quarter.
               </h2>
-              <p className="mx-auto mt-6 max-w-md text-muted">
-                A 30-minute call. We&apos;ll map one department, one role, and a governed path from pilot to
-                production.
+              <p className="lead mt-6 max-w-lg">
+                A 30-minute call is enough to find the first agent worth building — and the controls it will
+                need.
               </p>
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                <Link href="/contact" className="btn btn-primary">
+            </div>
+
+            <div className="flex flex-col justify-end">
+              <dl className="font-mono text-[11px] uppercase tracking-[0.08em]">
+                {[
+                  ["Checked", "Scope & data"],
+                  ["Approved", "Your name here"],
+                  ["Date", "This week"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-end justify-between gap-4 border-b border-ink py-3">
+                    <dt className="text-faint">{k}</dt>
+                    <dd className="serif text-xl normal-case tracking-normal italic text-ink">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact" className="btn btn-ink">
                   {siteConfig.contact.formTitle}
-                  <ArrowRight className="arrow h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="arrow h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
-                <a href={`mailto:${siteConfig.contact.email}`} className="btn btn-ghost">
+                <a href={`mailto:${siteConfig.contact.email}`} className="btn btn-line normal-case tracking-normal">
                   {siteConfig.contact.email}
                 </a>
               </div>

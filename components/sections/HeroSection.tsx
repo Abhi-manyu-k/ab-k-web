@@ -1,83 +1,86 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { LiveOrganigram } from "@/components/ui/LiveOrganigram";
-import { marqueeItems } from "@/lib/content";
+import { MachineDrawing } from "@/components/ui/MachineDrawing";
 import { siteConfig } from "@/lib/site";
+
+const zonesX = ["1", "2", "3", "4", "5", "6", "7", "8"];
+const zonesY = ["A", "B", "C", "D"];
 
 export function HeroSection() {
   return (
-    <>
-      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-24">
-        <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div
-          className="glow-signal pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[820px] -translate-x-1/2 opacity-70"
-          aria-hidden="true"
-        />
+    <section className="pt-24 pb-16 sm:pt-28 lg:pb-24">
+      <Container>
+        <div className="frame bg-paper">
+          {/* Zone markers */}
+          <div aria-hidden="true" className="pointer-events-none absolute -top-5 inset-x-0 hidden grid-cols-8 sm:grid">
+            {zonesX.map((z) => (
+              <span key={z} className="text-center font-mono text-[9px] text-faint">
+                {z}
+              </span>
+            ))}
+          </div>
+          <div aria-hidden="true" className="pointer-events-none absolute -left-5 inset-y-0 hidden grid-rows-4 sm:grid">
+            {zonesY.map((z) => (
+              <span key={z} className="flex items-center font-mono text-[9px] text-faint">
+                {z}
+              </span>
+            ))}
+          </div>
 
-        <Container className="relative">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+          {/* Headline */}
+          <div className="grid gap-8 border-b rule-ink p-6 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:p-14">
             <div>
-              <p className="label mb-8 inline-flex items-center gap-3 rounded-full border hairline bg-ink-2/70 py-1.5 pl-2 pr-4">
-                <span className="rounded-full bg-signal px-2 py-0.5 text-[0.5625rem] font-medium text-ink">New</span>
-                Virtual Employees · made for German enterprise
+              <p className="note mb-8 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-signal">●</span>
+                {siteConfig.tagline}
               </p>
-
-              <h1 className="display text-[3.4rem] sm:text-7xl lg:text-[6rem]">
-                Your next hire
+              <h1 className="display text-[3.4rem] sm:text-[5.5rem] lg:text-[8rem]">
+                Agents that <em className="text-signal">act.</em>
                 <br />
-                <em className="accent-italic">isn&apos;t human.</em>
+                Governance that <em>holds.</em>
               </h1>
-
-              <p className="mt-8 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-                Governed AI teammates placed on your organigram — scoped to a department,
-                wired into your systems, and accountable like any other employee.
+            </div>
+            <div className="max-w-sm lg:pb-3">
+              <p className="lead">
+                We build AI agents that diagnose and fix machines — and the governance that lets you trust
+                them to. Engineered in Aachen for industry facing the AI Act, the Machinery Regulation and
+                the Data Act.
               </p>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <Link href="/contact" className="btn btn-primary">
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact" className="btn btn-ink">
                   {siteConfig.contact.formTitle}
-                  <ArrowRight className="arrow h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="arrow h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
-                <Link href="/services" className="btn btn-ghost">
-                  See the platform
+                <Link href="/services" className="btn btn-line">
+                  Practices
                 </Link>
               </div>
-
-              <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t hairline pt-6">
-                {[
-                  ["100+", "engineers served"],
-                  ["EU", "hosted & routed"],
-                  ["0", "vendor lock-in"],
-                ].map(([value, label]) => (
-                  <div key={label}>
-                    <dt className="sr-only">{label}</dt>
-                    <dd className="serif text-3xl text-paper">{value}</dd>
-                    <dd className="mt-1 text-xs text-faint">{label}</dd>
-                  </div>
-                ))}
-              </dl>
             </div>
-
-            <LiveOrganigram />
           </div>
-        </Container>
-      </section>
 
-      <div className="marquee-mask overflow-hidden border-y hairline bg-ink-2/50 py-4" aria-hidden="true">
-        <div className="flex w-max animate-marquee">
-          {[0, 1].map((copy) => (
-            <ul key={copy} className="flex shrink-0">
-              {marqueeItems.map((item) => (
-                <li key={item} className="flex items-center gap-8 pr-8 font-mono text-xs uppercase tracking-[0.16em] text-muted">
-                  {item}
-                  <span className="text-signal">✦</span>
-                </li>
-              ))}
-            </ul>
-          ))}
+          <MachineDrawing />
+
+          {/* Title block */}
+          <dl className="grid grid-cols-2 border-t rule-ink font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
+            {[
+              ["Title", "Service agent · governed action sequence"],
+              ["Drawn", siteConfig.name],
+              ["Location", "Aachen, DE"],
+              ["Scale", "1 : 1"],
+              ["Sheet", "01 / 05"],
+            ].map(([k, v], i) => (
+              <div
+                key={k}
+                className={`border-b rule-ink px-4 py-2.5 lg:border-b-0 ${i > 0 ? "border-l" : ""} ${i === 0 ? "col-span-2 sm:col-span-4 lg:col-span-1" : ""} ${i === 1 || i === 3 ? "max-sm:border-l-0" : ""}`}
+              >
+                <dt className="text-faint">{k}</dt>
+                <dd className="mt-0.5 text-ink">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-      </div>
-    </>
+      </Container>
+    </section>
   );
 }

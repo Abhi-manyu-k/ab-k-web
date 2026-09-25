@@ -1,342 +1,388 @@
-export const services = [
+/* ───────────────────────── Practices ───────────────────────── */
+
+export const practices = [
   {
-    id: "strategy",
-    title: "Enterprise AI Strategy & ROI Alignment",
+    id: "service-agents",
+    code: "P-01",
+    title: "Agentic Service",
+    headline: "Service agents that diagnose — and fix — machines.",
     summary:
-      "Define where agentic AI creates value and where it doesn't, before capital and credibility are spent.",
-    icon: "Target",
-    capabilities: [
-      "AI opportunity mapping across business units",
-      "Executive roadmap design with measurable milestones",
-      "Governance-aware adoption frameworks",
-      "Value realization and ROI measurement models",
+      "Troubleshooting agents built on your manuals, tickets and live telemetry that move from answering questions to executing approved fixes on the machine.",
+    deliverables: [
+      "Troubleshooting agents on manuals, service tickets and sensor data (RAG + knowledge graphs)",
+      "Action-taking via MCP tool interfaces — every action behind an approval gate",
+      "Multilingual field-engineer copilots for the global service fleet",
+      "Service data flows ready for the EU Data Act's access-by-design rules",
     ],
+    format: "8-week pilot · one machine family · one failure class",
+    audience: "Machine builders, OEM service organisations",
   },
   {
-    id: "agentic",
-    title: "Agentic Architecture & Implementation",
+    id: "governance",
+    code: "P-02",
+    title: "AI Governance",
+    headline: "Governance that lets agents act.",
     summary:
-      "Design and deploy tool-calling agents, orchestration layers, and knowledge systems built for real workflows.",
-    icon: "Network",
-    capabilities: [
-      "Tool-calling agents with human-in-the-loop controls",
-      "LangGraph-style orchestration and state management",
-      "n8n and workflow automation integration patterns",
-      "Multi-agent systems and graph-based RAG workflows",
+      "Turn the AI Act, the Machinery Regulation and your own risk appetite into concrete controls — so agents can be trusted with more than a chat window.",
+    deliverables: [
+      "AI inventory and risk classification across AI Act and Machinery Regulation",
+      "Agent governance framework: autonomy levels, permissions, audit trails, kill switch",
+      "AI management system aligned with ISO/IEC 42001",
+      "Transparency (Art. 50) and AI-literacy (Art. 4) measures that hold up to an audit",
     ],
+    format: "2-week readiness check → 90-day implementation",
+    audience: "Compliance, quality, product safety, CIO/CTO office",
   },
   {
-    id: "integration",
-    title: "Hardware / Software Integration",
+    id: "virtual-employees",
+    code: "P-03",
+    title: "Virtual Employees",
+    headline: "Governed AI teammates on the organigram.",
     summary:
-      "Bridge enterprise software with shop-floor reality through live data streams and operational interfaces.",
-    icon: "Cpu",
-    capabilities: [
-      "Live data streams from IoT and industrial systems",
-      "IoT-to-LLM decision support workflows",
-      "MCP-style tool interfaces for enterprise systems",
-      "Operational dashboards and shop-floor data realities",
+      "Department agents with a role, a manager and scoped access — for finance, IT operations and legal teams that want more than a copilot.",
+    deliverables: [
+      "Role design: responsibilities, clearances, escalation paths",
+      "Custom harnesses into ERP, ticketing, Teams and internal APIs",
+      "Model gateway with EU-hosted routing for sensitive data",
+      "Department-scoped memory without cross-team leakage",
     ],
+    format: "One department · one role · production in a quarter",
+    audience: "Operations, finance, IT, legal & risk",
   },
   {
-    id: "production",
-    title: "Production Enablement",
+    id: "academy",
+    code: "P-04",
+    title: "Strategy & Academy",
+    headline: "People who can run what we build.",
     summary:
-      "Move from compelling demos to governed, observable systems your organization can maintain and scale.",
-    icon: "Rocket",
-    capabilities: [
-      "Prototype-to-production migration planning",
-      "Cloud deployment patterns, including Azure environments",
-      "Observability, security review readiness, and maintainability",
-      "Team enablement and operating model design",
+      "Roadmaps tied to measurable outcomes, and hands-on training for the engineers, managers and service teams who will live with the agents.",
+    deliverables: [
+      "AI opportunity mapping and executive roadmap with ROI milestones",
+      "AI-literacy programmes for technical teams (AI Act Art. 4)",
+      "Hands-on agent-building workshops for service and operations engineers",
+      "Train-the-trainer formats for global service organisations",
     ],
+    format: "Workshops · 1–3 days · on-site or remote, in German or English",
+    audience: "Leadership teams, service academies, engineering",
   },
 ] as const;
 
-export const caseStudyMetrics = [
+/* ───────────────────────── Regulation ───────────────────────── */
+
+export const regulations = [
   {
-    value: "100+",
-    label: "Global field engineers onboarded",
-    description:
-      "Scaled proprietary agentic service assistants from localized prototypes to daily global use.",
+    date: "2025-02-02",
+    instrument: "AI Act",
+    change: "Prohibited practices banned; AI-literacy measures for staff (Art. 4)",
+    affects: "Everyone using AI",
   },
   {
-    value: "100%",
-    label: "Enterprise MCP standardization",
-    description:
-      "Governed pipelines connecting live hardware telemetry to LLMs on Azure.",
+    date: "2025-08-02",
+    instrument: "AI Act",
+    change: "Obligations for general-purpose AI models",
+    affects: "Model providers",
   },
   {
-    value: "Zero",
-    label: "Vendor lock-in",
-    description:
-      "Custom LangGraph and n8n orchestration to protect IP and keep ROI accountable.",
+    date: "2026-08-02",
+    instrument: "AI Act",
+    change: "Transparency duties (Art. 50): disclose AI interaction, label generated content",
+    affects: "Anyone deploying chatbots & agents",
   },
+  {
+    date: "2026-09-11",
+    instrument: "Cyber Resilience Act",
+    change: "Reporting of actively exploited vulnerabilities and severe incidents",
+    affects: "Makers of products with digital elements",
+  },
+  {
+    date: "2026-09-12",
+    instrument: "Data Act",
+    change: "New connected products must give users direct access to their machine data",
+    affects: "Machine builders, OEM service",
+  },
+  {
+    date: "2027-01-20",
+    instrument: "Machinery Regulation",
+    change: "Applies in full; ML-based safety components need notified-body assessment",
+    affects: "Machine builders, integrators",
+  },
+  {
+    date: "2027-12-02",
+    instrument: "AI Act",
+    change: "High-risk obligations for Annex III systems (deferred by the Digital Omnibus)",
+    affects: "HR, critical infrastructure, access",
+  },
+  {
+    date: "2027-12-11",
+    instrument: "Cyber Resilience Act",
+    change: "All essential cybersecurity requirements apply",
+    affects: "Makers of products with digital elements",
+  },
+  {
+    date: "2028-08-02",
+    instrument: "AI Act",
+    change: "High-risk obligations for AI in regulated products — incl. machinery (Annex I)",
+    affects: "Machine builders",
+  },
+] as const;
+
+export const marketFacts = [
+  {
+    value: "57%",
+    label: "of German companies now use AI — up from 20% two years ago.",
+    source: "Bitkom, Sept 2026",
+  },
+  {
+    value: "56%",
+    label: "of those users name legal ambiguity as a major challenge.",
+    source: "Bitkom, Sept 2026",
+  },
+  {
+    value: "4",
+    label: "EU regulations touching AI on machines take effect between 2026 and 2028.",
+    source: "AI Act · MR · Data Act · CRA",
+  },
+] as const;
+
+export const sources = [
+  {
+    label: "Bitkom — Erstmals nutzt die Mehrheit der Unternehmen KI (14 Sept 2026)",
+    href: "https://www.bitkom.org/Presse/Presseinformation/Erstmals-nutzt-Mehrheit-Unternehmen-KI",
+  },
+  {
+    label: "Gibson Dunn — EU AI Act Omnibus agreement: postponed high-risk deadlines",
+    href: "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+  },
+  {
+    label: "TÜV SÜD — EU Machinery Regulation: tips for manufacturers and operators",
+    href: "https://www.tuvsud.com/en/newsroom/press-releases/2025/october/7-tips-for-manufacturers-and-operators",
+  },
+  {
+    label: "Wilson Sonsini — EU Data Act September 2026 deadline",
+    href: "https://www.wsgr.com/en/insights/eu-data-act-september-2026-deadline-what-businesses-need-to-know.html",
+  },
+] as const;
+
+/* ───────────────────────── Autonomy ladder ───────────────────────── */
+
+export const autonomyLevels = [
+  {
+    level: "L0",
+    name: "Informs",
+    example: "Answers questions from manuals, tickets and past fixes — with sources.",
+    controls: ["Source citations on every answer", "Access scoped to role and site"],
+  },
+  {
+    level: "L1",
+    name: "Recommends",
+    example: "Diagnoses a fault and proposes a fix with evidence and confidence.",
+    controls: ["Evidence & confidence shown", "Engineer feedback loop into evaluation"],
+  },
+  {
+    level: "L2",
+    name: "Acts with approval",
+    example: "Executes the fix on the machine after a named engineer signs off.",
+    controls: ["Human approval gate per action", "Action audit log", "Rollback plan per action class"],
+  },
+  {
+    level: "L3",
+    name: "Acts within policy",
+    example: "Runs pre-approved action classes on its own; escalates the rest.",
+    controls: ["Policy-as-code action limits", "Live monitoring & alerting", "Kill switch"],
+  },
+  {
+    level: "L4",
+    name: "Acts & reports",
+    example: "Owns whole service workflows; humans review by exception.",
+    controls: ["Continuous evaluation", "Incident & reporting process", "Periodic re-certification"],
+  },
+] as const;
+
+/* ───────────────────────── Governance offers ───────────────────────── */
+
+export const governanceOffers = [
+  {
+    title: "AI Readiness Check",
+    duration: "2 weeks",
+    description:
+      "Inventory every AI use — shadow AI included — classify it under the AI Act and Machinery Regulation, and leave with a prioritised gap list.",
+  },
+  {
+    title: "Agent Governance Framework",
+    duration: "4–6 weeks",
+    description:
+      "Autonomy levels, action permissions, approval gates, audit trails and a kill switch — designed for agents that touch real systems.",
+  },
+  {
+    title: "ISO/IEC 42001 AI Management System",
+    duration: "90 days",
+    description:
+      "Policies, roles, risk and impact assessments and a lifecycle process that can grow into certification.",
+  },
+  {
+    title: "AI Literacy Programme",
+    duration: "Ongoing",
+    description:
+      "Role-specific training for engineers, service teams and managers — documented to show the measures Art. 4 asks for.",
+  },
+] as const;
+
+export const regulationBriefs = [
+  {
+    instrument: "AI Act",
+    question: "Is our service agent high-risk?",
+    answer:
+      "Usually not by itself — but transparency duties apply from August 2026, and AI inside safety functions of machinery moves into high-risk scope by August 2028.",
+  },
+  {
+    instrument: "Machinery Regulation",
+    question: "What changes for AI on the machine?",
+    answer:
+      "From 20 January 2027, safety components with self-evolving ML behaviour require notified-body assessment. Agents that act on machines need clear boundaries to stay outside safety functions.",
+  },
+  {
+    instrument: "Data Act",
+    question: "Who else can service our machines?",
+    answer:
+      "Users can now access — and share — the data your machines generate. Third-party service gets easier. The best defence is a service experience competitors can't match.",
+  },
+] as const;
+
+/* ───────────────────────── Field notes ───────────────────────── */
+
+export const fieldMetrics = [
+  { value: "100+", label: "field engineers using a production AI service assistant" },
+  { value: "30+", label: "service engineers in a field test of a troubleshooting agent" },
+  { value: "3", label: "continents of engineers, sales teams and clients trained on wafer-handling systems" },
 ] as const;
 
 export const caseStudies = [
   {
-    id: "scale",
-    title: "Global Agentic Service Assistant Rollout",
+    id: "assistant",
+    tag: "Production",
+    title: "A global AI service assistant",
     context:
-      "Leading semiconductor equipment manufacturer seeking to move from localized AI pilots to enterprise-wide field support.",
-    challenge:
-      "Fragmented prototypes could not scale across regions, teams, or governance requirements without losing reliability.",
+      "A leading semiconductor equipment manufacturer needed its field service knowledge available to every engineer, in every region.",
     intervention:
-      "Led end-to-end development of a proprietary AI Service Assistant, designing adoption patterns, reference workflows, and enablement for global engineering teams.",
-    impact:
-      "Scaled proprietary agentic service assistants from localized prototypes to global daily use across 100+ field engineers.",
+      "Led end-to-end delivery of a proprietary AI assistant: prototype to production on Azure, external development teams, LangGraph orchestration and Model Context Protocol for scalable retrieval.",
+    impact: "In daily use by 100+ field engineers worldwide.",
   },
   {
-    id: "mcp-azure",
-    title: "Enterprise MCP Integration on Azure",
+    id: "action",
+    tag: "Now building",
+    title: "From answers to actions",
     context:
-      "Enterprise environment requiring secure connections between live hardware telemetry and LLM-powered support systems.",
-    challenge:
-      "Legacy integrations lacked governance, standardization, and a path to production-grade observability on Azure.",
+      "Knowing the fix is not the same as applying it. The next step is agents that take corrective action on semiconductor equipment.",
     intervention:
-      "Architected secure, governed MCP pipelines connecting live hardware telemetry directly to LLMs with enterprise identity and data policies.",
-    impact:
-      "Achieved 100% enterprise MCP standardization with production-ready Azure deployment and governed tool interfaces.",
+      "Service agents that execute approved fixes on the machine through tool interfaces — with approval gates, audit logs and rollback built in from day one.",
+    impact: "Autonomy level L2: the agent acts, a named engineer signs off.",
   },
   {
-    id: "orchestration",
-    title: "Custom Agentic Orchestration",
+    id: "cambridge",
+    tag: "Research",
+    title: "Troubleshooting agent for semiconductor robotics",
     context:
-      "Organization needing autonomous workflows without surrendering IP or accepting proprietary vendor lock-in.",
-    challenge:
-      "Off-the-shelf platforms could not support multi-step workflows, live database queries, and strict ROI accountability.",
+      "Master thesis at the University of Cambridge Institute for Manufacturing on wafer-handling robot failures.",
     intervention:
-      "Built custom LangGraph and n8n orchestration backends with tool-calling agents, retrieval layers, and human approval gates.",
-    impact:
-      "Delivered zero vendor lock-in architecture with autonomous tools that query live databases and execute multi-step workflows.",
+      "A troubleshooting agent combining retrieval-augmented generation with knowledge graphs, tested in industry with service engineers.",
+    impact: "Field-tested with 30+ engineers; published at AIRSI 2025.",
   },
   {
-    id: "industrial",
-    title: "Industrial Data to LLM Pipelines",
+    id: "carma",
+    tag: "Research",
+    title: "AI governance through agent simulation",
     context:
-      "Manufacturing and field-service environment with heterogeneous operational and telemetry data sources.",
-    challenge:
-      "Passive chat interfaces could not act on live data or support shop-floor decision loops without compromising uptime.",
+      "Research collaboration with the Center for AI Risk Management & Alignment (CARMA).",
     intervention:
-      "Designed streaming data pipelines, MCP-style interfaces, and operator-facing dashboards with LLM-assisted analysis.",
-    impact:
-      "Connected industrial telemetry and operational data to agentic workflows that drive measurable field-service ROI.",
+      "LLM-driven agents and Monte-Carlo simulation to stress-test AI governance and policy options before they meet reality.",
+    impact: "Governance advice grounded in simulation, not slogans.",
   },
+  {
+    id: "platform",
+    tag: "Architecture",
+    title: "An enterprise agent platform",
+    context: "Many departments, many ideas, no shared foundation for multi-agent workflows.",
+    intervention:
+      "Architecting a company-wide agentic platform on LangGraph and n8n, and advising project teams as a vertical integrator — from document generation to workflow automation.",
+    impact: "One governed stack instead of a zoo of pilots.",
+  },
+] as const;
+
+/* ───────────────────────── About ───────────────────────── */
+
+export const founderBio = {
+  name: "Abhimanyu Kanwar",
+  title: "Founder · Senior AI Solutions Manager in semiconductor equipment service",
+  quote:
+    "I've trained engineers on the machines, fixed them on the shop floor, and now build agents that fix them. Governance isn't paperwork to me — it's what lets an agent touch a real machine.",
+  paragraphs: [
+    "Mechanical and production engineer from RWTH Aachen. Research on troubleshooting agents at the University of Cambridge Institute for Manufacturing, and on AI governance through agent simulation at CARMA.",
+    "Today I lead AI solutions in the service organisation of a leading semiconductor equipment manufacturer: a production AI assistant used by 100+ field engineers, an enterprise agent platform on LangGraph and n8n, and service agents that take action on machines.",
+    "AB Kinetics brings that work to European industry — for teams that want agents in production, and the governance to keep them there.",
+  ],
+} as const;
+
+export const careerRoute = [
+  { year: "2017", place: "RWTH Aachen", role: "Mechanical engineering" },
+  { year: "2020", place: "Mercedes-Benz EQ", role: "Li-ion battery development" },
+  { year: "2021", place: "Amazon", role: "Delivery operations & KPIs" },
+  { year: "2023", place: "Semiconductor equipment", role: "Technical trainer, field service" },
+  { year: "2024", place: "Cambridge · CARMA", role: "Agent & AI-governance research" },
+  { year: "2025", place: "Semiconductor equipment", role: "AI solutions — agents in production" },
+  { year: "Now", place: "AB Kinetics", role: "Agentic AI & governance for industry" },
+] as const;
+
+export const credentials = [
+  "RWTH Aachen — M.Sc. Production Engineering",
+  "University of Cambridge — Institute for Manufacturing",
+  "Cambridge Service Alliance",
+  "CARMA — AI Risk Management & Alignment",
+  "AIRSI 2025 — published",
+  "Turing College — AI Ethics",
 ] as const;
 
 export const aboutPillars = [
   {
-    title: "C-Suite Strategy & ROI",
-    description:
-      "Board-ready narratives, investment cases, and adoption roadmaps tied to outcomes your leadership team can track.",
-    icon: "Briefcase",
+    zone: "Boardroom",
+    title: "Strategy & ROI",
+    description: "Investment cases and roadmaps your leadership can track — not strategy decks that stall.",
   },
   {
-    title: "Software Architecture",
-    description:
-      "Agentic system design, orchestration patterns, retrieval strategies, and integration blueprints for enterprise constraints.",
-    icon: "Layers",
+    zone: "IDE",
+    title: "Agent architecture",
+    description: "LangGraph, MCP, n8n, Azure — orchestration and retrieval designed for enterprise constraints.",
   },
   {
-    title: "Physical & Operational Reality",
-    description:
-      "Live data streams, industrial workflows, and shop-floor contexts that most AI consultancies never touch.",
-    icon: "Factory",
+    zone: "Shop floor",
+    title: "Machines & service",
+    description: "Wafer handlers, sensors, pneumatics, field service. We know what the agent is actually touching.",
+  },
+  {
+    zone: "Rulebook",
+    title: "Governance",
+    description: "AI Act, Machinery Regulation, Data Act — translated into controls engineers can build.",
   },
 ] as const;
 
-export const founderBio = {
-  name: "Abhimanyu Kanwar",
-  title: "Founder, AB Kinetics",
-  quote:
-    "I work where the boardroom, the IDE, and the shop floor meet. That's where agentic AI either ships or stalls.",
-  paragraphs: [
-    "I'm an enterprise AI architect with a mechanical engineering foundation from RWTH Aachen and research in GraphRAG multi-agent systems at the University of Cambridge Service Alliance.",
-    "Most recently I led a proprietary AI Service Assistant for a leading semiconductor equipment manufacturer, scaling it to 100+ field engineers with MCP integrations on Azure and orchestration via LangGraph and n8n.",
-    "AB Kinetics exists for teams stuck between strategy decks and demos that never reach production. We build governed systems your organization can run, extend, and measure.",
-  ],
-} as const;
-
-export const coreConceptPoints = [
-  {
-    title: "On the org chart",
-    description: "Assigned to roles and departments — not floating in a sidebar.",
-    icon: "Users",
-  },
-  {
-    title: "Lives in your workflows",
-    description: "Slack, Teams, internal tools. Async collaboration with your teams.",
-    icon: "MessageSquare",
-  },
-  {
-    title: "Memory that stays scoped",
-    description: "Long-term context without cross-department leakage.",
-    icon: "Brain",
-  },
-] as const;
-
-export const platformPillars = [
-  {
-    id: "harnesses",
-    title: "Custom Harnesses",
-    summary: "Deep hooks into your APIs, ERP, and internal systems.",
-    icon: "Wrench",
-  },
-  {
-    id: "gateway",
-    title: "Model Gateway",
-    summary: "Route to the right model. Sensitive data stays where it belongs.",
-    icon: "GitBranch",
-  },
-  {
-    id: "governance",
-    title: "GDPR Governance",
-    summary: "Access controls, audit logs, and department-scoped memory.",
-    icon: "Shield",
-  },
-  {
-    id: "memory",
-    title: "Context & Memory",
-    summary: "Persistent knowledge graphs without cross-team leakage.",
-    icon: "Database",
-  },
-] as const;
+/* ───────────────────────── Virtual Employees demo data ───────────────────────── */
 
 export const enterpriseUseCases = [
   {
     id: "analyst",
-    title: "Virtual Data Analyst",
+    title: "Data Analyst",
     department: "Finance",
     description: "Queries ERP and BI systems, flags anomalies, cites source records.",
-    capabilities: ["ERP integration", "Reporting", "Anomaly detection"],
-    icon: "BarChart3",
   },
   {
-    id: "engineer",
-    title: "Virtual Support Engineer",
+    id: "support",
+    title: "Support Engineer",
     department: "IT & Ops",
     description: "Triages tickets, runs approved playbooks, escalates with full context.",
-    capabilities: ["Ticket triage", "Runbooks", "Escalation"],
-    icon: "Headphones",
   },
   {
     id: "compliance",
-    title: "Virtual Compliance Officer",
+    title: "Compliance Officer",
     department: "Legal & Risk",
     description: "Reviews policies against GDPR, monitors regulatory change, produces audit docs.",
-    capabilities: ["Policy review", "Regulatory monitoring", "Audit docs"],
-    icon: "Scale",
   },
-] as const;
-
-export const legacyExpertise = {
-  eyebrow: "Deployment experience",
-  title: "Built on production-grade knowledge systems",
-  description:
-    "Before Virtual Employees, we deployed complex agentic RAG and hierarchical knowledge graph systems for global field service operations — scaling to 100+ engineers with governed MCP pipelines on Azure. That same depth of structural integration now powers enterprise-wide agentic workforces.",
-  metrics: [
-    { value: "100+", label: "Engineers onboarded globally" },
-    { value: "100%", label: "MCP standardization on Azure" },
-    { value: "Zero", label: "Vendor lock-in" },
-  ],
-} as const;
-
-export const complianceFeatures = [
-  {
-    title: "GDPR Compliance",
-    description: "Data minimization, purpose limitation, and right-to-erasure built into agent memory architecture.",
-    icon: "Lock",
-  },
-  {
-    title: "Audit Logs",
-    description: "Immutable records of every model call, tool invocation, and data access — exportable for compliance reviews.",
-    icon: "FileText",
-  },
-  {
-    title: "Data Sovereignty",
-    description: "Deploy on EU infrastructure or on-premises. Your data never leaves jurisdictions you haven't explicitly approved.",
-    icon: "Globe",
-  },
-  {
-    title: "Secure Model Execution",
-    description: "Sandboxed tool execution, encrypted context stores, and policy-enforced model routing at the gateway layer.",
-    icon: "Server",
-  },
-] as const;
-
-export const homeTeasers = [
-  {
-    title: "Services",
-    description: "Strategy, agentic architecture, integration, and production enablement.",
-    href: "/services",
-    cta: "Explore services",
-  },
-  {
-    title: "Vertical integration",
-    description: "Why bridging strategy, software, and operations is our edge.",
-    href: "/about",
-    cta: "Our approach",
-  },
-  {
-    title: "Proven impact",
-    description: "Enterprise-scale outcomes across global rollouts and governed production systems.",
-    href: "/case-studies",
-    cta: "View track record",
-  },
-] as const;
-
-export const marqueeItems = [
-  "Organigram-level",
-  "GDPR-native",
-  "EU-hosted models",
-  "Model routing",
-  "Scoped memory",
-  "Audit logs by default",
-  "Human approval gates",
-  "No vendor lock-in",
-] as const;
-
-export const orgChart = {
-  company: "Muster AG",
-  board: { name: "Executive Board", role: "Vorstand" },
-  departments: [
-    {
-      id: "analyst",
-      department: "Finance",
-      lead: { name: "K. Weber", role: "CFO" },
-      ve: { code: "VE-0142", title: "Data Analyst" },
-    },
-    {
-      id: "support",
-      department: "IT & Ops",
-      lead: { name: "J. Schmidt", role: "Head of IT" },
-      ve: { code: "VE-0217", title: "Support Engineer" },
-    },
-    {
-      id: "compliance",
-      department: "Legal & Risk",
-      lead: { name: "A. Yilmaz", role: "General Counsel" },
-      ve: { code: "VE-0309", title: "Compliance Officer" },
-    },
-  ],
-} as const;
-
-export const activityLog = [
-  { agent: "analyst", actor: "VE-0142", system: "SAP FI", text: "Flagged 3 anomalies in Q3 accruals · 12 sources cited" },
-  { agent: "gateway", actor: "Gateway", system: "Router", text: "PII detected → routed to EU-hosted model" },
-  { agent: "support", actor: "VE-0217", system: "ServiceNow", text: "INC-4821 triaged · runbook R-17 executed" },
-  { agent: "compliance", actor: "VE-0309", system: "Policy DB", text: "Art. 30 record updated · audit entry #9913" },
-  { agent: "analyst", actor: "VE-0142", system: "Teams", text: "Draft forecast sent to K. Weber for approval" },
-  { agent: "support", actor: "VE-0217", system: "Jira", text: "Escalated OPS-311 to J. Schmidt with full context" },
-  { agent: "gateway", actor: "Gateway", system: "Router", text: "Routine summary → cost-optimised model" },
-  { agent: "compliance", actor: "VE-0309", system: "EUR-Lex", text: "New AI Act guidance mapped to 4 internal policies" },
-] as const;
-
-export const comparisonRows = [
-  { dimension: "Where it lives", tool: "A sidebar someone has to open", teammate: "On the organigram, inside a department" },
-  { dimension: "Access", tool: "Whatever the user happens to see", teammate: "Scoped per role, least-privilege by default" },
-  { dimension: "Memory", tool: "Forgets — or leaks across teams", teammate: "Persistent, department-scoped context" },
-  { dimension: "Accountability", tool: "Nobody owns the output", teammate: "A named owner, audit log, approval gates" },
-  { dimension: "Works in", tool: "One chat window", teammate: "Slack, Teams, ERP, ticketing, your APIs" },
 ] as const;

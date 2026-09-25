@@ -1,13 +1,13 @@
 # AB Kinetics
 
-Premium marketing website for **AB Kinetics** — an elite AI consulting firm focused on agentic AI, vertical integration, and production-grade systems.
+Website for **AB Kinetics** — agentic AI and AI governance for European industry: service agents that act on machines, and the governance (AI Act, Machinery Regulation, Data Act, CRA) that lets them.
 
 Built with Next.js (App Router, static export), Tailwind CSS, and Lucide React. Animations are CSS-only for a light bundle. Optimized for deployment on **Netlify free tier** with a custom **Ionos** domain.
 
 ## Tech Stack
 
 - **Next.js 15** — App Router with `output: 'export'`
-- **Tailwind CSS 4** — Dark editorial design system (ink, paper, one signal colour)
+- **Tailwind CSS 4** — "Engineering drawing" design system: drafting paper, graphite, one safety-orange mark
 - **Lucide React** — Icons
 - **Netlify Forms** — Contact form (static-compatible)
 - **TypeScript**

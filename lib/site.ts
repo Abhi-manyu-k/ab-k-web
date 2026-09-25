@@ -1,39 +1,33 @@
 export const siteConfig = {
   name: "AB Kinetics",
-  tagline: "Virtual Employees for the Enterprise",
+  tagline: "Agentic AI & AI governance for European industry",
   url: "https://www.ab-k.com",
   ogImage: "/og.svg",
   description:
-    "Governed Virtual Employees for German enterprises — organigram-level AI with GDPR-native controls and model routing.",
+    "AI agents that diagnose and fix machines — and the governance that lets you trust them to. Engineered in Aachen for EU industry facing the AI Act, the Machinery Regulation and the Data Act.",
+  location: "Aachen, Germany",
   links: {
     linkedin: "https://www.linkedin.com/in/abhimanyu-kanwar-792721180",
   },
   contact: {
     email: "strategy@ab-k.com",
-    formTitle: "Request a Demo",
-    secondaryCta: "Discuss Integration",
+    formTitle: "Book an intro call",
+    secondaryCta: "Explore the practices",
   },
 };
 
 export const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Platform" },
+  { href: "/services", label: "Practices" },
+  { href: "/governance", label: "Governance" },
+  { href: "/case-studies", label: "Field notes" },
   { href: "/about", label: "About" },
-  { href: "/case-studies", label: "Case Studies" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const trustStripItems = [
-  "Organigram-level",
-  "GDPR-native",
-  "Model routing",
-  "Production-proven",
-] as const;
-
 export const projectStages = [
-  "Platform evaluation",
-  "Pilot department",
-  "Enterprise rollout",
-  "Compliance review",
-  "Other",
+  "Service agent pilot",
+  "AI governance / compliance readiness",
+  "Virtual Employees",
+  "AI literacy & training",
+  "Something else",
 ] as const;

@@ -28,7 +28,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} | Virtual Employees`,
+    default: `${siteConfig.name} | Agentic AI & AI Governance for Industry`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0c",
+  themeColor: "#f2efe7",
 };
 
 export default function RootLayout({

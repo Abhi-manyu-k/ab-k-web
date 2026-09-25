@@ -1,18 +1,18 @@
 import { HeroSection } from "@/components/sections/HeroSection";
-import { ShiftSection } from "@/components/sections/ShiftSection";
-import { PlatformSection } from "@/components/sections/PlatformSection";
-import { RosterSection } from "@/components/sections/RosterSection";
-import { ProofSection } from "@/components/sections/ProofSection";
+import { SituationSection } from "@/components/sections/SituationSection";
+import { PracticesSection } from "@/components/sections/PracticesSection";
+import { AutonomySection } from "@/components/sections/AutonomySection";
+import { FieldNotesSection } from "@/components/sections/FieldNotesSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ShiftSection />
-      <PlatformSection />
-      <RosterSection />
-      <ProofSection />
+      <SituationSection />
+      <PracticesSection />
+      <AutonomySection />
+      <FieldNotesSection />
       <CTASection />
     </>
   );
