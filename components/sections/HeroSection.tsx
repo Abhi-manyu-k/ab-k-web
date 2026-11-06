@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { MachineDrawing } from "@/components/ui/MachineDrawing";
+import { Annotation } from "@/components/ui/Annotation";
 import { siteConfig } from "@/lib/site";
 
 const zonesX = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -12,7 +13,7 @@ const generalNotes = [
   "Every action is logged, attributable and reversible.",
   "Sensitive data stays on EU-hosted models by default.",
   "Designed against the AI Act, Machinery Regulation (EU) 2023/1230 and the Data Act.",
-  "Built by engineers who have serviced the machines.",
+  "Written by an engineer who has serviced the machines.",
 ];
 
 export function HeroSection() {
@@ -52,18 +53,28 @@ export function HeroSection() {
                 </span>
               </h1>
               <div className="mt-10 grid gap-8 xl:grid-cols-[minmax(0,26rem)_auto] xl:items-end xl:gap-10">
-                <p className="lead">
-                  We build AI agents that diagnose and fix machines — and the governance that lets you
-                  trust them to. Engineered in Aachen for industry facing the AI Act, the Machinery
-                  Regulation and the Data Act.
-                </p>
+                <div>
+                  <p className="lead">
+                    I build AI agents that diagnose machines, and the governance that lets you trust them
+                    to act. Engineer from Aachen, working on service AI for semiconductor equipment.
+                  </p>
+                  <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+                    <span>Drawn by</span>
+                    <Link href="/about" className="serif link text-xl normal-case tracking-normal text-ink">
+                      {siteConfig.author}
+                    </Link>
+                    <Annotation className="normal-case tracking-normal" rotate={-4}>
+                      hi — that&apos;s me
+                    </Annotation>
+                  </p>
+                </div>
                 <div className="flex flex-wrap gap-3">
-                  <Link href="/contact" className="btn btn-ink">
-                    {siteConfig.contact.formTitle}
+                  <Link href="/framework" className="btn btn-ink">
+                    Read the autonomy framework
                     <ArrowRight className="arrow h-3.5 w-3.5" aria-hidden="true" />
                   </Link>
-                  <Link href="/services" className="btn btn-line">
-                    Practices
+                  <Link href="/writing" className="btn btn-line">
+                    Writing
                   </Link>
                 </div>
               </div>
@@ -96,10 +107,10 @@ export function HeroSection() {
           <dl className="grid grid-cols-2 border-t rule-ink font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
             {[
               ["Title", "Service agent · governed action sequence"],
-              ["Drawn", siteConfig.name],
+              ["Drawn", siteConfig.author],
               ["Location", "Aachen, DE"],
               ["Scale", "1 : 1"],
-              ["Sheet", "01 / 05"],
+              ["Sheet", "00 / 06"],
             ].map(([k, v], i) => (
               <div
                 key={k}

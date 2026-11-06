@@ -1,22 +1,43 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { PageHero } from "@/components/ui/PageHero";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { CTASection } from "@/components/sections/CTASection";
-import { aboutPillars, careerRoute, credentials, founderBio } from "@/lib/content";
+import { TrackRecordSection } from "@/components/sections/TrackRecordSection";
+import { aboutPillars, authorBio, careerRoute, credentials } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
+  ogTitle: "About Abhimanyu Kanwar — engineer, service AI & agent governance",
   description:
-    "AB Kinetics connects boardroom, IDE, shop floor and rulebook — founded by an engineer who builds service agents for semiconductor equipment.",
+    "I'm Abhimanyu Kanwar, an engineer from Aachen working on service AI for semiconductor equipment. Boardroom, IDE, shop floor and rulebook: how I got here and what I work on.",
+  path: "/about",
+  type: "profile",
+});
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.author,
+  jobTitle: authorBio.title,
+  url: `${siteConfig.url}/about`,
+  image: `${siteConfig.url}/images/founder.webp`,
+  homeLocation: { "@type": "Place", name: siteConfig.location },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "RWTH Aachen University", sameAs: "https://www.rwth-aachen.de" },
+    { "@type": "CollegeOrUniversity", name: "University of Cambridge", sameAs: "https://www.cam.ac.uk" },
+  ],
+  knowsAbout: ["AI agents", "AI governance", "EU AI Act", "Field service", "Semiconductor equipment"],
+  sameAs: [siteConfig.links.linkedin],
 };
 
 export default function AboutPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <PageHero
         sheet="05"
         eyebrow="About"
@@ -25,7 +46,7 @@ export default function AboutPage() {
             Boardroom, IDE, shop floor, <em>rulebook.</em>
           </>
         }
-        description="Most AI consultancies cover one of these. Agents that touch real machines need all four — so that's how we're built."
+        description="Agents that touch real machines need all four. I have worked in each of them — that is what I write and speak from."
       />
 
       <section className="py-20 lg:py-28">
@@ -58,31 +79,34 @@ export default function AboutPage() {
                   An engineer <em>first.</em>
                 </>
               }
-              intro="AB Kinetics is a small, senior practice. The person scoping your agent is the person who has built them — and serviced the machines they run on."
+              intro="I write about agents I have built, for machines I have serviced. AB Kinetics is the name I publish under."
             />
           </FadeInOnScroll>
 
           <FadeInOnScroll>
             <dl className="mt-14 grid grid-cols-[auto_1fr] border border-ink font-mono text-[11px] uppercase tracking-[0.08em] sm:grid-cols-[auto_1fr_1fr_1fr]">
               <div className="row-span-2 border-r border-ink p-2 sm:row-span-1">
+                <dt className="sr-only">Portrait</dt>
+                <dd>
                 <Image
                   src="/images/founder.webp"
-                  alt={`Portrait of ${founderBio.name}`}
+                  alt={`Portrait of ${authorBio.name}`}
                   width={72}
                   height={88}
                   className="h-[88px] w-[72px] object-cover object-top grayscale contrast-110 mix-blend-multiply"
                 />
+                </dd>
               </div>
               <div className="border-b border-ink px-4 py-3 sm:border-b-0 sm:border-r">
-                <dt className="text-[9px] text-faint">Drawn by</dt>
-                <dd className="mt-1 text-ink">{founderBio.name}</dd>
+                <dt className="text-[9px] text-muted">Drawn by</dt>
+                <dd className="mt-1 text-ink">{authorBio.name}</dd>
               </div>
               <div className="px-4 py-3 sm:border-r sm:border-ink">
-                <dt className="text-[9px] text-faint">Role</dt>
-                <dd className="mt-1 normal-case tracking-normal text-ink">{founderBio.title}</dd>
+                <dt className="text-[9px] text-muted">Role</dt>
+                <dd className="mt-1 normal-case tracking-normal text-ink">{authorBio.title}</dd>
               </div>
               <div className="col-span-2 border-t border-ink px-4 py-3 sm:col-span-1 sm:border-t-0">
-                <dt className="text-[9px] text-faint">Contact</dt>
+                <dt className="text-[9px] text-muted">Contact</dt>
                 <dd className="mt-1 normal-case tracking-normal">
                   <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="link text-ink">
                     LinkedIn ↗
@@ -95,15 +119,19 @@ export default function AboutPage() {
           <div className="mt-14 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <FadeInOnScroll>
               <p className="serif text-3xl leading-snug text-ink lg:text-4xl">
-                <em>&ldquo;{founderBio.quote}&rdquo;</em>
+                <em>&ldquo;{authorBio.quote}&rdquo;</em>
               </p>
             </FadeInOnScroll>
             <FadeInOnScroll delay={100}>
               <div className="space-y-5 text-ink-2">
-                {founderBio.paragraphs.map((p) => (
+                {authorBio.paragraphs.map((p) => (
                   <p key={p.slice(0, 40)}>{p}</p>
                 ))}
               </div>
+              <p className="mt-8 grid grid-cols-[auto_1fr] gap-4 border-t border-dashed rule pt-4 text-sm">
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted pt-0.5">Currently learning</span>
+                <span className="text-ink">{authorBio.learning}</span>
+              </p>
               <ul className="mt-10 flex flex-wrap gap-2">
                 {credentials.map((c) => (
                   <li key={c} className="border border-ink px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-ink">
@@ -139,7 +167,7 @@ export default function AboutPage() {
                     <span
                       className={`absolute -left-[5px] top-3 h-2.5 w-2.5 rotate-45 border border-ink lg:-top-[5px] lg:left-0 ${last ? "bg-signal border-signal" : "bg-paper"}`}
                     />
-                    <span className={`font-mono text-xs ${last ? "text-signal" : "text-faint"}`}>{s.year}</span>
+                    <span className={`font-mono text-xs ${last ? "text-signal" : "text-muted"}`}>{s.year}</span>
                     <span className="serif mt-2 block text-xl leading-tight text-ink">{s.place}</span>
                     <span className="mt-1 block pb-4 text-sm text-muted">{s.role}</span>
                   </li>
@@ -149,6 +177,8 @@ export default function AboutPage() {
           </FadeInOnScroll>
         </Container>
       </section>
+
+      <TrackRecordSection id="track-record" sheet="04" />
 
       <CTASection />
     </>

@@ -1,18 +1,20 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
-import { siteConfig } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
+import { mailto, siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-  description: `${siteConfig.contact.formTitle} with AB Kinetics — service agents and AI governance for European industry.`,
-};
+  description:
+    "Invite Abhimanyu Kanwar to speak, collaborate on research on service agents and AI governance, or ask about the autonomy framework.",
+  path: "/contact",
+});
 
-const nextSteps = [
-  ["Day 0", "You describe one machine, one department or one compliance question."],
-  ["Day 2", "A 30-minute call in German or English to scope data, systems and risk."],
-  ["Week 2", "A written proposal: fixed scope, autonomy level, controls, timeline."],
+const routes = [
+  { k: "Speaking", v: "Conference talks, panels and webinars on service agents and AI governance.", subject: "Speaking invitation" },
+  { k: "Research", v: "Collaborations on troubleshooting agents, retrieval for field service, or agent governance.", subject: "Research collaboration" },
+  { k: "Questions", v: "About the autonomy framework or something I wrote.", subject: "Question" },
 ] as const;
 
 export default function ContactPage() {
@@ -23,7 +25,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Send us the <em>problem,</em> not a brief.
+            Let&apos;s <em>talk.</em>
           </>
         }
       />
@@ -33,28 +35,30 @@ export default function ContactPage() {
           <div className="grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
             <div>
               <p className="note mb-3">Direct</p>
-              <a href={`mailto:${siteConfig.contact.email}`} className="serif link text-3xl text-ink sm:text-4xl">
+              <a href={mailto()} className="serif link text-3xl text-ink sm:text-4xl">
                 {siteConfig.contact.email}
               </a>
 
-              <p className="note mt-14 mb-6">What happens next</p>
+              <p className="note mt-14 mb-6">What I&apos;m glad to hear about</p>
               <ol className="border-t border-ink">
-                {nextSteps.map(([when, what]) => (
-                  <li key={when} className="grid grid-cols-[5rem_1fr] border-b rule py-4">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-signal">{when}</span>
-                    <span className="text-sm text-ink-2">{what}</span>
+                {routes.map((r) => (
+                  <li key={r.k} className="grid grid-cols-[6rem_1fr] border-b rule py-4">
+                    <a href={mailto(r.subject)} className="link self-start font-mono text-[11px] uppercase tracking-[0.08em] text-signal">
+                      {r.k}
+                    </a>
+                    <span className="text-sm text-ink-2">{r.v}</span>
                   </li>
                 ))}
               </ol>
 
               <p className="mt-10 text-sm text-muted">
-                Based in {siteConfig.location}. Remote-first, on site where machines are involved.
+                Based in {siteConfig.location}. I reply in English or German.
               </p>
             </div>
 
             <div className="crop border border-ink bg-paper-3 p-6 sm:p-10">
               <p className="note mb-8 flex justify-between">
-                <span>Form ABK-06 · Inquiry</span>
+                <span>Form ABK-06 · Message</span>
                 <span>1 / 1</span>
               </p>
               <ContactForm />

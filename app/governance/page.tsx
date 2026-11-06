@@ -1,31 +1,33 @@
-import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { PageHero } from "@/components/ui/PageHero";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { RegulationTimeline } from "@/components/ui/RegulationTimeline";
-import { AutonomyLadder } from "@/components/ui/AutonomyLadder";
 import { CTASection } from "@/components/sections/CTASection";
-import { governanceOffers, regulationBriefs, sources } from "@/lib/content";
+import { autonomyLevels, framework, regulationBriefs, sources } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "AI Governance",
+export const metadata = pageMetadata({
+  title: "AI governance for industry",
   description:
-    "AI Act, Machinery Regulation, Data Act and Cyber Resilience Act — turned into engineering controls for AI agents on machines and in the enterprise.",
-};
+    "How I read the AI Act, Machinery Regulation, Data Act and Cyber Resilience Act as an engineer: the dates that matter and the controls they imply for AI agents on machines.",
+  path: "/governance",
+});
 
 export default function GovernancePage() {
   return (
     <>
       <PageHero
-        sheet="03"
+        sheet="02"
         eyebrow="AI governance for industry"
         title={
           <>
             Regulation, translated into <em>controls you can build.</em>
           </>
         }
-        description="Four EU regulations now touch AI on machines. We turn them into autonomy levels, approval gates and audit trails — so compliance speeds agents up instead of freezing them."
+        description="Four EU regulations now touch AI on machines. I translate them into autonomy levels, approval gates and audit trails — so compliance speeds agents up instead of freezing them."
       />
 
       <section className="py-20 lg:py-28">
@@ -55,7 +57,7 @@ export default function GovernancePage() {
           <FadeInOnScroll>
             <SheetHeader
               sheet="02"
-              label="Questions we get from machine builders"
+              label="Questions machine builders ask"
               title={
                 <>
                   Three questions, <em>straight answers.</em>
@@ -84,62 +86,49 @@ export default function GovernancePage() {
           <FadeInOnScroll>
             <SheetHeader
               sheet="03"
-              label="Our framework"
+              label="The framework"
               title={
                 <>
                   Autonomy, <em>by level.</em>
                 </>
               }
-              intro="The core of every governance engagement: decide how much an agent may do, then build exactly the controls that level requires — no more, no less."
+              intro="The core of the governance question: decide how much an agent may do, then build exactly the controls that level requires — no more, no less."
             />
           </FadeInOnScroll>
           <FadeInOnScroll>
-            <div className="mt-24">
-              <AutonomyLadder />
-            </div>
+            <ul className="mt-14 grid border-t border-l border-ink bg-paper sm:grid-cols-5">
+              {autonomyLevels.map((l) => (
+                <li key={l.level} className="border-r border-b border-ink p-4">
+                  <Link href={`/framework#${l.level.toLowerCase()}`} className="group block">
+                    <span className="font-mono text-xs text-signal">{l.level}</span>
+                    <span className="serif mt-1 block text-xl text-ink group-hover:underline">{l.name}</span>
+                    <span className="mt-2 block text-sm text-muted">{l.controls.join(" · ")}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/framework" className="btn btn-ink mt-10">
+              {framework.code} v{framework.version} — read the framework
+              <ArrowRight className="arrow h-3.5 w-3.5" aria-hidden="true" />
+            </Link>
           </FadeInOnScroll>
         </Container>
       </section>
 
       <section className="border-t rule-ink py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="04"
-              label="Engagements"
-              title={
-                <>
-                  Fixed scope. <em>Clear exit.</em>
-                </>
-              }
-            />
-          </FadeInOnScroll>
-          <ul className="mt-14 border-t border-ink">
-            {governanceOffers.map((o, i) => (
-              <FadeInOnScroll key={o.title} delay={i * 60}>
-                <li className="grid gap-3 border-b border-ink py-8 md:grid-cols-[4rem_1fr_1.4fr_8rem] md:items-baseline md:gap-8">
-                  <span className="font-mono text-xs text-faint">G-0{i + 1}</span>
-                  <h3 className="serif text-3xl text-ink lg:text-4xl">{o.title}</h3>
-                  <p className="text-ink-2">{o.description}</p>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-signal md:text-right">
-                    {o.duration}
-                  </span>
-                </li>
-              </FadeInOnScroll>
-            ))}
-          </ul>
-
-          <div className="mt-16 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
             <p className="text-sm text-muted">
-              We are engineers, not lawyers. Our work turns regulation into technical and organisational
-              controls, and we coordinate with your legal counsel and notified bodies where required.
+              I am an engineer, not a lawyer. I write about turning regulation into technical and
+              organisational controls; legal assessment belongs with counsel and, where required, notified
+              bodies. Nothing here is legal advice.
             </p>
             <div>
               <p className="note mb-3">Sources</p>
               <ol className="space-y-1.5 text-sm">
                 {sources.map((s, i) => (
                   <li key={s.href} className="flex gap-3">
-                    <span className="font-mono text-[11px] text-faint">[{i + 1}]</span>
+                    <span className="font-mono text-[11px] text-muted">[{i + 1}]</span>
                     <a href={s.href} target="_blank" rel="noopener noreferrer" className="link text-ink-2">
                       {s.label}
                     </a>

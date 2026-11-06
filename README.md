@@ -1,6 +1,6 @@
 # AB Kinetics
 
-Website for **AB Kinetics** — agentic AI and AI governance for European industry: service agents that act on machines, and the governance (AI Act, Machinery Regulation, Data Act, CRA) that lets them.
+Personal site of **Abhimanyu Kanwar**, writing as **AB Kinetics** — service AI and agent governance for European industry: the ABK-AL autonomy framework, essays, talks and publications.
 
 Built with Next.js (App Router, static export), Tailwind CSS, and Lucide React. Animations are CSS-only for a light bundle. Optimized for deployment on **Netlify free tier** with a custom **Ionos** domain.
 
@@ -11,6 +11,19 @@ Built with Next.js (App Router, static export), Tailwind CSS, and Lucide React. 
 - **Lucide React** — Icons
 - **Netlify Forms** — Contact form (static-compatible)
 - **TypeScript**
+
+## Content
+
+- `lib/content.ts` — framework levels, regulation table, track record, talks, about copy
+- `content/writing/*.mdx` — essays (MDX). Each exports `metadata` (`number`, `title`, `abstract`, `topic`, `status`, `date`).
+  Only `status: "Published"` essays with a `date` are built in production; drafts are excluded from pages, RSS and sitemap.
+  Preview drafts with `npm run dev` or `SHOW_DRAFTS=true npm run build` (always `noindex`).
+- Feed: `/rss.xml` · Sitemap: `/sitemap.xml`
+- Fonts are self-hosted (`app/fonts`, `public/fonts`) — no request to Google at build or run time.
+- Redirects (`/services` → `/framework`, `/case-studies` → `/about#track-record`) live in `netlify.toml`.
+
+> **iCloud note:** this folder sits in iCloud Drive. If `npm run build` hangs, macOS has evicted
+> `node_modules` files to the cloud — run `rm -rf node_modules && npm ci`, or build from a copy outside iCloud.
 
 ## Local Development
 
@@ -87,15 +100,19 @@ npx netlify deploy --prod --dir=out
 app/
   layout.tsx          # Root layout, fonts, metadata
   page.tsx            # Home
-  about/page.tsx
-  services/page.tsx
-  case-studies/page.tsx
-  contact/page.tsx
-  contact/success/page.tsx
+  framework/          # ABK-AL autonomy framework
+  governance/
+  writing/            # Drawing register + [slug] essay pages
+  talks/
+  about/
+  contact/
+  impressum/ datenschutz/
+  rss.xml/ sitemap.ts robots.ts
+content/writing/      # MDX essays
 components/
   layout/             # Header, Footer
-  sections/           # Hero, TrustStrip, Teasers, CTA
-  ui/                 # Button, Container, cards, form, background
+  sections/           # Hero, Situation, Areas, Autonomy, Track record, CTA
+  ui/                 # Ladder, drawing, timeline, annotations, form
 lib/
   site.ts             # Site config, nav, constants
   content.ts          # Services, case studies, copy data
@@ -107,13 +124,7 @@ next.config.mjs
 
 ## Before Public Launch
 
-Replace the following placeholders:
-
-| Item | Location |
-|------|----------|
-| LinkedIn profile URL | `lib/site.ts` — `links.linkedin` |
-| Logo SVG paths | `components/ui/Logo.tsx` |
-| OG image asset | Add `public/og.jpg` and verify `siteConfig.ogImage` |
+See [docs/LAUNCH-TODO.md](docs/LAUNCH-TODO.md) — every placeholder is marked `TODO(launch)` in the code.
 
 ## Netlify Forms
 
@@ -128,4 +139,4 @@ Submissions appear in **Netlify → Forms** after deploy. Configure email notifi
 
 ## License
 
-Private — AB Kinetics.
+Private — Abhimanyu Kanwar / AB Kinetics. Fonts: SIL Open Font License (see OFL-*.txt).

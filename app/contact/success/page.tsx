@@ -1,11 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Message Sent",
-  description: "Thank you for contacting AB Kinetics.",
-};
+export const metadata = pageMetadata({
+  title: "Message sent",
+  description: "Thanks for your message to Abhimanyu Kanwar.",
+  path: "/contact/success",
+  noindex: true,
+});
 
 export default function ContactSuccessPage() {
   return (
@@ -16,13 +18,13 @@ export default function ContactSuccessPage() {
             Received ✓
           </span>
           <h1 className="display mt-10 text-6xl sm:text-7xl">
-            Logged. <em>We&apos;ll be in touch.</em>
+            Logged. <em>I&apos;ll be in touch.</em>
           </h1>
           <p className="lead mx-auto mt-6 max-w-md bg-paper/80">
-            Thanks for reaching out — expect a reply within two working days.
+            Thanks for your message — I read every one and reply as soon as I can.
           </p>
           <Link href="/" className="btn btn-line mt-10 bg-paper">
-            Back to sheet 01
+            Back to sheet 00
           </Link>
         </div>
       </Container>

@@ -104,7 +104,7 @@ export function MachineDrawing() {
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto w-full"
           role="img"
-          aria-label="Technical drawing of a semiconductor cluster tool. An AI service agent detects a temperature deviation in process module 3, diagnoses it, proposes a fix, waits for engineer approval, then executes and verifies it."
+          aria-label="Illustrative technical drawing of a semiconductor cluster tool, not a live system. In the animation an AI service agent detects a temperature deviation in process module 3, diagnoses it, proposes a fix, waits for engineer approval, then executes and verifies it."
         >
           <defs>
             <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -253,9 +253,12 @@ export function MachineDrawing() {
       <div className="flex flex-col border-t rule-ink lg:border-l lg:border-t-0">
         <div className="flex items-center justify-between border-b rule-ink px-4 py-2.5">
           <span className="note !text-ink">Service agent · log</span>
-          <span className="note flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 bg-signal animate-blink" />
-            Live
+          <span
+            className="flex items-center gap-1.5 border border-ink px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-ink"
+            title="An illustrative animation, not a live production system"
+          >
+            <span className="h-1.5 w-1.5 bg-signal animate-blink" aria-hidden="true" />
+            Illustrative
           </span>
         </div>
         <ol className="flex-1 divide-y divide-line">

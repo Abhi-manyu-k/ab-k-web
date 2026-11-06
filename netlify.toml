@@ -2,9 +2,50 @@
   command = "npm run build"
   publish = "out"
 
+# Old consultancy pages → their new homes (301, permanent).
+[[redirects]]
+  from = "/services"
+  to = "/framework"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/*"
+  to = "/framework"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-studies"
+  to = "/about#track-record"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-studies/*"
+  to = "/about#track-record"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/rss.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=utf-8"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Self-hosted fonts are versioned in the file name (.v1.woff2).
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

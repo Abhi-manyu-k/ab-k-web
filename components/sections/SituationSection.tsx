@@ -4,7 +4,10 @@ import { Container } from "@/components/ui/Container";
 import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { RegulationTimeline } from "@/components/ui/RegulationTimeline";
 import { SheetHeader } from "@/components/ui/SheetHeader";
-import { marketFacts } from "@/lib/content";
+import { Tbd } from "@/components/ui/Tbd";
+import { marketFacts, regulationLastReviewed } from "@/lib/content";
+
+const fmt = (d: string) => d.split("-").reverse().join(".");
 
 export function SituationSection() {
   return (
@@ -19,28 +22,48 @@ export function SituationSection() {
                 Adopt agents. <em>Regulate them.</em> At the same time.
               </>
             }
-            intro="European industry is being asked to do both at once. Most AI vendors only help with the first half. We were built for the overlap."
+            intro="European industry is being asked to do both at once. Most AI tooling only helps with the first half. My work sits in the overlap."
           />
         </FadeInOnScroll>
 
         <FadeInOnScroll>
-          <dl className="mt-16 grid border-t border-l rule-ink sm:grid-cols-3">
+          <ul className="mt-16 grid border-t border-l rule-ink sm:grid-cols-3">
             {marketFacts.map((f) => (
-              <div key={f.label} className="border-r border-b rule-ink p-6 lg:p-8">
-                <dd className="display text-7xl text-ink lg:text-8xl">{f.value}</dd>
-                <dt className="mt-4 max-w-xs text-sm text-ink-2">{f.label}</dt>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.08em] text-faint">Src: {f.source}</p>
-              </div>
+              <li key={f.label} className="border-r border-b rule-ink p-6 lg:p-8">
+                <p className="display text-7xl text-ink lg:text-8xl">{f.value}</p>
+                <p className="mt-4 max-w-xs text-sm text-ink-2">{f.label}</p>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+                  Src:{" "}
+                  {f.href ? (
+                    <a href={f.href} target="_blank" rel="noopener noreferrer" className="link text-ink-2">
+                      {f.source} ↗
+                    </a>
+                  ) : (
+                    f.source
+                  )}
+                </p>
+              </li>
             ))}
-          </dl>
+          </ul>
         </FadeInOnScroll>
 
         <FadeInOnScroll>
           <div className="mt-20">
-            <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4">
-              <p className="note !text-ink">Revision table — AI on machines, 2026 → 2028</p>
-              <Link href="/governance" className="note link !text-ink">
-                Full timeline & what it means →
+            <div className="mb-6 grid border border-ink font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-[1fr_auto_auto]">
+              <p className="px-4 py-2.5 text-ink">Revision table — AI on machines, 2026 → 2028</p>
+              <p className="border-t border-ink px-4 py-2.5 sm:border-t-0 sm:border-l">
+                <span className="text-muted">Last reviewed: </span>
+                {regulationLastReviewed ? (
+                  <span className="text-ink">{fmt(regulationLastReviewed)}</span>
+                ) : (
+                  <Tbd>date</Tbd>
+                )}
+              </p>
+              <Link
+                href="/governance"
+                className="border-t border-ink px-4 py-2.5 text-ink transition-colors hover:bg-ink hover:text-paper sm:border-t-0 sm:border-l"
+              >
+                Full timeline →
               </Link>
             </div>
             <RegulationTimeline compact />
@@ -50,7 +73,7 @@ export function SituationSection() {
         <FadeInOnScroll>
           <p className="mt-10 flex items-center gap-2 text-sm text-muted">
             <ArrowRight className="h-3.5 w-3.5 text-signal" aria-hidden="true" />
-            Not legal advice — we turn regulation into engineering controls, alongside your counsel.
+            Not legal advice — I write about turning regulation into engineering controls.
           </p>
         </FadeInOnScroll>
       </Container>

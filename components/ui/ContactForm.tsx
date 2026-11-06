@@ -1,4 +1,5 @@
-import { projectStages, siteConfig } from "@/lib/site";
+import Link from "next/link";
+import { contactTopics, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const fieldClass = "form-field";
@@ -32,6 +33,7 @@ export function ContactForm() {
             required
             className={fieldClass}
             placeholder="Your name"
+            autoComplete="name"
           />
         </div>
         <div>
@@ -44,55 +46,43 @@ export function ContactForm() {
             name="email"
             required
             className={fieldClass}
-            placeholder="you@company.com"
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div>
-          <label htmlFor="company" className="note mb-1 block">
-            Company
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            className={fieldClass}
-            placeholder="Company name"
-          />
-        </div>
-        <div>
-          <label htmlFor="role" className="note mb-1 block">
-            Role
-          </label>
-          <input
-            type="text"
-            id="role"
-            name="role"
-            className={fieldClass}
-            placeholder="Your role"
+            placeholder="you@example.com"
+            autoComplete="email"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="project-stage" className="note mb-1 block">
-          Project stage
+        <label htmlFor="organisation" className="note mb-1 block">
+          Organisation
+        </label>
+        <input
+          type="text"
+          id="organisation"
+          name="organisation"
+          autoComplete="organization"
+          className={fieldClass}
+          placeholder="Conference, university or company (optional)"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="topic" className="note mb-1 block">
+          Topic
         </label>
         <select
-          id="project-stage"
-          name="project-stage"
+          id="topic"
+          name="topic"
           required
           className={cn(fieldClass, "form-select")}
           defaultValue=""
         >
           <option value="" disabled>
-            Select a stage
+            Select a topic
           </option>
-          {projectStages.map((stage) => (
-            <option key={stage} value={stage}>
-              {stage}
+          {contactTopics.map((topic) => (
+            <option key={topic} value={topic}>
+              {topic}
             </option>
           ))}
         </select>
@@ -108,13 +98,17 @@ export function ContactForm() {
           required
           rows={5}
           className={cn(fieldClass, "resize-y")}
-          placeholder="Tell us about your AI initiative, constraints, and goals."
+          placeholder="What would you like to talk about?"
         />
       </div>
 
-      <p className="text-xs text-faint">
-        By submitting, you agree to be contacted about your inquiry. We do not share your
-        information with third parties.
+      <p className="text-xs text-muted">
+        I use your details only to reply to your message and do not share them. Submissions are stored
+        by my host, Netlify — see the{" "}
+        <Link href="/datenschutz" className="link text-ink-2">
+          privacy notice
+        </Link>
+        .
       </p>
 
       <button

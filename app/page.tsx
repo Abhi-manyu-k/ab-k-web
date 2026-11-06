@@ -2,8 +2,16 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SituationSection } from "@/components/sections/SituationSection";
 import { PracticesSection } from "@/components/sections/PracticesSection";
 import { AutonomySection } from "@/components/sections/AutonomySection";
-import { FieldNotesSection } from "@/components/sections/FieldNotesSection";
+import { TrackRecordSection } from "@/components/sections/TrackRecordSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { pageMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  description: siteConfig.description,
+  path: "/",
+  ogTitle: "Agents that act. Governance that holds. — Abhimanyu Kanwar",
+});
 
 export default function HomePage() {
   return (
@@ -12,7 +20,7 @@ export default function HomePage() {
       <SituationSection />
       <PracticesSection />
       <AutonomySection />
-      <FieldNotesSection />
+      <TrackRecordSection />
       <CTASection />
     </>
   );

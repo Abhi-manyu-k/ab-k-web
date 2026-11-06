@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
-import { navLinks, siteConfig } from "@/lib/site";
+import { navLinks } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -22,7 +22,7 @@ export function Header() {
 
         <nav className="hidden h-full items-stretch md:flex" aria-label="Main navigation">
           {navLinks.map((link, i) => {
-            const active = pathname === link.href;
+            const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
@@ -33,15 +33,19 @@ export function Header() {
                   active ? "bg-ink text-paper" : "text-ink-2 hover:bg-paper-2",
                 )}
               >
-                <span className={cn("text-[9px]", active ? "text-paper/50" : "text-faint")}>0{i + 1}</span>
+                <span className={cn("text-[9px]", active ? "text-paper/70" : "text-muted")}>0{i + 1}</span>
                 {link.label}
               </Link>
             );
           })}
         </nav>
 
-        <Link href="/contact" className="btn btn-ink !hidden whitespace-nowrap !py-2.5 !shadow-none xl:!inline-flex">
-          {siteConfig.contact.formTitle}
+        <Link
+          href="/contact"
+          aria-current={pathname === "/contact" ? "page" : undefined}
+          className="btn btn-ink !hidden whitespace-nowrap !py-2.5 !shadow-none lg:!inline-flex"
+        >
+          Contact
         </Link>
 
         <button
@@ -67,13 +71,13 @@ export function Header() {
                 pathname === link.href ? "bg-ink text-paper" : "text-ink",
               )}
             >
-              <span className="font-mono text-[10px] text-faint">0{i + 1}</span>
+              <span className="font-mono text-[10px] text-muted">0{i + 1}</span>
               <span className="serif text-3xl">{link.label}</span>
             </Link>
           ))}
           <div className="p-5">
             <Link href="/contact" className="btn btn-ink w-full">
-              {siteConfig.contact.formTitle}
+              Contact
             </Link>
           </div>
         </nav>

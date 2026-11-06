@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+/* ─── Fraunces (self-hosted, see app/layout.tsx) ─── */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-latin-normal.v1.woff2") format("woff2");
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-latin-italic.v1.woff2") format("woff2");
+  font-weight: 300 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Metric-matched fallback so the swap does not shift the layout. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Arial");
+  ascent-override: 84.05%;
+  descent-override: 21.91%;
+  line-gap-override: 0%;
+  size-adjust: 116.36%;
+}
+
 @theme {
   /* ─── Palette: drafting paper, graphite, one safety-orange mark ─── */
   --color-paper: #f2efe7;
@@ -7,11 +35,14 @@
   --color-paper-3: #faf8f3;
   --color-ink: #1c1b18;
   --color-ink-2: #3b3934;
-  --color-muted: #6b675e;
-  --color-faint: #9a958a;
+  --color-muted: #5e5a52;
+  /* Darkened from #9a958a / #6b675e to meet WCAG AA (4.5:1) for small labels. */
+  --color-faint: #6e695f;
   --color-line: #d8d3c6;
   --color-line-strong: #b8b1a1;
   --color-signal: #d4471a;
+  /* Same hue, deep enough for small text on paper (4.9:1). Fills and strokes keep --color-signal. */
+  --color-signal-ink: #b93b14;
   --color-ok: #2f6f50;
   --color-plate: #171715;
   --color-plate-2: #201f1c;
@@ -19,7 +50,7 @@
 
   /* ─── Typography ─── */
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-display), "Georgia", serif;
+  --font-serif: "Fraunces", "Fraunces Fallback", "Georgia", serif;
   --font-mono: var(--font-code), ui-monospace, monospace;
 
   --animate-blink: blink 1.1s steps(2, start) infinite;
@@ -287,11 +318,120 @@ body {
   }
 
   .plate .note {
-    color: var(--color-faint);
+    color: #9e998e;
   }
 
   .plate .rule {
     border-color: var(--color-plate-line);
+  }
+
+  /* ─── Red-pen margin notes ─── */
+
+  .annotation {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--color-signal-ink);
+    font-variation-settings:
+      "opsz" 24,
+      "SOFT" 100,
+      "WONK" 1;
+    transform-origin: left center;
+  }
+
+  .annotation-stroke {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: draw 0.9s 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+
+  /* Reserved (not yet issued) register rows */
+  .sheet-reserved {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--color-line-strong) 45%, transparent) 0 1px,
+      transparent 1px 9px
+    );
+  }
+
+  /* ─── Essay body (MDX) ─── */
+
+  .prose-sheet {
+    color: var(--color-ink-2);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose-sheet > * + * {
+    margin-top: 1.25em;
+  }
+
+  .prose-sheet h2,
+  .prose-sheet h3 {
+    font-family: var(--font-serif);
+    font-weight: 350;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--color-ink);
+    margin-top: 2.2em;
+  }
+
+  .prose-sheet h2 {
+    font-size: 2rem;
+  }
+
+  .prose-sheet h3 {
+    font-size: 1.5rem;
+  }
+
+  .prose-sheet a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose-sheet ul,
+  .prose-sheet ol {
+    padding-left: 1.25em;
+  }
+
+  .prose-sheet ul {
+    list-style: square;
+  }
+
+  .prose-sheet ol {
+    list-style: decimal;
+  }
+
+  .prose-sheet blockquote {
+    border-left: 2px solid var(--color-signal);
+    padding-left: 1rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-ink);
+  }
+
+  .prose-sheet code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-paper-2);
+    padding: 0.1em 0.3em;
+  }
+
+  .prose-sheet pre {
+    overflow-x: auto;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper-3);
+    padding: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .prose-sheet pre code {
+    background: none;
+    padding: 0;
   }
 
   /* ─── Forms ─── */
@@ -386,4 +526,13 @@ body {
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* Small orange text uses the deeper ink tone (unlayered, so it wins over the utility). */
+.text-signal {
+  color: var(--color-signal-ink);
+}
+
+.plate .text-signal {
+  color: #e5622f; /* lifted for the dark plate (5.2:1) */
 }

@@ -1,69 +1,48 @@
-/* ───────────────────────── Practices ───────────────────────── */
+/*
+ * Content for ab-k.com.
+ *
+ * Every placeholder the author still has to fill in is marked `TODO(launch)`.
+ * Run `grep -rn "TODO(launch)" app components lib content public` for the full list.
+ */
 
-export const practices = [
+/* ───────────────────────── Areas I work on ───────────────────────── */
+
+export const workAreas = [
   {
     id: "service-agents",
-    code: "P-01",
-    title: "Agentic Service",
-    headline: "Service agents that diagnose — and fix — machines.",
+    code: "A-01",
+    title: "Service agents",
+    headline: "Agents that diagnose machines.",
     summary:
-      "Troubleshooting agents built on your manuals, tickets and live telemetry that move from answering questions to executing approved fixes on the machine.",
-    deliverables: [
-      "Troubleshooting agents on manuals, service tickets and sensor data (RAG + knowledge graphs)",
-      "Action-taking via MCP tool interfaces — every action behind an approval gate",
-      "Multilingual field-engineer copilots for the global service fleet",
-      "Service data flows ready for the EU Data Act's access-by-design rules",
-    ],
-    format: "8-week pilot · one machine family · one failure class",
-    audience: "Machine builders, OEM service organisations",
+      "Troubleshooting agents on manuals, service tickets, log files and sensor data: retrieval, knowledge graphs and tool interfaces (MCP) that a field engineer can check.",
+    readMore: { essay: "mcp-log-file-analysis", fallback: "/writing" },
   },
   {
-    id: "governance",
-    code: "P-02",
-    title: "AI Governance",
-    headline: "Governance that lets agents act.",
+    id: "autonomy",
+    code: "A-02",
+    title: "Autonomy & controls",
+    headline: "How much may an agent do on its own?",
     summary:
-      "Turn the AI Act, the Machinery Regulation and your own risk appetite into concrete controls — so agents can be trusted with more than a chat window.",
-    deliverables: [
-      "AI inventory and risk classification across AI Act and Machinery Regulation",
-      "Agent governance framework: autonomy levels, permissions, audit trails, kill switch",
-      "AI management system aligned with ISO/IEC 42001",
-      "Transparency (Art. 50) and AI-literacy (Art. 4) measures that hold up to an audit",
-    ],
-    format: "2-week readiness check → 90-day implementation",
-    audience: "Compliance, quality, product safety, CIO/CTO office",
+      "A five-level autonomy framework for industrial service agents, and the approval gates, audit trails and kill switches each level requires.",
+    readMore: { href: "/framework", label: "The framework" },
   },
   {
-    id: "virtual-employees",
-    code: "P-03",
-    title: "Virtual Employees",
-    headline: "Governed AI teammates on the organigram.",
+    id: "regulation",
+    code: "A-03",
+    title: "Regulation & machine data",
+    headline: "AI Act, Machinery Regulation, Data Act.",
     summary:
-      "Department agents with a role, a manager and scoped access — for finance, IT operations and legal teams that want more than a copilot.",
-    deliverables: [
-      "Role design: responsibilities, clearances, escalation paths",
-      "Custom harnesses into ERP, ticketing, Teams and internal APIs",
-      "Model gateway with EU-hosted routing for sensitive data",
-      "Department-scoped memory without cross-team leakage",
-    ],
-    format: "One department · one role · production in a quarter",
-    audience: "Operations, finance, IT, legal & risk",
+      "What the EU rules on AI and machine data mean for service organisations, translated into controls engineers can build.",
+    readMore: { essay: "data-act-service-battleground", fallback: "/governance" },
   },
   {
-    id: "academy",
-    code: "P-04",
-    title: "Strategy & Academy",
-    headline: "People who can run what we build.",
+    id: "operations",
+    code: "A-04",
+    title: "AI in operations",
+    headline: "Measured like any other process.",
     summary:
-      "Roadmaps tied to measurable outcomes, and hands-on training for the engineers, managers and service teams who will live with the agents.",
-    deliverables: [
-      "AI opportunity mapping and executive roadmap with ROI milestones",
-      "AI-literacy programmes for technical teams (AI Act Art. 4)",
-      "Hands-on agent-building workshops for service and operations engineers",
-      "Train-the-trainer formats for global service organisations",
-    ],
-    format: "Workshops · 1–3 days · on-site or remote, in German or English",
-    audience: "Leadership teams, service academies, engineering",
+      "ROI gates for AI tools, and what statistical process control reveals about evaluating LLM agents on the fab floor.",
+    readMore: { essay: "roi-gate-vendor-ai-tools", fallback: "/writing" },
   },
 ] as const;
 
@@ -83,6 +62,8 @@ export const regulations = [
     affects: "Model providers",
   },
   {
+    // Row A in the home-page revision table.
+    // TODO(launch): verify whether Art. 50(2) marking duties were deferred to 2 Dec 2026.
     date: "2026-08-02",
     instrument: "AI Act",
     change: "Transparency duties (Art. 50): disclose AI interaction, label generated content",
@@ -119,6 +100,8 @@ export const regulations = [
     affects: "Makers of products with digital elements",
   },
   {
+    // Row G in the home-page revision table.
+    // TODO(launch): verify Machinery Regulation moved to Annex I Section B under Reg. (EU) 2026/1744 and reword.
     date: "2028-08-02",
     instrument: "AI Act",
     change: "High-risk obligations for AI in regulated products — incl. machinery (Annex I)",
@@ -126,28 +109,39 @@ export const regulations = [
   },
 ] as const;
 
+/** Date the regulation table was last checked against the sources. */
+// TODO(launch): set to the date you last reviewed the table (YYYY-MM-DD).
+export const regulationLastReviewed: string | null = null;
+
+const BITKOM_KI_2026 =
+  // TODO(launch): confirm this is the Bitkom release both statistics come from.
+  "https://www.bitkom.org/Presse/Presseinformation/Erstmals-nutzt-Mehrheit-Unternehmen-KI";
+
 export const marketFacts = [
   {
     value: "57%",
     label: "of German companies now use AI — up from 20% two years ago.",
     source: "Bitkom, Sept 2026",
+    href: BITKOM_KI_2026,
   },
   {
     value: "56%",
     label: "of those users name legal ambiguity as a major challenge.",
     source: "Bitkom, Sept 2026",
+    href: BITKOM_KI_2026,
   },
   {
     value: "4",
     label: "EU regulations touching AI on machines take effect between 2026 and 2028.",
     source: "AI Act · MR · Data Act · CRA",
+    href: null,
   },
 ] as const;
 
 export const sources = [
   {
     label: "Bitkom — Erstmals nutzt die Mehrheit der Unternehmen KI (14 Sept 2026)",
-    href: "https://www.bitkom.org/Presse/Presseinformation/Erstmals-nutzt-Mehrheit-Unternehmen-KI",
+    href: BITKOM_KI_2026,
   },
   {
     label: "Gibson Dunn — EU AI Act Omnibus agreement: postponed high-risk deadlines",
@@ -163,74 +157,10 @@ export const sources = [
   },
 ] as const;
 
-/* ───────────────────────── Autonomy ladder ───────────────────────── */
-
-export const autonomyLevels = [
-  {
-    level: "L0",
-    name: "Informs",
-    example: "Answers questions from manuals, tickets and past fixes — with sources.",
-    controls: ["Source citations on every answer", "Access scoped to role and site"],
-  },
-  {
-    level: "L1",
-    name: "Recommends",
-    example: "Diagnoses a fault and proposes a fix with evidence and confidence.",
-    controls: ["Evidence & confidence shown", "Engineer feedback loop into evaluation"],
-  },
-  {
-    level: "L2",
-    name: "Acts with approval",
-    example: "Executes the fix on the machine after a named engineer signs off.",
-    controls: ["Human approval gate per action", "Action audit log", "Rollback plan per action class"],
-  },
-  {
-    level: "L3",
-    name: "Acts within policy",
-    example: "Runs pre-approved action classes on its own; escalates the rest.",
-    controls: ["Policy-as-code action limits", "Live monitoring & alerting", "Kill switch"],
-  },
-  {
-    level: "L4",
-    name: "Acts & reports",
-    example: "Owns whole service workflows; humans review by exception.",
-    controls: ["Continuous evaluation", "Incident & reporting process", "Periodic re-certification"],
-  },
-] as const;
-
-/* ───────────────────────── Governance offers ───────────────────────── */
-
-export const governanceOffers = [
-  {
-    title: "AI Readiness Check",
-    duration: "2 weeks",
-    description:
-      "Inventory every AI use — shadow AI included — classify it under the AI Act and Machinery Regulation, and leave with a prioritised gap list.",
-  },
-  {
-    title: "Agent Governance Framework",
-    duration: "4–6 weeks",
-    description:
-      "Autonomy levels, action permissions, approval gates, audit trails and a kill switch — designed for agents that touch real systems.",
-  },
-  {
-    title: "ISO/IEC 42001 AI Management System",
-    duration: "90 days",
-    description:
-      "Policies, roles, risk and impact assessments and a lifecycle process that can grow into certification.",
-  },
-  {
-    title: "AI Literacy Programme",
-    duration: "Ongoing",
-    description:
-      "Role-specific training for engineers, service teams and managers — documented to show the measures Art. 4 asks for.",
-  },
-] as const;
-
 export const regulationBriefs = [
   {
     instrument: "AI Act",
-    question: "Is our service agent high-risk?",
+    question: "Is a service agent high-risk?",
     answer:
       "Usually not by itself — but transparency duties apply from August 2026, and AI inside safety functions of machinery moves into high-risk scope by August 2028.",
   },
@@ -242,40 +172,95 @@ export const regulationBriefs = [
   },
   {
     instrument: "Data Act",
-    question: "Who else can service our machines?",
+    question: "Who else can service the machines?",
     answer:
-      "Users can now access — and share — the data your machines generate. Third-party service gets easier. The best defence is a service experience competitors can't match.",
+      "Users can now access — and share — the data their machines generate. Third-party service gets easier. The best defence is a service experience competitors can't match.",
   },
 ] as const;
 
-/* ───────────────────────── Field notes ───────────────────────── */
+/* ───────────────────────── Autonomy framework (ABK-AL) ───────────────────────── */
 
-export const fieldMetrics = [
-  { value: "100+", label: "field engineers using a production AI service assistant" },
-  { value: "30+", label: "service engineers in a field test of a troubleshooting agent" },
-  { value: "3", label: "continents of engineers, sales teams and clients trained on wafer-handling systems" },
+export const framework = {
+  code: "ABK-AL",
+  title: "Autonomy Levels for Industrial Service Agents",
+  version: "1.0",
+  // TODO(launch): confirm the publication date of v1.0.
+  date: "2026-11-06",
+  pdf: "/framework/abk-al-v1.pdf",
+  path: "/framework",
+} as const;
+
+export const frameworkChangelog = [
+  {
+    rev: "1.0",
+    date: framework.date,
+    change:
+      "First public version: five levels (L0–L4), the agent's and the human's role at each level, and cumulative controls.",
+    by: "A. Kanwar",
+  },
 ] as const;
 
-export const caseStudies = [
+export const autonomyLevels = [
+  {
+    level: "L0",
+    name: "Informs",
+    example: "Answers questions from manuals, tickets and past fixes — with sources.",
+    agent: "Answers questions from manuals, service tickets and past fixes, and cites its sources.",
+    human: "Diagnoses, decides and acts. Judges whether the answer applies to the machine in front of them.",
+    controls: ["Source citations on every answer", "Access scoped to role and site"],
+  },
+  {
+    level: "L1",
+    name: "Recommends",
+    example: "Diagnoses a fault and proposes a fix with evidence and confidence.",
+    agent: "Diagnoses a fault and proposes a fix, with the evidence and its confidence.",
+    human: "Reviews the evidence, decides on the fix and carries it out.",
+    controls: ["Evidence & confidence shown", "Engineer feedback loop into evaluation"],
+  },
+  {
+    level: "L2",
+    name: "Acts with approval",
+    example: "Executes the fix on the machine after a named engineer signs off.",
+    agent: "Prepares the action and executes it only after a named engineer signs off.",
+    human: "Approves or rejects every single action and owns the outcome.",
+    controls: ["Human approval gate per action", "Action audit log", "Rollback plan per action class"],
+  },
+  {
+    level: "L3",
+    name: "Acts within policy",
+    example: "Runs pre-approved action classes on its own; escalates the rest.",
+    agent: "Runs pre-approved classes of action on its own and escalates everything else.",
+    human: "Defines and maintains the policy, monitors the agent and handles escalations.",
+    controls: ["Policy-as-code action limits", "Live monitoring & alerting", "Kill switch"],
+  },
+  {
+    level: "L4",
+    name: "Acts & reports",
+    example: "Owns whole service workflows; humans review by exception.",
+    agent: "Owns whole service workflows end to end and reports what it did.",
+    human: "Reviews by exception, audits the record and re-certifies the agent periodically.",
+    controls: ["Continuous evaluation", "Incident & reporting process", "Periodic re-certification"],
+  },
+] as const;
+
+/* ───────────────────────── Track record ───────────────────────── */
+
+export const fieldMetrics = [
+  { value: "100+", label: "field engineers using a production AI service assistant I led" },
+  { value: "30+", label: "service engineers in a field test of my troubleshooting agent" },
+  { value: "3", label: "continents where I have trained engineering and service teams" },
+] as const;
+
+export const trackRecord = [
   {
     id: "assistant",
     tag: "Production",
     title: "A global AI service assistant",
     context:
-      "A leading semiconductor equipment manufacturer needed its field service knowledge available to every engineer, in every region.",
-    intervention:
-      "Led end-to-end delivery of a proprietary AI assistant: prototype to production on Azure, external development teams, LangGraph orchestration and Model Context Protocol for scalable retrieval.",
-    impact: "In daily use by 100+ field engineers worldwide.",
-  },
-  {
-    id: "action",
-    tag: "Now building",
-    title: "From answers to actions",
-    context:
-      "Knowing the fix is not the same as applying it. The next step is agents that take corrective action on semiconductor equipment.",
-    intervention:
-      "Service agents that execute approved fixes on the machine through tool interfaces — with approval gates, audit logs and rollback built in from day one.",
-    impact: "Autonomy level L2: the agent acts, a named engineer signs off.",
+      "In my role at a leading semiconductor equipment manufacturer, I led end-to-end delivery of a proprietary AI service assistant.",
+    detail:
+      "Prototype to production on Azure, with external development teams, LangGraph orchestration and Model Context Protocol for scalable retrieval.",
+    impact: "In daily use by 100+ field engineers.",
   },
   {
     id: "cambridge",
@@ -283,43 +268,78 @@ export const caseStudies = [
     title: "Troubleshooting agent for semiconductor robotics",
     context:
       "Master thesis at the University of Cambridge Institute for Manufacturing on wafer-handling robot failures.",
-    intervention:
+    detail:
       "A troubleshooting agent combining retrieval-augmented generation with knowledge graphs, tested in industry with service engineers.",
     impact: "Field-tested with 30+ engineers; published at AIRSI 2025.",
   },
-  {
-    id: "carma",
-    tag: "Research",
-    title: "AI governance through agent simulation",
-    context:
-      "Research collaboration with the Center for AI Risk Management & Alignment (CARMA).",
-    intervention:
-      "LLM-driven agents and Monte-Carlo simulation to stress-test AI governance and policy options before they meet reality.",
-    impact: "Governance advice grounded in simulation, not slogans.",
-  },
-  {
-    id: "platform",
-    tag: "Architecture",
-    title: "An enterprise agent platform",
-    context: "Many departments, many ideas, no shared foundation for multi-agent workflows.",
-    intervention:
-      "Architecting a company-wide agentic platform on LangGraph and n8n, and advising project teams as a vertical integrator — from document generation to workflow automation.",
-    impact: "One governed stack instead of a zoo of pilots.",
-  },
 ] as const;
+
+/* ───────────────────────── Talks & publications ───────────────────────── */
+
+export type TalkType = "Paper" | "Talk" | "Webinar";
+
+export interface Talk {
+  id: string;
+  /** ISO date, or null while unknown. */
+  date: string | null;
+  year: string;
+  venue: string;
+  title: string;
+  type: TalkType;
+  /** Slides, paper or recording. null = not yet available. */
+  link: { label: string; href: string } | null;
+  placeholders: string[];
+}
+
+export const talks: Talk[] = [
+  {
+    id: "airsi-2025",
+    // TODO(launch): exact publication/conference date, paper title and DOI or PDF link.
+    date: null,
+    year: "2025",
+    venue: "AIRSI 2025",
+    title: "Troubleshooting agent for semiconductor robotics (working title)",
+    type: "Paper",
+    link: null,
+    placeholders: ["exact paper title", "date", "paper link / DOI"],
+  },
+  {
+    id: "karlstad-industry-day",
+    // TODO(launch): date, exact talk title and slides link.
+    date: null,
+    year: "",
+    venue: "Karlstad University · Industry Day",
+    title: "Multimodal RAG for field service",
+    type: "Talk",
+    link: null,
+    placeholders: ["date", "exact title", "slides link"],
+  },
+  {
+    id: "csa-webinars",
+    // TODO(launch): dates, series title and recording links.
+    date: null,
+    year: "",
+    venue: "Cambridge Service Alliance",
+    title: "Webinars on agentic AI in customer service",
+    type: "Webinar",
+    link: null,
+    placeholders: ["dates", "exact title", "recording link"],
+  },
+];
 
 /* ───────────────────────── About ───────────────────────── */
 
-export const founderBio = {
+export const authorBio = {
   name: "Abhimanyu Kanwar",
-  title: "Founder · Senior AI Solutions Manager in semiconductor equipment service",
+  title: "Senior AI Solutions Manager, service AI for semiconductor equipment",
   quote:
-    "I've trained engineers on the machines, fixed them on the shop floor, and now build agents that fix them. Governance isn't paperwork to me — it's what lets an agent touch a real machine.",
+    "I've trained engineers on the machines, fixed them on the shop floor, and now build agents that diagnose them. Governance isn't paperwork to me — it's what decides how far an agent may act on a real machine.",
   paragraphs: [
-    "Mechanical and production engineer from RWTH Aachen. Research on troubleshooting agents at the University of Cambridge Institute for Manufacturing, and on AI governance through agent simulation at CARMA.",
-    "Today I lead AI solutions in the service organisation of a leading semiconductor equipment manufacturer: a production AI assistant used by 100+ field engineers, an enterprise agent platform on LangGraph and n8n, and service agents that take action on machines.",
-    "AB Kinetics brings that work to European industry — for teams that want agents in production, and the governance to keep them there.",
+    "I'm a mechanical and production engineer from RWTH Aachen. I researched troubleshooting agents at the University of Cambridge Institute for Manufacturing, and AI governance through agent simulation at CARMA.",
+    "In my role at a leading semiconductor equipment manufacturer, I work on service AI: I led a production AI assistant used by 100+ field engineers, and I architect agent workflows on LangGraph and n8n.",
+    "AB Kinetics is where I write and speak about that work: service agents, the autonomy levels that govern them, and the EU rules they have to meet.",
   ],
+  learning: "Semiconductor process control (SPC) and epitaxy fundamentals.",
 } as const;
 
 export const careerRoute = [
@@ -328,8 +348,8 @@ export const careerRoute = [
   { year: "2021", place: "Amazon", role: "Delivery operations & KPIs" },
   { year: "2023", place: "Semiconductor equipment", role: "Technical trainer, field service" },
   { year: "2024", place: "Cambridge · CARMA", role: "Agent & AI-governance research" },
-  { year: "2025", place: "Semiconductor equipment", role: "AI solutions — agents in production" },
-  { year: "Now", place: "AB Kinetics", role: "Agentic AI & governance for industry" },
+  { year: "2025", place: "Semiconductor equipment", role: "AI solutions in field service" },
+  { year: "Now", place: "Service AI & governance", role: "Writing as AB Kinetics" },
 ] as const;
 
 export const credentials = [
@@ -345,7 +365,7 @@ export const aboutPillars = [
   {
     zone: "Boardroom",
     title: "Strategy & ROI",
-    description: "Investment cases and roadmaps your leadership can track — not strategy decks that stall.",
+    description: "Investment cases and ROI gates leadership can track — not strategy decks that stall.",
   },
   {
     zone: "IDE",
@@ -355,34 +375,11 @@ export const aboutPillars = [
   {
     zone: "Shop floor",
     title: "Machines & service",
-    description: "Wafer handlers, sensors, pneumatics, field service. We know what the agent is actually touching.",
+    description: "Wafer handlers, sensors, pneumatics, field service. I know what the agent is actually touching.",
   },
   {
     zone: "Rulebook",
     title: "Governance",
     description: "AI Act, Machinery Regulation, Data Act — translated into controls engineers can build.",
-  },
-] as const;
-
-/* ───────────────────────── Virtual Employees demo data ───────────────────────── */
-
-export const enterpriseUseCases = [
-  {
-    id: "analyst",
-    title: "Data Analyst",
-    department: "Finance",
-    description: "Queries ERP and BI systems, flags anomalies, cites source records.",
-  },
-  {
-    id: "support",
-    title: "Support Engineer",
-    department: "IT & Ops",
-    description: "Triages tickets, runs approved playbooks, escalates with full context.",
-  },
-  {
-    id: "compliance",
-    title: "Compliance Officer",
-    department: "Legal & Risk",
-    description: "Reviews policies against GDPR, monitors regulatory change, produces audit docs.",
   },
 ] as const;

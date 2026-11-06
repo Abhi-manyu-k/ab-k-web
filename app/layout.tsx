@@ -1,52 +1,69 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { preload } from "react-dom";
+import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+/*
+ * All fonts are self-hosted (SIL Open Font License) — the same latin subsets Google Fonts served
+ * before, so the type renders exactly as it did. No request goes to Google, at build time or in the
+ * visitor's browser.
+ *
+ * - IBM Plex Sans / Mono: next/font/local (app/fonts). Sans is preloaded (it sets the LCP text).
+ * - Fraunces: plain @font-face in globals.css (public/fonts), so the roman and italic cuts share one
+ *   family. Its weight axis is trimmed to the 300–400 the
+ *   design uses.
+ */
+const plexSans = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-sans-latin-variable.woff2", weight: "100 700", style: "normal" },
+  ],
   variable: "--font-body",
   display: "swap",
+  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-500-italic.woff2", weight: "500", style: "italic" },
+  ],
   variable: "--font-code",
   display: "swap",
+  preload: false,
+  fallback: ["ui-monospace", "monospace"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} | Agentic AI & AI Governance for Industry`,
-    template: `%s | ${siteConfig.name}`,
+    default: `${siteConfig.author} · ${siteConfig.name} — Agents that act. Governance that holds.`,
+    template: `%s · ${siteConfig.author}`,
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
+  authors: [{ name: siteConfig.author, url: `${siteConfig.url}/about` }],
+  creator: siteConfig.author,
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
   },
+  alternates: {
+    types: { "application/rss+xml": [{ url: "/rss.xml", title: `${siteConfig.author} — Writing` }] },
+  },
   openGraph: {
-    title: siteConfig.name,
+    title: `${siteConfig.author} · ${siteConfig.name}`,
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage }],
+    locale: "en_GB",
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -58,10 +75,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Both Fraunces cuts are preloaded: page titles set italic words, and a late italic swap shifts the layout.
+  preload("/fonts/fraunces-latin-normal.v1.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  preload("/fonts/fraunces-latin-italic.v1.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`${plexSans.variable} ${plexMono.variable}`}
     >
       <body className="min-h-screen antialiased">
         <Header />

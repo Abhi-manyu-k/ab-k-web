@@ -21,11 +21,11 @@ export function AutonomyLadder() {
               <span className="h-3 w-px bg-signal" />
             </div>
             <p className="mt-1 text-center font-mono text-[10px] uppercase tracking-[0.06em] text-signal">
-              Start here in 2026
+              Recommended start
             </p>
           </div>
 
-          <div className="flex h-64 items-end sm:h-72" role="tablist" aria-label="Agent autonomy levels">
+          <div className="flex h-72 items-end sm:h-96" role="tablist" aria-label="Agent autonomy levels">
             {autonomyLevels.map((l, i) => {
               const active = i === selected;
               return (
@@ -34,6 +34,8 @@ export function AutonomyLadder() {
                   type="button"
                   role="tab"
                   aria-selected={active}
+                  aria-controls="autonomy-panel"
+                  id={`autonomy-tab-${l.level}`}
                   onClick={() => setSelected(i)}
                   className={cn(
                     "group relative flex min-w-0 flex-1 flex-col justify-start border-t border-l border-ink px-1.5 pt-3 text-left transition-colors sm:px-3",
@@ -49,7 +51,7 @@ export function AutonomyLadder() {
             })}
           </div>
           <div className="h-px bg-ink" />
-          <div className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-faint">
+          <div className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
             <span>Human does</span>
             <span>→ Autonomy →</span>
             <span>Agent does</span>
@@ -58,13 +60,20 @@ export function AutonomyLadder() {
       </div>
 
       {/* Detail */}
-      <div className="border border-ink bg-paper-3 p-6" role="tabpanel" aria-live="polite">
+      <div className="border border-ink bg-paper-3 p-6" role="tabpanel" id="autonomy-panel" aria-labelledby={`autonomy-tab-${level.level}`} aria-live="polite">
         <p className="note">
           Level <span className="text-signal">{level.level}</span> · {level.name}
         </p>
-        <p key={level.level} className="fade-up serif mt-4 text-2xl leading-snug text-ink">
-          {level.example}
-        </p>
+        <dl key={level.level} className="fade-up mt-4 space-y-4">
+          <div>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">Agent does</dt>
+            <dd className="serif mt-1 text-2xl leading-snug text-ink">{level.agent}</dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">Human does</dt>
+            <dd className="mt-1 text-ink-2">{level.human}</dd>
+          </div>
+        </dl>
         <p className="note mt-8 mb-3">Controls required</p>
         <ul className="space-y-2">
           {autonomyLevels.slice(0, selected + 1).flatMap((l, li) =>
@@ -73,7 +82,7 @@ export function AutonomyLadder() {
                 key={c}
                 className={cn(
                   "flex items-start gap-3 text-sm",
-                  li === selected ? "text-ink" : "text-faint",
+                  li === selected ? "text-ink" : "text-muted",
                 )}
               >
                 <span
