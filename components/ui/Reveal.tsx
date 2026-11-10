@@ -43,10 +43,7 @@ function onIntersectTall(entries: IntersectionObserverEntry[]) {
 }
 
 function observe(el: Element) {
-  if (
-    typeof IntersectionObserver === "undefined" ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
+  if (typeof IntersectionObserver === "undefined") {
     el.setAttribute("data-inview", "true");
     return;
   }

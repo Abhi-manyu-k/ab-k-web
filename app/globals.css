@@ -104,21 +104,6 @@ body {
   html {
     scroll-behavior: auto;
   }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0s !important;
-  }
-
-  /* The scroll-progress line is driven by the user's own scrolling, not by time. */
-  .header-progress {
-    animation-duration: auto !important;
-  }
 }
 
 @layer components {
@@ -249,7 +234,7 @@ body {
    * html.js, or with reduced motion, it is the plain .frame border.
    * Budget: uses ::after — never combine with .crop.
    */
-  @media (prefers-reduced-motion: no-preference) {
+  @media all {
     html.js .frame-draw {
       border-color: transparent;
     }
@@ -768,7 +753,7 @@ body {
   vertical-align: baseline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   /* ─── A1. Reveal ─── */
 
   html.js [data-reveal]:not([data-inview]):is([data-reveal="rise"], [data-reveal="mask"]),
@@ -1071,5 +1056,30 @@ body::before {
     transform: none !important;
     clip-path: none !important;
     animation: none !important;
+  }
+}
+
+/* ═══ Reduced motion: no travel ═══════════════════════════════════════════════════════════════
+ * Lines are still drawn and ink still fades in, so the sheet keeps its character, but nothing
+ * slides, rises, grows or pulses. Same-named keyframes declared here replace the ones above
+ * (and those in styles/hero.css and styles/diagrams.css) while the preference is set.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes ink-rise { from { opacity: 0; } }
+  @keyframes ink-mask { from { opacity: 0; } }
+  @keyframes word-rise { from { opacity: 0; } }
+  @keyframes word-mask { from, to { clip-path: none; } }
+  @keyframes route-in { from { opacity: 0; } }
+  @keyframes fade-up { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes hero-rise { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes hero-line-ink { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes hero-line-mask { from, to { clip-path: none; } }
+  @keyframes md-detail-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes diag-rise-8 { from { opacity: 0; } }
+  @keyframes diag-drop { from { opacity: 0; } }
+
+  .md-pulse {
+    display: none;
   }
 }

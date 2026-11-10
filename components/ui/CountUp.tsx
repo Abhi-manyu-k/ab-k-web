@@ -47,7 +47,7 @@ export function CountUp({ value, className, duration = 1400 }: CountUpProps) {
     if (!root || !run) return;
 
     const done = () => root.setAttribute("data-counted", "true");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    if (!("IntersectionObserver" in window)) {
       done();
       return;
     }

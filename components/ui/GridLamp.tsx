@@ -13,10 +13,7 @@ import { useEffect } from "react";
  */
 export function GridLamp() {
   useEffect(() => {
-    if (
-      !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       return;
     }
 

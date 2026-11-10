@@ -109,7 +109,7 @@
   transform-origin: left center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   /* Steps extrude up from the baseline, L0 → L4, 90ms apart. The clip is on each step, not the staircase, so the
    * "Recommended start" dimension above is never clipped. Fill is `backwards` only: once landed the step has no
    * clip-path at all, so its focus ring is not cut off. */
@@ -187,7 +187,7 @@
   background-color: var(--color-paper-3);
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   html.js .rt:not([data-drawn]) .rt-axis {
     transform: scaleX(0);
   }
@@ -262,7 +262,7 @@
   left: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   html.js .countup:not([data-counted]) .countup-final {
     opacity: 0; /* transparent, not hidden: it still holds the width and is what screen readers read */
   }

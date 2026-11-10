@@ -126,11 +126,10 @@ export function MachineDrawing() {
   const labelRef = useRef<HTMLSpanElement>(null);
   const frameRef = useRef(0);
 
-  // Phase loop: one timer at a time, paused off-screen / in a hidden tab, none with reduced motion.
+  // Phase loop: one timer at a time, paused off-screen / in a hidden tab.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     let phase = 0; // mirrors the reducer's phase
     let idx = 0; // next event in timeline(phase)
@@ -181,17 +180,8 @@ export function MachineDrawing() {
     };
 
     const update = () => {
-      if (inView && document.visibilityState === "visible" && !motion.matches) start();
+      if (inView && document.visibilityState === "visible") start();
       else stop();
-    };
-
-    const onMotionChange = () => {
-      stop();
-      phase = 0;
-      idx = 0;
-      elapsed = 0;
-      dispatch({ type: motion.matches ? "still" : "reset" });
-      update();
     };
 
     const io = new IntersectionObserver(([entry]) => {
@@ -200,14 +190,11 @@ export function MachineDrawing() {
     });
     io.observe(root);
     document.addEventListener("visibilitychange", update);
-    motion.addEventListener("change", onMotionChange);
-    if (motion.matches) dispatch({ type: "still" });
 
     return () => {
       stop();
       io.disconnect();
       document.removeEventListener("visibilitychange", update);
-      motion.removeEventListener("change", onMotionChange);
     };
   }, []);
 
