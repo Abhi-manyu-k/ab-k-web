@@ -16,7 +16,7 @@ export function TrackRecordSection({
   showLink?: boolean;
 }) {
   return (
-    <section id={id} className="plate scroll-mt-14 py-20 lg:py-32">
+    <section id={id} className="plate scroll-mt-14 py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet={sheet}
@@ -31,7 +31,7 @@ export function TrackRecordSection({
         />
 
         {/* Cell lines hold still; each metric's ink lands, one after another. */}
-        <ul className="mt-16 grid border-t border-plate-line sm:grid-cols-3">
+        <ul className="mt-20 grid border-t border-plate-line sm:grid-cols-3">
           {fieldMetrics.map((m, i) => (
             <Reveal
               as="li"

@@ -131,7 +131,7 @@ export function RegulationTimeline({ compact = false }: { compact?: boolean }) {
                     <span
                       className={cn(
                         "inline-block border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em]",
-                        days <= 0 ? "border-ink bg-ink text-paper" : days < 180 ? "border-signal text-signal" : "border-line-strong text-muted",
+                        days <= 0 ? "border-ink text-ink" : days < 180 ? "border-signal text-signal" : "border-line-strong text-muted",
                       )}
                     >
                       {days <= 0 ? "In force" : `in ${days} d`}

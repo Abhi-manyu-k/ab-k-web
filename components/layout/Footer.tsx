@@ -9,9 +9,9 @@ export function Footer() {
   return (
     <footer className="pb-10">
       <Container>
-        <div className="border border-ink font-mono text-[11px] uppercase tracking-[0.08em]">
-          <div className="grid lg:grid-cols-[1.4fr_1fr_1fr]">
-            <div className="border-b border-ink p-6 lg:border-r lg:border-b-0">
+        <div className="border-t rule font-mono text-[11px] uppercase tracking-[0.08em]">
+          <div className="grid gap-10 py-10 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:py-14">
+            <div>
               <Logo />
               <p className="mt-5 max-w-sm font-sans text-sm normal-case tracking-normal text-muted">
                 Writing and talks by {siteConfig.author} on service AI and agent governance. Agents that act,
@@ -19,7 +19,7 @@ export function Footer() {
               </p>
             </div>
 
-            <nav aria-label="Footer navigation" className="border-b border-ink p-6 lg:border-r lg:border-b-0">
+            <nav aria-label="Footer navigation">
               <p className="text-muted">Index</p>
               <ul className="mt-4 grid grid-cols-2 gap-y-2">
                 {navLinks.map((link, i) => (
@@ -37,7 +37,7 @@ export function Footer() {
               </ul>
             </nav>
 
-            <div className="p-6">
+            <div>
               <p className="text-muted">Contact</p>
               <ul className="mt-4 space-y-2 normal-case tracking-normal">
                 <li>
@@ -74,7 +74,7 @@ export function Footer() {
           </div>
 
           {/* Title block */}
-          <dl className="grid grid-cols-2 border-t border-ink sm:grid-cols-3 lg:grid-cols-6">
+          <dl className="flex flex-wrap gap-x-8 gap-y-2 border-t rule py-4">
             {[
               ["Author", siteConfig.author],
               ["Location", siteConfig.location],
@@ -83,9 +83,9 @@ export function Footer() {
               ["Rev.", String(year)],
               ["©", `${year} All rights reserved`],
             ].map(([k, v]) => (
-              <div key={k} className="border-b border-r border-ink px-4 py-3 last:border-r-0 lg:border-b-0">
+              <div key={k} className="flex items-baseline gap-2">
                 <dt className="text-[9px] text-muted">{k}</dt>
-                <dd className="mt-0.5 text-ink">{v}</dd>
+                <dd className="text-ink">{v}</dd>
               </div>
             ))}
           </dl>

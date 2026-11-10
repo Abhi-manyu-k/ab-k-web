@@ -49,7 +49,7 @@ export default function GovernancePage() {
         </Container>
       </section>
 
-      <section className="border-t rule-ink py-20 lg:py-28">
+      <section className="border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="02"
@@ -60,10 +60,16 @@ export default function GovernancePage() {
               </>
             }
           />
-          {/* Card surfaces stay (no ink flash through the gaps); their contents land card after card. */}
-          <div className="mt-14 grid gap-px border border-ink bg-ink lg:grid-cols-3">
+          {/* Hairlines hold still between the answers; their contents land one after another. */}
+          <div className="mt-14 grid gap-y-10 lg:grid-cols-3 lg:gap-y-0">
             {regulationBriefs.map((b, i) => (
-              <Reveal as="article" stagger delay={i * 120} key={b.instrument} className="flex h-full flex-col bg-paper p-6 lg:p-8">
+              <Reveal
+                as="article"
+                stagger
+                delay={i * 120}
+                key={b.instrument}
+                className={`rule flex h-full flex-col ${i > 0 ? "border-t pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8" : ""} ${i === regulationBriefs.length - 1 ? "" : "lg:pr-8"}`}
+              >
                 <p className="note">
                   <span className="text-signal">Q{i + 1}</span> · {b.instrument}
                 </p>
@@ -75,7 +81,7 @@ export default function GovernancePage() {
         </Container>
       </section>
 
-      <section className="bg-mm border-t rule-ink py-20 lg:py-28">
+      <section className="bg-mm border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="03"
@@ -87,10 +93,13 @@ export default function GovernancePage() {
             }
             intro="The core of the governance question: decide how much an agent may do, then build exactly the controls that level requires — no more, no less."
           />
-          {/* Cell lines hold still; each level's ink lands L0 → L4. */}
-          <ul className="mt-14 grid border-t border-l border-ink bg-paper sm:grid-cols-5">
+          {/* Hairlines hold still between the levels; each level's ink lands L0 → L4. */}
+          <ul className="mt-14 grid sm:grid-cols-5">
             {autonomyLevels.map((l, i) => (
-              <li key={l.level} className="border-r border-b border-ink p-4">
+              <li
+                key={l.level}
+                className={`rule py-4 sm:py-0 ${i > 0 ? "border-t sm:border-t-0 sm:border-l sm:pl-4" : ""} ${i === autonomyLevels.length - 1 ? "" : "sm:pr-4"}`}
+              >
                 <Reveal delay={i * 60}>
                   <Link href={`/framework#${l.level.toLowerCase()}`} className="group block">
                     <span className="font-mono text-xs text-signal">{l.level}</span>
@@ -110,7 +119,7 @@ export default function GovernancePage() {
         </Container>
       </section>
 
-      <section className="border-t rule-ink py-20 lg:py-28">
+      <section className="border-t rule py-20 lg:py-28">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
             <p className="text-sm text-muted">

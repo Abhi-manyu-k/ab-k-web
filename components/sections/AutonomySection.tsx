@@ -8,7 +8,7 @@ import { autonomyLevels, framework } from "@/lib/content";
 /** Home §04 — a static elevation of the staircase; the interactive version lives on /framework. */
 export function AutonomySection() {
   return (
-    <section className="bg-mm border-t rule-ink py-20 lg:py-32">
+    <section className="bg-mm py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet="04"
@@ -22,7 +22,7 @@ export function AutonomySection() {
         />
 
         {/* The steps land L0 → L4 on a baseline that is already drawn. */}
-        <Reveal as="ol" stagger className="mt-16 flex h-56 items-end sm:h-64" aria-label="Autonomy levels L0 to L4">
+        <Reveal as="ol" stagger className="mt-20 flex h-56 items-end sm:h-64" aria-label="Autonomy levels L0 to L4">
           {autonomyLevels.map((l, i) => (
             <li
               key={l.level}
@@ -43,7 +43,7 @@ export function AutonomySection() {
             <span>Agent does</span>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-ink pt-6">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t rule pt-6">
             <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
               {framework.code} v{framework.version} · {framework.title}
             </p>

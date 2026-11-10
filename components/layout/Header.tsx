@@ -51,7 +51,7 @@ export function Header() {
   }, [mobileOpen, close]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b rule-ink bg-paper/90 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b rule bg-paper/90 backdrop-blur-md">
       <Container className="flex h-14 items-center justify-between gap-6">
         <Logo />
 
@@ -64,7 +64,7 @@ export function Header() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "nav-cell flex items-center gap-1.5 whitespace-nowrap border-l rule px-3 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors last:border-r lg:px-4 xl:px-5",
+                  "nav-cell flex items-center gap-1.5 whitespace-nowrap px-3 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors lg:px-4 xl:px-5",
                   active ? "bg-ink text-paper" : "text-ink-2",
                 )}
               >
@@ -79,7 +79,7 @@ export function Header() {
         <Link
           href="/contact"
           aria-current={pathname === "/contact" ? "page" : undefined}
-          className="btn btn-ink btn-press !hidden whitespace-nowrap !py-2.5 !shadow-none lg:!inline-flex"
+          className="btn btn-line !hidden whitespace-nowrap !py-2.5 lg:!inline-flex"
         >
           Contact
         </Link>
@@ -110,7 +110,7 @@ export function Header() {
         aria-label="Mobile navigation"
         inert={!mobileOpen}
         data-open={mobileOpen ? "" : undefined}
-        className="mobile-nav absolute inset-x-0 top-full h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain border-t rule-ink bg-paper md:hidden"
+        className="mobile-nav absolute inset-x-0 top-full h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain border-t rule bg-paper md:hidden"
       >
         {navLinks.map((link, i) => (
           <Link
@@ -128,7 +128,7 @@ export function Header() {
           </Link>
         ))}
         <div className="mobile-nav-item p-5" style={{ "--i": navLinks.length } as CSSProperties}>
-          <Link href="/contact" onClick={close} className="btn btn-ink w-full">
+          <Link href="/contact" onClick={close} className="btn btn-line w-full">
             Contact
           </Link>
         </div>

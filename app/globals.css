@@ -190,7 +190,7 @@ body {
   }
 
   .lead {
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
     letter-spacing: -0.005em;
     line-height: 1.7;
     color: var(--color-ink-2);
@@ -199,17 +199,12 @@ body {
 
   /* ─── Paper textures ─── */
 
+  /*
+   * No standing grid: the sheet is bare. The millimetre grid exists only on the cursor lamp
+   * (.bg-mm::before in styles/diagrams.css paints its own 40px / 8px grid under a radial mask).
+   */
   .bg-mm {
-    background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-line) 70%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 70%, transparent) 1px, transparent 1px),
-      linear-gradient(to right, color-mix(in srgb, var(--color-line) 30%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 30%, transparent) 1px, transparent 1px);
-    background-size:
-      40px 40px,
-      40px 40px,
-      8px 8px,
-      8px 8px;
+    background-image: none;
   }
 
   .bg-hatch {
@@ -342,15 +337,6 @@ body {
   .btn-ink:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0 0 var(--color-muted);
-  }
-
-  /* Press only (e.g. the header's shadowless contact button). */
-  .btn-ink.btn-press:hover {
-    transform: none;
-  }
-
-  .btn-ink.btn-press:active {
-    transform: translate(2px, 2px);
   }
 
   /* Ink fills in from the left. */
@@ -524,7 +510,7 @@ body {
 
   .prose-sheet pre {
     overflow-x: auto;
-    border: 1px solid var(--color-ink);
+    border: 1px solid var(--color-line);
     background: var(--color-paper-3);
     padding: 1rem;
     font-size: 0.8125rem;
@@ -770,7 +756,7 @@ body {
 
   /* ─── A2 + A3. Sheet header: the pen draws the rule, then the ink lands ─── */
 
-  html.js .sheet-head:not([data-inview]) :is(.sheet-label, .sheet-no, .sheet-intro) {
+  html.js .sheet-head:not([data-inview]) :is(.sheet-label, .sheet-intro) {
     opacity: 0;
   }
 
@@ -794,11 +780,6 @@ body {
     animation: ink-fade var(--dur-2) var(--ease-out) both;
   }
 
-  /* SHEET 0X appears when the pen arrives at the right-hand end. */
-  html.js .sheet-head[data-inview] .sheet-no {
-    animation: ink-fade var(--dur-2) var(--ease-out) 700ms both;
-  }
-
   html.js .sheet-head[data-inview] .sheet-title {
     --words-delay: 150ms;
   }
@@ -817,7 +798,11 @@ body {
     animation: ink-rise var(--dur-3) var(--ease-out) 350ms both;
   }
 
-  /* ─── A3. Page hero, on load: frame draws, eyebrow, words, description, children ─── */
+  /* ─── A3. Page hero, on load: rule draws, eyebrow, words, description, children ─── */
+
+  html.js .ph-rule {
+    animation: rule-draw var(--dur-4) var(--ease-draw) both;
+  }
 
   html.js .ph-eyebrow {
     animation: ink-fade var(--dur-2) var(--ease-out) 200ms both;

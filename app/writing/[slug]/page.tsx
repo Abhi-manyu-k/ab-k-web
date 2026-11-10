@@ -62,14 +62,14 @@ export default async function EssayPage({ params }: { params: Promise<{ slug: st
     <>
       {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       <PageHero sheet={essay.number} eyebrow={`Writing · ${essay.topic}`} title={essay.title} description={essay.abstract}>
-        <dl className="mt-10 flex flex-wrap border border-ink bg-paper font-mono text-[10px] uppercase tracking-[0.08em] sm:inline-flex">
+        <dl className="mt-10 flex flex-wrap font-mono text-[10px] uppercase tracking-[0.08em] sm:inline-flex">
           {[
             ["No.", essay.number],
             ["Date", essay.date ? fmt(essay.date) : "—"],
             ["Author", siteConfig.authorShort],
             ["Status", essay.status],
           ].map(([k, v]) => (
-            <div key={k} className="border-r border-ink px-4 py-2.5 last:border-r-0">
+            <div key={k} className="rule border-l px-4 py-2.5 first:border-l-0 first:pl-0">
               <dt className="text-muted">{k}</dt>
               <dd className={`mt-0.5 ${k === "Status" && draft ? "text-signal" : "text-ink"}`}>{v}</dd>
             </div>
@@ -87,7 +87,7 @@ export default async function EssayPage({ params }: { params: Promise<{ slug: st
             )}
             <Content />
           </article>
-          <p className="mx-auto mt-16 max-w-2xl border-t border-ink pt-6">
+          <p className="mx-auto mt-16 max-w-2xl border-t rule pt-6">
             <Link href="/writing" className="note link !text-ink">
               ← Drawing register
             </Link>

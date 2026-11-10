@@ -11,10 +11,10 @@ const actions = [
 
 export function CTASection() {
   return (
-    <section className="py-20 lg:py-32">
+    <section className="py-28 lg:py-44">
       <Container>
         {/* The frame rises as one block, then the title-block rows on the right land in turn. */}
-        <Reveal className="crop grid gap-12 border border-ink bg-paper-3 p-6 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:p-16">
+        <Reveal className="crop grid gap-12 border border-ink p-6 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:p-16">
           <div>
             <p className="note mb-6">Release for production</p>
             <h2 className="display text-6xl sm:text-7xl lg:text-8xl">
@@ -36,7 +36,7 @@ export function CTASection() {
                 ["Location", "Aachen, DE"],
                 ["Languages", "English · Deutsch"],
               ].map(([k, v]) => (
-                <div key={k} className="flex items-end justify-between gap-4 border-b border-ink py-3">
+                <div key={k} className="flex items-end justify-between gap-4 border-b rule py-3">
                   <dt className="text-muted">{k}</dt>
                   <dd className="serif text-xl normal-case tracking-normal italic text-ink">{v}</dd>
                 </div>

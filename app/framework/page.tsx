@@ -49,7 +49,7 @@ export default function FrameworkPage() {
         }
         description="How much may a service agent do on its own? My answer is a staircase of five levels. Each level says what the agent does, what the human does, and which controls must be in place before the agent is allowed to climb."
       >
-        <dl className="mt-12 grid max-w-3xl grid-cols-2 border border-ink bg-paper font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-4">
+        <dl className="mt-12 grid max-w-3xl grid-cols-2 font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-4">
           {[
             ["Document", framework.code],
             ["Version", framework.version],
@@ -58,7 +58,7 @@ export default function FrameworkPage() {
           ].map(([k, v], i) => (
             <div
               key={k}
-              className={`border-ink px-4 py-2.5 ${i % 2 === 1 ? "border-l" : ""} ${i >= 2 ? "border-t sm:border-t-0" : ""} ${i === 2 ? "sm:border-l" : ""}`}
+              className={`rule py-2.5 ${i % 2 === 1 ? "border-l px-4" : "pr-4"} ${i >= 2 ? "border-t sm:border-t-0" : ""} ${i === 2 ? "sm:border-l sm:pl-4" : ""}`}
             >
               <dt className="text-muted">{k}</dt>
               <dd className="mt-0.5 text-ink">{v}</dd>
@@ -70,7 +70,7 @@ export default function FrameworkPage() {
             <Download className="h-3.5 w-3.5" aria-hidden="true" />
             Download PDF
           </a>
-          <a href="#cite" className="btn btn-line bg-paper">
+          <a href="#cite" className="btn btn-line">
             Cite this
           </a>
         </div>
@@ -102,7 +102,7 @@ export default function FrameworkPage() {
       </section>
 
       {/* Level-by-level specification */}
-      <section className="border-t rule-ink py-20 lg:py-28">
+      <section className="border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="02"
@@ -115,9 +115,9 @@ export default function FrameworkPage() {
             intro="Controls are cumulative: an agent at L3 needs everything L0 to L2 require, plus its own."
           />
 
-          <ol className="mt-14 border-t border-ink">
+          <ol className="rule mt-14 border-t">
             {autonomyLevels.map((l, li) => (
-              <li key={l.level} id={l.level.toLowerCase()} className="scroll-mt-20 border-b border-ink">
+              <li key={l.level} id={l.level.toLowerCase()} className="rule scroll-mt-20 border-b">
                 {/* Each level is taller than a list row, so each lands as you reach it. */}
                 <Reveal as="article" className="grid gap-8 py-10 lg:grid-cols-[9rem_1fr_1fr_1fr] lg:gap-10 lg:py-14">
                   <header>
@@ -152,7 +152,7 @@ export default function FrameworkPage() {
                   <div>
                     <p className="note mb-2">Example scenario</p>
                     {/* TODO(launch): add an example scenario for this level. */}
-                    <div className="border border-dashed border-line-strong bg-paper-3 p-4 text-sm text-muted">
+                    <div className="border-t border-dashed rule pt-4 text-sm text-muted">
                       <Tbd>example scenario for {l.level}</Tbd>
                     </div>
                   </div>
@@ -164,7 +164,7 @@ export default function FrameworkPage() {
       </section>
 
       {/* Cite + changelog */}
-      <section id="cite" className="bg-mm scroll-mt-14 border-t rule-ink py-20 lg:py-28">
+      <section id="cite" className="bg-mm scroll-mt-14 border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="03"
@@ -178,8 +178,8 @@ export default function FrameworkPage() {
           />
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1fr]">
-            <Reveal className="border border-ink bg-paper-3">
-              <div className="flex items-center justify-between border-b border-ink px-4 py-2.5">
+            <Reveal>
+              <div className="rule flex items-center justify-between border-b py-2.5">
                 <p className="note !text-ink">Cite this</p>
                 <CopyButton text={citation} label="Copy citation" />
               </div>
@@ -192,24 +192,24 @@ export default function FrameworkPage() {
                   ["URL", url],
                 ].map(([k, v]) => (
                   <div key={k} className="contents">
-                    <dt className="border-b rule px-4 py-2.5 uppercase tracking-[0.08em] text-muted">{k}</dt>
-                    <dd className="break-words border-b rule px-4 py-2.5 text-ink">{v}</dd>
+                    <dt className="border-b rule py-2.5 pr-4 uppercase tracking-[0.08em] text-muted">{k}</dt>
+                    <dd className="break-words border-b rule py-2.5 text-ink">{v}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="px-4 py-4 text-sm text-ink-2">{citation}</p>
-              <div className="border-t border-ink">
-                <div className="flex items-center justify-between px-4 py-2.5">
+              <p className="py-4 text-sm text-ink-2">{citation}</p>
+              <div className="rule border-t">
+                <div className="flex items-center justify-between py-2.5">
                   <p className="note">BibTeX</p>
                   <CopyButton text={bibtex} label="Copy BibTeX" />
                 </div>
-                <pre className="overflow-x-auto px-4 pb-4 font-mono text-[11px] leading-relaxed text-ink-2">{bibtex}</pre>
+                <pre className="overflow-x-auto pb-4 font-mono text-[11px] leading-relaxed text-ink-2">{bibtex}</pre>
               </div>
             </Reveal>
 
-            <Reveal delay={100} className="border border-ink bg-paper">
-              <p className="border-b border-ink px-4 py-2.5 note !text-ink">Revision table — {framework.code}</p>
-              <div className="hidden grid-cols-[3.5rem_6.5rem_1fr_5rem] gap-4 border-b border-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted sm:grid">
+            <Reveal delay={100}>
+              <p className="py-2.5 note !text-ink">Revision table — {framework.code}</p>
+              <div className="hidden grid-cols-[3.5rem_6.5rem_1fr_5rem] gap-4 border-b rule-ink py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted sm:grid">
                 <span>Rev.</span>
                 <span>Date</span>
                 <span>Description</span>
@@ -219,7 +219,7 @@ export default function FrameworkPage() {
                 {frameworkChangelog.map((r) => (
                   <li
                     key={r.rev}
-                    className="grid grid-cols-[3.5rem_1fr] gap-x-4 gap-y-1 border-b rule px-4 py-3.5 last:border-b-0 sm:grid-cols-[3.5rem_6.5rem_1fr_5rem]"
+                    className="grid grid-cols-[3.5rem_1fr] gap-x-4 gap-y-1 border-b rule py-8 sm:grid-cols-[3.5rem_6.5rem_1fr_5rem]"
                   >
                     <span className="font-mono text-[11px] text-signal">{r.rev}</span>
                     <span className="font-mono text-xs text-ink">{fmt(r.date)}</span>

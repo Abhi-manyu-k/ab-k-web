@@ -41,7 +41,7 @@ export default function ContactPage() {
               </a>
 
               <p className="note mt-14 mb-6">What I&apos;m glad to hear about</p>
-              <ol className="border-t border-ink">
+              <ol className="rule border-t">
                 {routes.map((r) => (
                   <li key={r.k} className="grid grid-cols-[6rem_1fr] border-b rule py-4">
                     <a href={mailto(r.subject)} className="link self-start font-mono text-[11px] uppercase tracking-[0.08em] text-signal">
@@ -57,7 +57,7 @@ export default function ContactPage() {
               </p>
             </Reveal>
 
-            <Reveal delay={120} className="crop border border-ink bg-paper-3 p-6 sm:p-10">
+            <Reveal delay={120} className="crop border border-ink p-6 sm:p-10">
               <p className="note mb-8 flex justify-between">
                 <span>Form ABK-06 · Message</span>
                 <span>1 / 1</span>

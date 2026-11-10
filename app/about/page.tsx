@@ -51,10 +51,15 @@ export default function AboutPage() {
 
       <section className="py-20 lg:py-28">
         <Container>
-          {/* First block below the hero: cell lines hold still, each zone's ink lands in turn. */}
-          <div className="grid border-t border-l border-ink sm:grid-cols-2 lg:grid-cols-4">
+          {/* First block below the hero: four columns between hairlines, each zone's ink lands in turn. */}
+          <div className="grid gap-y-8 sm:grid-cols-2 sm:gap-y-14 lg:grid-cols-4 lg:gap-y-0">
             {aboutPillars.map((p, i) => (
-              <Reveal stagger delay={i * 120} key={p.zone} className="flex h-full flex-col border-r border-b border-ink p-6 lg:p-8">
+              <Reveal
+                stagger
+                delay={i * 120}
+                key={p.zone}
+                className={`rule flex h-full flex-col ${i > 0 ? "border-t pt-8 sm:border-t-0 sm:pt-0 lg:border-l lg:pl-8" : ""} ${i % 2 === 1 ? "sm:border-l sm:pl-8" : "sm:pr-8"} ${i === aboutPillars.length - 1 ? "lg:pr-0" : "lg:pr-8"}`}
+              >
                 <p className="note flex justify-between">
                   <span>Zone {String.fromCharCode(65 + i)}</span>
                   <span className="text-ink">{p.zone}</span>
@@ -67,7 +72,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-t rule-ink py-20 lg:py-28">
+      <section className="border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="02"
@@ -81,8 +86,8 @@ export default function AboutPage() {
           />
 
           <Reveal>
-            <dl className="mt-14 grid grid-cols-[auto_1fr] border border-ink font-mono text-[11px] uppercase tracking-[0.08em] sm:grid-cols-[auto_1fr_1fr_1fr]">
-              <div className="row-span-2 border-r border-ink p-2 sm:row-span-1">
+            <dl className="mt-14 grid grid-cols-[auto_1fr] font-mono text-[11px] uppercase tracking-[0.08em] sm:grid-cols-[auto_1fr_1fr_1fr]">
+              <div className="rule row-span-2 border-r py-2 pr-4 sm:row-span-1">
                 <dt className="sr-only">Portrait</dt>
                 <dd>
                 <Image
@@ -90,19 +95,19 @@ export default function AboutPage() {
                   alt={`Portrait of ${authorBio.name}`}
                   width={72}
                   height={88}
-                  className="h-[88px] w-[72px] object-cover object-top grayscale contrast-110 mix-blend-multiply"
+                  className="h-[88px] w-[72px] object-cover object-top grayscale contrast-110"
                 />
                 </dd>
               </div>
-              <div className="border-b border-ink px-4 py-3 sm:border-b-0 sm:border-r">
+              <div className="rule border-b px-4 py-3 sm:border-b-0 sm:border-r">
                 <dt className="text-[9px] text-muted">Drawn by</dt>
                 <dd className="mt-1 text-ink">{authorBio.name}</dd>
               </div>
-              <div className="px-4 py-3 sm:border-r sm:border-ink">
+              <div className="rule px-4 py-3 sm:border-r">
                 <dt className="text-[9px] text-muted">Role</dt>
                 <dd className="mt-1 normal-case tracking-normal text-ink">{authorBio.title}</dd>
               </div>
-              <div className="col-span-2 border-t border-ink px-4 py-3 sm:col-span-1 sm:border-t-0">
+              <div className="rule col-span-2 border-t px-4 py-3 sm:col-span-1 sm:border-t-0">
                 <dt className="text-[9px] text-muted">Contact</dt>
                 <dd className="mt-1 normal-case tracking-normal">
                   <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="link text-ink">
@@ -141,7 +146,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-mm border-t rule-ink py-20 lg:py-28">
+      <section className="bg-mm border-t rule py-20 lg:py-28">
         <Container>
           <SheetHeader
             sheet="03"
@@ -158,9 +163,9 @@ export default function AboutPage() {
             {careerRoute.map((s, i) => {
               const last = i === careerRoute.length - 1;
               return (
-                <li key={s.year + s.place} className="relative border-l border-ink bg-paper py-2 pl-5 pr-3 lg:border-l-0 lg:border-t lg:pl-0 lg:pt-8">
+                <li key={s.year + s.place} className="rule relative border-l py-2 pl-5 pr-3 lg:border-l-0 lg:border-t lg:pl-0 lg:pt-8">
                   <span
-                    className={`absolute -left-[5px] top-3 h-2.5 w-2.5 rotate-45 border border-ink lg:-top-[5px] lg:left-0 ${last ? "bg-signal border-signal" : "bg-paper"}`}
+                    className={`absolute -left-[5px] top-3 h-2.5 w-2.5 rotate-45 border lg:-top-[5px] lg:left-0 ${last ? "bg-signal border-signal" : "border-line-strong bg-paper"}`}
                   />
                   <span className={`font-mono text-xs ${last ? "text-signal" : "text-muted"}`}>{s.year}</span>
                   <span className="serif mt-2 block text-xl leading-tight text-ink">{s.place}</span>
