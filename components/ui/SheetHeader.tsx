@@ -20,18 +20,18 @@ export function SheetHeader({ sheet, label, title, intro, tone = "paper", classN
   return (
     <Reveal variant="none" className={cn("sheet-head", className)}>
       <div className="relative mb-10 flex items-baseline justify-between gap-4 border-b border-transparent pb-3 lg:mb-14">
-        <span className={cn("note sheet-label", tone === "plate" ? "!text-paper" : "!text-ink")}>
+        <span className={cn("note sheet-label", "!text-ink")}>
           <span className="text-signal">§{sheet}</span> — {label}
         </span>
         <span className="note sheet-no hidden sm:inline">Sheet {sheet}</span>
-        <span aria-hidden="true" className={cn("sheet-rule", tone === "plate" ? "bg-paper/30" : "bg-ink")} />
+        <span aria-hidden="true" className={cn("sheet-rule", tone === "plate" ? "bg-ink/40" : "bg-ink")} />
       </div>
       <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
         <h2 className="display sheet-title text-[2.75rem] sm:text-6xl lg:text-[4.75rem]">
           <SplitWords>{title}</SplitWords>
         </h2>
         {intro && (
-          <div className={cn("lead sheet-intro max-w-md", tone === "plate" && "!text-paper/70")}>{intro}</div>
+          <div className={cn("lead sheet-intro max-w-md", tone === "plate" && "!text-ink-2")}>{intro}</div>
         )}
       </div>
     </Reveal>

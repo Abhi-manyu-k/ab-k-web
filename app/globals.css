@@ -44,24 +44,27 @@
 }
 
 @theme {
-  /* ─── Palette: drafting paper, graphite, one safety-orange mark ─── */
-  --color-paper: #f2efe7;
-  --color-paper-2: #e9e5da;
-  --color-paper-3: #faf8f3;
-  --color-ink: #1c1b18;
-  --color-ink-2: #3b3934;
-  --color-muted: #5e5a52;
-  /* Darkened from #9a958a / #6b675e to meet WCAG AA (4.5:1) for small labels. */
-  --color-faint: #6e695f;
-  --color-line: #d8d3c6;
-  --color-line-strong: #b8b1a1;
-  --color-signal: #d4471a;
-  /* Same hue, deep enough for small text on paper (4.9:1). Fills and strokes keep --color-signal. */
-  --color-signal-ink: #b93b14;
-  --color-ok: #2f6f50;
-  --color-plate: #171715;
-  --color-plate-2: #201f1c;
-  --color-plate-line: #35332e;
+  /* ─── Palette: the night sheet — a drawing on a light table. Dark sheet, light lines, one safety-orange mark.
+   * Token names keep their drafting meaning: "paper" is the sheet, "ink" is the line, whatever their value.
+   * AA (4.5:1) small-text contrast, worst case on paper-3: ink 13.9, ink-2 10.4, muted 6.0, faint 4.6,
+   * signal 5.0, ok 6.4. Paper text on a signal or ink fill: 5.5 / 15.4. ─── */
+  --color-paper: #111110;
+  --color-paper-2: #181816;
+  --color-paper-3: #1d1c1a;
+  --color-ink: #ece8dd;
+  --color-ink-2: #cfcabd;
+  --color-muted: #9e998e;
+  --color-faint: #8a857a;
+  --color-line: #2a2926;
+  --color-line-strong: #45423c;
+  --color-signal: #e5622f;
+  /* On the dark sheet the fill tone is already legible as small text, so the two coincide. */
+  --color-signal-ink: #e5622f;
+  --color-ok: #5fae86;
+  /* The Track Record band: a slightly lighter strip of the same sheet, no longer an inverted plate. */
+  --color-plate: #181816;
+  --color-plate-2: #1d1c1a;
+  --color-plate-line: #302e2a;
 
   /* ─── Typography ─── */
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
@@ -75,7 +78,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
@@ -149,10 +152,6 @@ body {
   .drafted {
     color: transparent;
     -webkit-text-stroke: 1px var(--color-ink);
-  }
-
-  .plate .drafted {
-    -webkit-text-stroke-color: var(--color-paper);
   }
 
   .hero-title {
@@ -336,13 +335,13 @@ body {
   @media (hover: hover) {
     .btn-ink:hover {
       transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0 0 var(--color-ink);
+      box-shadow: 4px 4px 0 0 var(--color-muted);
     }
   }
 
   .btn-ink:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 0 var(--color-ink);
+    box-shadow: 1px 1px 0 0 var(--color-muted);
   }
 
   /* Press only (e.g. the header's shadowless contact button). */
@@ -412,19 +411,11 @@ body {
       100% 100%;
   }
 
-  .plate .link {
-    --link-signal: #e5622f;
-  }
-
-  /* ─── Dark plate (inverted sheet) ─── */
+  /* ─── Plate: a lighter band of the night sheet ─── */
 
   .plate {
     background-color: var(--color-plate);
-    color: var(--color-paper);
-  }
-
-  .plate .note {
-    color: #9e998e;
+    color: var(--color-ink);
   }
 
   .plate .rule {
@@ -595,7 +586,7 @@ body {
     padding-right: 2rem;
     cursor: pointer;
     background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231c1b18' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ece8dd' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
       var(--field-signal),
       var(--field-line);
     background-repeat: no-repeat;
@@ -660,10 +651,6 @@ body {
 /* Small orange text uses the deeper ink tone (unlayered, so it wins over the utility). */
 .text-signal {
   color: var(--color-signal-ink);
-}
-
-.plate .text-signal {
-  color: #e5622f; /* lifted for the dark plate (5.2:1) */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════════
@@ -1028,7 +1015,7 @@ body {
     rotate var(--dur-1) var(--ease-snap);
 }
 
-/* ─── A7. Paper grain: barely-there graphite specks over the whole sheet (no blend mode) ─── */
+/* ─── A7. Sheet grain: barely-there light specks over the dark sheet (no blend mode) ─── */
 
 body::before {
   content: "";
@@ -1036,8 +1023,8 @@ body::before {
   inset: 0;
   z-index: 70;
   pointer-events: none;
-  opacity: 0.12;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.106 0 0 0 0 0.094 0 0 0 2.4 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.925 0 0 0 0 0.91 0 0 0 0 0.867 0 0 0 2.4 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
 

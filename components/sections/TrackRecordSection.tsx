@@ -40,10 +40,10 @@ export function TrackRecordSection({
               key={m.label}
               className="border-b border-plate-line py-8 sm:border-b-0 sm:border-r sm:px-8 sm:first:pl-0 sm:last:border-r-0"
             >
-              <p className="display text-7xl text-paper lg:text-8xl">
+              <p className="display text-7xl text-ink lg:text-8xl">
                 <CountUp value={m.value} />
               </p>
-              <p className="mt-4 max-w-xs text-sm text-paper/70">{m.label}</p>
+              <p className="mt-4 max-w-xs text-sm text-muted">{m.label}</p>
             </Reveal>
           ))}
         </ul>
@@ -53,13 +53,13 @@ export function TrackRecordSection({
           {trackRecord.map((n, i) => (
             <Reveal as="article" stagger delay={i * 120} key={n.id} className="flex h-full flex-col bg-plate p-6 lg:p-10">
               <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.08em]">
-                <span className="text-paper/60">N-{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-paper/70">{n.tag}</span>
+                <span className="text-muted">N-{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-muted">{n.tag}</span>
               </div>
-              <h3 className="serif mt-10 text-3xl text-paper lg:text-4xl">{n.title}</h3>
-              <p className="mt-4 text-paper/85">{n.context}</p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-paper/70">{n.detail}</p>
-              <p className="mt-8 border-t border-plate-line pt-4 font-mono text-[11px] leading-relaxed text-paper">
+              <h3 className="serif mt-10 text-3xl text-ink lg:text-4xl">{n.title}</h3>
+              <p className="mt-4 text-ink-2">{n.context}</p>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{n.detail}</p>
+              <p className="mt-8 border-t border-plate-line pt-4 font-mono text-[11px] leading-relaxed text-ink">
                 → {n.impact}
               </p>
             </Reveal>
@@ -68,7 +68,7 @@ export function TrackRecordSection({
 
         {showLink && (
           <Reveal className="mt-10">
-            <Link href="/talks" className="note link inline-flex items-center gap-2 !text-paper">
+            <Link href="/talks" className="note link inline-flex items-center gap-2 !text-ink">
               Talks & publications <ArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>
           </Reveal>
