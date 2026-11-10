@@ -1,8 +1,8 @@
 import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { CopyButton } from "@/components/ui/CopyButton";
-import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { AutonomyLadder } from "@/components/ui/AutonomyLadder";
 import { Tbd } from "@/components/ui/Tbd";
@@ -79,90 +79,84 @@ export default function FrameworkPage() {
       {/* Interactive staircase */}
       <section className="py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="01"
-              label="Section A–A · Elevation"
-              title={
-                <>
-                  An agent <em>earns</em> the right to act.
-                </>
-              }
-              intro="Autonomy is decided per class of action, not per agent: the same agent can recommend a recipe change (L1) and run a log export on its own (L3). Pick a level to see what it takes."
-            />
-          </FadeInOnScroll>
-          <FadeInOnScroll>
-            <div className="mt-24">
-              <AutonomyLadder />
-            </div>
-            <p className="mt-6 lg:mt-2">
-              <Annotation arrow="up-left" rotate={-2}>
-                the hard step is L2 → L3: from approving actions to approving policy
-              </Annotation>
-            </p>
-          </FadeInOnScroll>
+          <SheetHeader
+            sheet="01"
+            label="Section A–A · Elevation"
+            title={
+              <>
+                An agent <em>earns</em> the right to act.
+              </>
+            }
+            intro="Autonomy is decided per class of action, not per agent: the same agent can recommend a recipe change (L1) and run a log export on its own (L3). Pick a level to see what it takes."
+          />
+          {/* The staircase builds itself on view. */}
+          <div className="mt-24">
+            <AutonomyLadder />
+          </div>
+          <Reveal as="p" delay={400} className="mt-6 lg:mt-2">
+            <Annotation arrow="up-left" rotate={-2}>
+              the hard step is L2 → L3: from approving actions to approving policy
+            </Annotation>
+          </Reveal>
         </Container>
       </section>
 
       {/* Level-by-level specification */}
       <section className="border-t rule-ink py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="02"
-              label="Specification"
-              title={
-                <>
-                  Level by <em>level.</em>
-                </>
-              }
-              intro="Controls are cumulative: an agent at L3 needs everything L0 to L2 require, plus its own."
-            />
-          </FadeInOnScroll>
+          <SheetHeader
+            sheet="02"
+            label="Specification"
+            title={
+              <>
+                Level by <em>level.</em>
+              </>
+            }
+            intro="Controls are cumulative: an agent at L3 needs everything L0 to L2 require, plus its own."
+          />
 
           <ol className="mt-14 border-t border-ink">
             {autonomyLevels.map((l, li) => (
               <li key={l.level} id={l.level.toLowerCase()} className="scroll-mt-20 border-b border-ink">
-                <FadeInOnScroll>
-                  <article className="grid gap-8 py-10 lg:grid-cols-[9rem_1fr_1fr_1fr] lg:gap-10 lg:py-14">
-                    <header>
-                      <p className="font-mono text-xs text-signal">{l.level}</p>
-                      <h3 className="serif mt-2 text-3xl text-ink">{l.name}</h3>
-                    </header>
-                    <div>
-                      <p className="note mb-2">What the agent does</p>
-                      <p className="text-ink-2">{l.agent}</p>
-                      <p className="note mt-6 mb-2">What the human does</p>
-                      <p className="text-ink-2">{l.human}</p>
+                {/* Each level is taller than a list row, so each lands as you reach it. */}
+                <Reveal as="article" className="grid gap-8 py-10 lg:grid-cols-[9rem_1fr_1fr_1fr] lg:gap-10 lg:py-14">
+                  <header>
+                    <p className="font-mono text-xs text-signal">{l.level}</p>
+                    <h3 className="serif mt-2 text-3xl text-ink">{l.name}</h3>
+                  </header>
+                  <div>
+                    <p className="note mb-2">What the agent does</p>
+                    <p className="text-ink-2">{l.agent}</p>
+                    <p className="note mt-6 mb-2">What the human does</p>
+                    <p className="text-ink-2">{l.human}</p>
+                  </div>
+                  <div>
+                    <p className="note mb-2">Required controls</p>
+                    <ul className="space-y-2">
+                      {autonomyLevels.slice(0, li + 1).flatMap((prev, pi) =>
+                        prev.controls.map((c) => (
+                          <li key={c} className={`flex items-start gap-3 text-sm ${pi === li ? "text-ink" : "text-muted"}`}>
+                            <span
+                              aria-hidden="true"
+                              className={`mt-1.5 h-2 w-2 shrink-0 rotate-45 border ${pi === li ? "border-signal bg-signal" : "border-line-strong"}`}
+                            />
+                            <span>
+                              {c}
+                              {pi !== li && <span className="ml-2 font-mono text-[10px]">({prev.level})</span>}
+                            </span>
+                          </li>
+                        )),
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="note mb-2">Example scenario</p>
+                    {/* TODO(launch): add an example scenario for this level. */}
+                    <div className="border border-dashed border-line-strong bg-paper-3 p-4 text-sm text-muted">
+                      <Tbd>example scenario for {l.level}</Tbd>
                     </div>
-                    <div>
-                      <p className="note mb-2">Required controls</p>
-                      <ul className="space-y-2">
-                        {autonomyLevels.slice(0, li + 1).flatMap((prev, pi) =>
-                          prev.controls.map((c) => (
-                            <li key={c} className={`flex items-start gap-3 text-sm ${pi === li ? "text-ink" : "text-muted"}`}>
-                              <span
-                                aria-hidden="true"
-                                className={`mt-1.5 h-2 w-2 shrink-0 rotate-45 border ${pi === li ? "border-signal bg-signal" : "border-line-strong"}`}
-                              />
-                              <span>
-                                {c}
-                                {pi !== li && <span className="ml-2 font-mono text-[10px]">({prev.level})</span>}
-                              </span>
-                            </li>
-                          )),
-                        )}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="note mb-2">Example scenario</p>
-                      {/* TODO(launch): add an example scenario for this level. */}
-                      <div className="border border-dashed border-line-strong bg-paper-3 p-4 text-sm text-muted">
-                        <Tbd>example scenario for {l.level}</Tbd>
-                      </div>
-                    </div>
-                  </article>
-                </FadeInOnScroll>
+                  </div>
+                </Reveal>
               </li>
             ))}
           </ol>
@@ -172,75 +166,69 @@ export default function FrameworkPage() {
       {/* Cite + changelog */}
       <section id="cite" className="bg-mm scroll-mt-14 border-t rule-ink py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="03"
-              label="Cite this · Revisions"
-              title={
-                <>
-                  Use it, <em>cite it.</em>
-                </>
-              }
-              intro="If the framework is useful in your own work, please cite the version you used. Later revisions are listed below."
-            />
-          </FadeInOnScroll>
+          <SheetHeader
+            sheet="03"
+            label="Cite this · Revisions"
+            title={
+              <>
+                Use it, <em>cite it.</em>
+              </>
+            }
+            intro="If the framework is useful in your own work, please cite the version you used. Later revisions are listed below."
+          />
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1fr]">
-            <FadeInOnScroll>
-              <div className="border border-ink bg-paper-3">
-                <div className="flex items-center justify-between border-b border-ink px-4 py-2.5">
-                  <p className="note !text-ink">Cite this</p>
-                  <CopyButton text={citation} label="Copy citation" />
-                </div>
-                <dl className="grid grid-cols-[6rem_1fr] font-mono text-[11px]">
-                  {[
-                    ["Author", siteConfig.author],
-                    ["Title", framework.title],
-                    ["Version", `${framework.code} v${framework.version}`],
-                    ["Year", year],
-                    ["URL", url],
-                  ].map(([k, v]) => (
-                    <div key={k} className="contents">
-                      <dt className="border-b rule px-4 py-2.5 uppercase tracking-[0.08em] text-muted">{k}</dt>
-                      <dd className="break-words border-b rule px-4 py-2.5 text-ink">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="px-4 py-4 text-sm text-ink-2">{citation}</p>
-                <div className="border-t border-ink">
-                  <div className="flex items-center justify-between px-4 py-2.5">
-                    <p className="note">BibTeX</p>
-                    <CopyButton text={bibtex} label="Copy BibTeX" />
+            <Reveal className="border border-ink bg-paper-3">
+              <div className="flex items-center justify-between border-b border-ink px-4 py-2.5">
+                <p className="note !text-ink">Cite this</p>
+                <CopyButton text={citation} label="Copy citation" />
+              </div>
+              <dl className="grid grid-cols-[6rem_1fr] font-mono text-[11px]">
+                {[
+                  ["Author", siteConfig.author],
+                  ["Title", framework.title],
+                  ["Version", `${framework.code} v${framework.version}`],
+                  ["Year", year],
+                  ["URL", url],
+                ].map(([k, v]) => (
+                  <div key={k} className="contents">
+                    <dt className="border-b rule px-4 py-2.5 uppercase tracking-[0.08em] text-muted">{k}</dt>
+                    <dd className="break-words border-b rule px-4 py-2.5 text-ink">{v}</dd>
                   </div>
-                  <pre className="overflow-x-auto px-4 pb-4 font-mono text-[11px] leading-relaxed text-ink-2">{bibtex}</pre>
+                ))}
+              </dl>
+              <p className="px-4 py-4 text-sm text-ink-2">{citation}</p>
+              <div className="border-t border-ink">
+                <div className="flex items-center justify-between px-4 py-2.5">
+                  <p className="note">BibTeX</p>
+                  <CopyButton text={bibtex} label="Copy BibTeX" />
                 </div>
+                <pre className="overflow-x-auto px-4 pb-4 font-mono text-[11px] leading-relaxed text-ink-2">{bibtex}</pre>
               </div>
-            </FadeInOnScroll>
+            </Reveal>
 
-            <FadeInOnScroll delay={100}>
-              <div className="border border-ink bg-paper">
-                <p className="border-b border-ink px-4 py-2.5 note !text-ink">Revision table — {framework.code}</p>
-                <div className="hidden grid-cols-[3.5rem_6.5rem_1fr_5rem] gap-4 border-b border-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted sm:grid">
-                  <span>Rev.</span>
-                  <span>Date</span>
-                  <span>Description</span>
-                  <span>By</span>
-                </div>
-                <ul>
-                  {frameworkChangelog.map((r) => (
-                    <li
-                      key={r.rev}
-                      className="grid grid-cols-[3.5rem_1fr] gap-x-4 gap-y-1 border-b rule px-4 py-3.5 last:border-b-0 sm:grid-cols-[3.5rem_6.5rem_1fr_5rem]"
-                    >
-                      <span className="font-mono text-[11px] text-signal">{r.rev}</span>
-                      <span className="font-mono text-xs text-ink">{fmt(r.date)}</span>
-                      <span className="col-span-2 text-sm text-ink-2 sm:col-span-1">{r.change}</span>
-                      <span className="col-span-2 font-mono text-[11px] text-muted sm:col-span-1">{r.by}</span>
-                    </li>
-                  ))}
-                </ul>
+            <Reveal delay={100} className="border border-ink bg-paper">
+              <p className="border-b border-ink px-4 py-2.5 note !text-ink">Revision table — {framework.code}</p>
+              <div className="hidden grid-cols-[3.5rem_6.5rem_1fr_5rem] gap-4 border-b border-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted sm:grid">
+                <span>Rev.</span>
+                <span>Date</span>
+                <span>Description</span>
+                <span>By</span>
               </div>
-            </FadeInOnScroll>
+              <Reveal as="ul" stagger delay={300}>
+                {frameworkChangelog.map((r) => (
+                  <li
+                    key={r.rev}
+                    className="grid grid-cols-[3.5rem_1fr] gap-x-4 gap-y-1 border-b rule px-4 py-3.5 last:border-b-0 sm:grid-cols-[3.5rem_6.5rem_1fr_5rem]"
+                  >
+                    <span className="font-mono text-[11px] text-signal">{r.rev}</span>
+                    <span className="font-mono text-xs text-ink">{fmt(r.date)}</span>
+                    <span className="col-span-2 text-sm text-ink-2 sm:col-span-1">{r.change}</span>
+                    <span className="col-span-2 font-mono text-[11px] text-muted sm:col-span-1">{r.by}</span>
+                  </li>
+                ))}
+              </Reveal>
+            </Reveal>
           </div>
         </Container>
       </section>

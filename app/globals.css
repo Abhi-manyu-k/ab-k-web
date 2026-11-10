@@ -1,4 +1,19 @@
 @import "tailwindcss";
+@import "./styles/hero.css";
+@import "./styles/diagrams.css";
+
+/* ─── Motion tokens: every movement is a pen stroke, ink landing, or an instrument responding ─── */
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* ink landing: reveals, rises */
+  --ease-draw: cubic-bezier(0.65, 0, 0.35, 1); /* pen travel: lines being drawn */
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1); /* instrument response: hovers, presses */
+  --dur-1: 160ms; /* hover */
+  --dur-2: 420ms; /* small reveal */
+  --dur-3: 800ms; /* headline, large reveal */
+  --dur-4: 1100ms; /* frame and long line draws */
+  --stagger-row: 60ms;
+  --stagger-word: 35ms;
+}
 
 /* ─── Fraunces (self-hosted, see app/layout.tsx) ─── */
 
@@ -94,8 +109,15 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  /* The scroll-progress line is driven by the user's own scrolling, not by time. */
+  .header-progress {
+    animation-duration: auto !important;
   }
 }
 
@@ -164,6 +186,11 @@ body {
     }
   }
 
+  /* Headlines keep their natural breaks but never strand a word (balance split italic phrases). */
+  :is(h1, h2, h3, h4):is(.display, .serif) {
+    text-wrap: pretty;
+  }
+
   .numerals {
     font-feature-settings: "lnum" 0, "onum" 1;
   }
@@ -183,6 +210,7 @@ body {
     letter-spacing: -0.005em;
     line-height: 1.7;
     color: var(--color-ink-2);
+    text-wrap: pretty;
   }
 
   /* ─── Paper textures ─── */
@@ -213,6 +241,42 @@ body {
   .frame {
     position: relative;
     border: 1px solid var(--color-ink);
+  }
+
+  /*
+   * A3. The frame is drawn: four 1px ink edges on an ::after. Top and left grow from the top-left
+   * corner, bottom and right from the bottom-right. Plays on load (used above the fold). Without
+   * html.js, or with reduced motion, it is the plain .frame border.
+   * Budget: uses ::after — never combine with .crop.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js .frame-draw {
+      border-color: transparent;
+    }
+
+    html.js .frame-draw::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--color-ink), var(--color-ink)),
+        linear-gradient(var(--color-ink), var(--color-ink)),
+        linear-gradient(var(--color-ink), var(--color-ink)),
+        linear-gradient(var(--color-ink), var(--color-ink));
+      background-repeat: no-repeat;
+      background-position:
+        0 0,
+        0 0,
+        100% 100%,
+        100% 100%;
+      background-size:
+        100% 1px,
+        1px 100%,
+        100% 1px,
+        1px 100%;
+      animation: frame-draw var(--dur-4) var(--ease-draw) var(--frame-delay, 0ms) both;
+    }
   }
 
   .crop {
@@ -263,10 +327,14 @@ body {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     line-height: 1;
+    /* An instrument responding: fast and exact. */
     transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease;
+      background-color var(--dur-1) var(--ease-snap),
+      background-size 240ms var(--ease-snap),
+      color var(--dur-1) var(--ease-snap),
+      border-color var(--dur-1) var(--ease-snap),
+      box-shadow var(--dur-1) var(--ease-snap),
+      transform var(--dur-1) var(--ease-snap);
   }
 
   .btn-ink {
@@ -279,35 +347,88 @@ body {
     background-color: var(--color-signal);
   }
 
+  /* Lifts off the sheet on its hard shadow, and is pressed into it. */
+  @media (hover: hover) {
+    .btn-ink:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 0 var(--color-ink);
+    }
+  }
+
+  .btn-ink:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--color-ink);
+  }
+
+  /* Press only (e.g. the header's shadowless contact button). */
+  .btn-ink.btn-press:hover {
+    transform: none;
+  }
+
+  .btn-ink.btn-press:active {
+    transform: translate(2px, 2px);
+  }
+
+  /* Ink fills in from the left. */
   .btn-line {
     border: 1px solid var(--color-ink);
     color: var(--color-ink);
+    background-image: linear-gradient(var(--color-ink), var(--color-ink));
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 0% 100%;
   }
 
   .btn-line:hover {
-    background-color: var(--color-ink);
+    background-size: 100% 100%;
     color: var(--color-paper);
   }
 
+  .btn-line:active {
+    transform: translate(1px, 1px);
+  }
+
   .btn .arrow {
-    transition: transform 0.2s ease;
+    transition: transform var(--dur-1) var(--ease-snap);
   }
 
   .btn:hover .arrow {
     transform: translateX(3px);
   }
 
+  /*
+   * Underline: on hover the ink line retracts to the right while a signal line draws in from the
+   * left. Two layers on two properties so each gets its own timing: the signal layer is a 200%-wide
+   * half-signal/half-clear strip slid by background-position, the ink layer shrinks by background-size.
+   */
   .link {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 100% 1px;
-    background-position: 0 100%;
+    --link-signal: var(--color-signal);
+    background-image:
+      linear-gradient(to right, var(--link-signal) 50%, transparent 50%),
+      linear-gradient(currentColor, currentColor);
+    background-size:
+      200% 1px,
+      100% 1px;
+    background-position:
+      100% 100%,
+      100% 100%;
     background-repeat: no-repeat;
-    transition: background-size 0.3s ease;
+    transition:
+      background-size 300ms var(--ease-draw),
+      background-position 300ms var(--ease-draw) 80ms;
   }
 
   .link:hover {
-    background-size: 0% 1px;
-    background-position: 100% 100%;
+    background-size:
+      200% 1px,
+      0% 1px;
+    background-position:
+      0% 100%,
+      100% 100%;
+  }
+
+  .plate .link {
+    --link-signal: #e5622f;
   }
 
   /* ─── Dark plate (inverted sheet) ─── */
@@ -363,6 +484,10 @@ body {
     color: var(--color-ink-2);
     font-size: 1.0625rem;
     line-height: 1.75;
+  }
+
+  .prose-sheet p {
+    text-wrap: pretty;
   }
 
   .prose-sheet > * + * {
@@ -436,16 +561,29 @@ body {
 
   /* ─── Forms ─── */
 
+  /*
+   * The underline is two background lines instead of a border (same 1px, same box size), so on
+   * focus the signal line can draw in from the left over the graphite one.
+   */
   .form-field {
+    --field-signal: linear-gradient(var(--color-signal), var(--color-signal));
+    --field-line: linear-gradient(var(--color-line-strong), var(--color-line-strong));
     width: 100%;
     border: 0;
-    border-bottom: 1px solid var(--color-line-strong);
     background-color: transparent;
-    padding: 0.6rem 0;
+    background-image: var(--field-signal), var(--field-line);
+    background-repeat: no-repeat;
+    background-position:
+      0 100%,
+      0 100%;
+    background-size:
+      0% 1px,
+      100% 1px;
+    padding: 0.6rem 0 calc(0.6rem + 1px);
     color: var(--color-ink);
     font-size: 1rem;
     line-height: 1.5;
-    transition: border-color 0.2s ease;
+    transition: background-size var(--dur-2) var(--ease-out);
   }
 
   .form-field::placeholder {
@@ -454,12 +592,15 @@ body {
 
   .form-field:focus {
     outline: none;
-    border-bottom-color: var(--color-signal);
+    background-size:
+      100% 1px,
+      100% 1px;
   }
 
   textarea.form-field {
     border: 1px solid var(--color-line-strong);
-    padding: 0.75rem;
+    border-bottom: 0;
+    padding: 0.75rem 0.75rem calc(0.75rem + 1px);
     background-color: var(--color-paper-3);
   }
 
@@ -468,10 +609,26 @@ body {
     -webkit-appearance: none;
     padding-right: 2rem;
     cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231c1b18' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231c1b18' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+      var(--field-signal),
+      var(--field-line);
     background-repeat: no-repeat;
-    background-position: right 0.25rem center;
-    background-size: 1rem;
+    background-position:
+      right 0.25rem center,
+      0 100%,
+      0 100%;
+    background-size:
+      1rem,
+      0% 1px,
+      100% 1px;
+  }
+
+  .form-select:focus {
+    background-size:
+      1rem,
+      100% 1px,
+      100% 1px;
   }
 
   .form-select:invalid {
@@ -515,19 +672,6 @@ body {
   animation: fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 /* Small orange text uses the deeper ink tone (unlayered, so it wins over the utility). */
 .text-signal {
   color: var(--color-signal-ink);
@@ -535,4 +679,397 @@ body {
 
 .plate .text-signal {
   color: #e5622f; /* lifted for the dark plate (5.2:1) */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════
+ * The plotter draws the sheet — reveals, headlines, rules, route change, chrome, paper.
+ *
+ * Unlayered so it wins over the component layer and Tailwind utilities. Every hidden-before-reveal
+ * state sits under html.js (set by an inline script in app/layout.tsx) AND under
+ * prefers-reduced-motion: no-preference, so without JS or with reduced motion the sheet is simply
+ * there. Entrances are CSS animations with only a `from` keyframe and fill-mode both: during the
+ * delay they hold the hidden pose, afterwards they hand back to the element's own styles.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes frame-draw {
+  from {
+    background-size:
+      0% 1px,
+      1px 0%,
+      0% 1px,
+      1px 0%;
+  }
+}
+
+@keyframes ink-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ink-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise, 16px));
+  }
+}
+
+@keyframes ink-mask {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(var(--reveal-rise, 16px));
+  }
+}
+
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Words: the mask is released on the last frame, so nothing is clipped once landed. */
+@keyframes word-mask {
+  from,
+  99.9% {
+    clip-path: inset(-0.25em -0.5em -0.14em -0.5em);
+  }
+  to {
+    clip-path: none;
+  }
+}
+
+@keyframes word-rise {
+  from {
+    transform: translateY(115%);
+  }
+}
+
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ─── A2. SplitWords: <span.w><span.wi>word</span></span> ─── */
+
+.w,
+.wi {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ─── A1. Reveal ─── */
+
+  html.js [data-reveal]:not([data-inview]):is([data-reveal="rise"], [data-reveal="mask"]),
+  html.js [data-stagger]:not([data-inview]) > * {
+    opacity: 0;
+  }
+
+  html.js [data-reveal="rise"][data-inview] {
+    animation: ink-rise var(--dur-3) var(--ease-out) var(--reveal-delay, 0ms) both;
+  }
+
+  html.js [data-reveal="mask"]:not([data-inview]) {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  html.js [data-reveal="mask"][data-inview] {
+    opacity: 1;
+    animation: ink-mask var(--dur-3) var(--ease-out) var(--reveal-delay, 0ms) both;
+  }
+
+  /* Stagger: the list holds still, its children land one after another. */
+  html.js [data-stagger][data-inview] > * {
+    --reveal-rise: 12px;
+    animation: ink-rise var(--dur-3) var(--ease-out) both;
+    animation-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * var(--stagger-row));
+  }
+
+  /* ─── A2 + A3. Sheet header: the pen draws the rule, then the ink lands ─── */
+
+  html.js .sheet-head:not([data-inview]) :is(.sheet-label, .sheet-no, .sheet-intro) {
+    opacity: 0;
+  }
+
+  html.js .sheet-head:not([data-inview]) .sheet-rule {
+    transform: scaleX(0);
+  }
+
+  html.js .sheet-head:not([data-inview]) .sheet-title .w {
+    clip-path: inset(-0.25em -0.5em -0.14em -0.5em);
+  }
+
+  html.js .sheet-head:not([data-inview]) .sheet-title .wi {
+    transform: translateY(115%);
+  }
+
+  html.js .sheet-head[data-inview] .sheet-rule {
+    animation: rule-draw var(--dur-4) var(--ease-draw) both;
+  }
+
+  html.js .sheet-head[data-inview] .sheet-label {
+    animation: ink-fade var(--dur-2) var(--ease-out) both;
+  }
+
+  /* SHEET 0X appears when the pen arrives at the right-hand end. */
+  html.js .sheet-head[data-inview] .sheet-no {
+    animation: ink-fade var(--dur-2) var(--ease-out) 700ms both;
+  }
+
+  html.js .sheet-head[data-inview] .sheet-title {
+    --words-delay: 150ms;
+  }
+
+  html.js .sheet-head[data-inview] .sheet-title .w {
+    animation: word-mask var(--dur-3) linear both;
+    animation-delay: calc(var(--words-delay) + min(var(--w, 0), 14) * var(--stagger-word));
+  }
+
+  html.js .sheet-head[data-inview] .sheet-title .wi {
+    animation: word-rise var(--dur-3) var(--ease-out) both;
+    animation-delay: calc(var(--words-delay) + min(var(--w, 0), 14) * var(--stagger-word));
+  }
+
+  html.js .sheet-head[data-inview] .sheet-intro {
+    animation: ink-rise var(--dur-3) var(--ease-out) 350ms both;
+  }
+
+  /* ─── A3. Page hero, on load: frame draws, eyebrow, words, description, children ─── */
+
+  html.js .ph-eyebrow {
+    animation: ink-fade var(--dur-2) var(--ease-out) 200ms both;
+  }
+
+  html.js .ph-title .w {
+    animation: word-mask var(--dur-3) linear both;
+    animation-delay: calc(150ms + min(var(--w, 0), 14) * var(--stagger-word));
+  }
+
+  html.js .ph-title .wi {
+    animation: word-rise var(--dur-3) var(--ease-out) both;
+    animation-delay: calc(150ms + min(var(--w, 0), 14) * var(--stagger-word));
+  }
+
+  html.js .ph-description {
+    animation: ink-rise var(--dur-3) var(--ease-out) 450ms both;
+  }
+
+  html.js .ph-children {
+    animation: ink-rise var(--dur-3) var(--ease-out) 550ms both;
+  }
+
+  /* ─── A4. Route change (app/template.tsx remounts per navigation, so this replays) ─── */
+
+  html.js .route-in {
+    animation: route-in 360ms var(--ease-out) both;
+  }
+
+  /* ─── A6. Mobile menu links rise in one after another ─── */
+
+  html.js .mobile-nav:not([data-open]) .mobile-nav-item {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  html.js .mobile-nav-item {
+    transition:
+      opacity var(--dur-2) var(--ease-out),
+      transform var(--dur-2) var(--ease-out);
+  }
+
+  html.js .mobile-nav[data-open] .mobile-nav-item {
+    transition-delay: calc(var(--i, 0) * var(--stagger-row));
+  }
+}
+
+/* Stagger index from position, capped at 12. */
+[data-stagger] > :nth-child(1) { --i: 0; }
+[data-stagger] > :nth-child(2) { --i: 1; }
+[data-stagger] > :nth-child(3) { --i: 2; }
+[data-stagger] > :nth-child(4) { --i: 3; }
+[data-stagger] > :nth-child(5) { --i: 4; }
+[data-stagger] > :nth-child(6) { --i: 5; }
+[data-stagger] > :nth-child(7) { --i: 6; }
+[data-stagger] > :nth-child(8) { --i: 7; }
+[data-stagger] > :nth-child(9) { --i: 8; }
+[data-stagger] > :nth-child(10) { --i: 9; }
+[data-stagger] > :nth-child(11) { --i: 10; }
+[data-stagger] > :nth-child(n + 12) { --i: 11; }
+
+/* ─── A3. Sheet header rule (replaces the border) ─── */
+
+.sheet-rule {
+  position: absolute;
+  inset: auto 0 -1px; /* sits on the (transparent) border it replaces, so the layout is unchanged */
+  height: 1px;
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* ─── A5. Header nav cells: a 2px ink bar draws along the bottom edge ─── */
+
+.nav-cell {
+  position: relative;
+}
+
+.nav-bar {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background-color: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-2) var(--ease-out);
+  pointer-events: none;
+}
+
+.nav-idx {
+  transition: color var(--dur-1) var(--ease-snap);
+}
+
+.nav-cell:focus-visible .nav-bar {
+  transform: none;
+}
+
+@media (hover: hover) {
+  .nav-cell:hover .nav-bar {
+    transform: none;
+  }
+
+  .nav-cell:not([aria-current]):hover .nav-idx {
+    color: var(--color-signal-ink);
+  }
+}
+
+/* ─── A5. Register rows that hold a link ─── */
+
+.row-hover {
+  position: relative;
+  transition: background-color var(--dur-1) var(--ease-snap);
+}
+
+.row-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background-color: var(--color-signal);
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition: transform var(--dur-2) var(--ease-out);
+  pointer-events: none;
+}
+
+.row-pos {
+  transition:
+    background-color var(--dur-1) var(--ease-snap),
+    color var(--dur-1) var(--ease-snap),
+    border-color var(--dur-1) var(--ease-snap);
+}
+
+.row-arrow {
+  display: inline-block;
+  transition: transform var(--dur-1) var(--ease-snap);
+}
+
+@media (hover: hover) {
+  .row-hover:hover {
+    background-color: var(--color-paper-3);
+  }
+
+  .row-hover:hover::before {
+    transform: none;
+  }
+
+  .row-hover:hover .row-pos {
+    background-color: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .row-hover:hover .row-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* ─── A6. Header: scroll progress + mobile menu ─── */
+
+.header-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .header-progress {
+    display: block;
+    position: absolute;
+    inset: auto 0 -1px;
+    height: 2px;
+    background-color: var(--color-signal);
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* Mounted at all times; closed it is clipped away and inert. */
+.mobile-nav {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--dur-2) var(--ease-out);
+}
+
+.mobile-nav[data-open] {
+  clip-path: inset(0);
+}
+
+.menu-icon {
+  /* Tailwind v4 rotate-* sets the individual `rotate` property. */
+  transition:
+    opacity var(--dur-1) var(--ease-snap),
+    rotate var(--dur-1) var(--ease-snap);
+}
+
+/* ─── A7. Paper grain: barely-there graphite specks over the whole sheet (no blend mode) ─── */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.106 0 0 0 0 0.094 0 0 0 2.4 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+@media print {
+  body::before,
+  .header-progress {
+    display: none;
+  }
+
+  html.js [data-reveal],
+  html.js [data-stagger] > *,
+  html.js .sheet-head *,
+  html.js .w,
+  html.js .wi {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
 }

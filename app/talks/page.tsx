@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { Tbd } from "@/components/ui/Tbd";
 import { CTASection } from "@/components/sections/CTASection";
 import { talks } from "@/lib/content";
@@ -61,12 +62,13 @@ export default function TalksPage() {
               <span className="border-r border-ink px-3 py-2">Type</span>
               <span className="px-3 py-2">Slides / paper</span>
             </div>
-            <ol>
+            {/* The register's frame holds still; its rows land in turn. */}
+            <Reveal as="ol" stagger>
               {talks.map((t, i) => (
                   <li
                     key={t.id}
                     id={t.id}
-                    className="grid grid-cols-[3rem_1fr] border-b border-ink last:border-b-0 lg:grid-cols-[3rem_7rem_1fr_1.4fr_6rem_8rem]"
+                    className={`${t.link ? "row-hover " : ""}grid grid-cols-[3rem_1fr] border-b border-ink last:border-b-0 lg:grid-cols-[3rem_7rem_1fr_1.4fr_6rem_8rem]`}
                   >
                     <span className="row-span-5 border-r border-ink px-3 py-5 font-mono text-[11px] text-muted lg:row-span-1">
                       {String(i + 1).padStart(2, "0")}
@@ -88,7 +90,7 @@ export default function TalksPage() {
                     <span className="col-start-2 px-4 pt-2 pb-5 font-mono text-[11px] lg:col-start-auto lg:px-3 lg:py-5">
                       {t.link ? (
                         <a href={t.link.href} target="_blank" rel="noopener noreferrer" className="link text-ink">
-                          {t.link.label} ↗
+                          {t.link.label} <span className="row-arrow">↗</span>
                         </a>
                       ) : (
                         <Tbd>{t.type === "Paper" ? "paper link" : t.type === "Webinar" ? "recording" : "slides"}</Tbd>
@@ -96,7 +98,7 @@ export default function TalksPage() {
                     </span>
                   </li>
               ))}
-            </ol>
+            </Reveal>
           </div>
         </Container>
       </section>

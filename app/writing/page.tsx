@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Rss } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/sections/CTASection";
 import { pageMetadata } from "@/lib/metadata";
 import { Annotation } from "@/components/ui/Annotation";
@@ -52,8 +53,9 @@ export default async function WritingPage() {
               <span className="px-4 py-2">Topic</span>
             </div>
 
+            {/* The register's frame holds still; its rows land in turn. */}
             {essays.length === 0 ? (
-              <ol>
+              <Reveal as="ol" stagger>
                 {reserved.map((n) => (
                   <li
                     key={n}
@@ -69,40 +71,38 @@ export default async function WritingPage() {
                     <span className="hidden md:block" />
                   </li>
                 ))}
-              </ol>
+              </Reveal>
             ) : (
-              <ol>
+              <Reveal as="ol" stagger>
                 {essays.map((e) => (
-                    <li key={e.slug} className="border-b border-ink last:border-b-0">
-                      <Link
-                        href={`/writing/${e.slug}`}
-                        className="group grid grid-cols-[5rem_1fr] transition-colors hover:bg-ink hover:text-paper md:grid-cols-[6rem_1fr_7rem_10rem]"
-                      >
-                        <span className="border-r border-ink px-4 py-5 font-mono text-[11px] text-muted group-hover:border-paper/30 group-hover:text-paper/70">
-                          {e.number}
-                        </span>
-                        <span className="px-4 py-5 md:border-r md:border-ink md:group-hover:border-paper/30">
-                          <span className="serif block text-2xl lg:text-3xl">{e.title}</span>
-                          <span className="mt-2 block text-sm text-muted group-hover:text-paper/70">{e.abstract}</span>
-                          {!isPublished(e) && (
-                            <span className="mt-3 inline-block border border-signal px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-signal">
-                              Draft · not public
-                            </span>
-                          )}
-                          <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.08em] text-muted group-hover:text-paper/70 md:hidden">
-                            {e.date ? fmt(e.date) : "—"} · {e.topic}
+                  <li key={e.slug} className="border-b border-ink last:border-b-0">
+                    <Link
+                      href={`/writing/${e.slug}`}
+                      className="row-hover grid grid-cols-[5rem_1fr] md:grid-cols-[6rem_1fr_7rem_10rem]"
+                    >
+                      <span className="border-r border-ink px-4 py-5 font-mono text-[11px] text-muted">{e.number}</span>
+                      <span className="px-4 py-5 md:border-r md:border-ink">
+                        <span className="serif block text-2xl lg:text-3xl">{e.title}</span>
+                        <span className="mt-2 block text-sm text-muted">{e.abstract}</span>
+                        {!isPublished(e) && (
+                          <span className="mt-3 inline-block border border-signal px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-signal">
+                            Draft · not public
                           </span>
+                        )}
+                        <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.08em] text-muted md:hidden">
+                          {e.date ? fmt(e.date) : "—"} · {e.topic}
                         </span>
-                        <span className="hidden px-4 py-5 font-mono text-[11px] text-ink-2 group-hover:text-paper md:block md:border-r md:border-ink md:group-hover:border-paper/30">
-                          {e.date ? fmt(e.date) : "—"}
-                        </span>
-                        <span className="hidden px-4 py-5 font-mono text-[11px] uppercase tracking-[0.06em] text-ink-2 group-hover:text-paper md:block">
-                          {e.topic}
-                        </span>
-                      </Link>
-                    </li>
+                      </span>
+                      <span className="hidden px-4 py-5 font-mono text-[11px] text-ink-2 md:block md:border-r md:border-ink">
+                        {e.date ? fmt(e.date) : "—"}
+                      </span>
+                      <span className="hidden px-4 py-5 font-mono text-[11px] uppercase tracking-[0.06em] text-ink-2 md:block">
+                        {e.topic}
+                      </span>
+                    </Link>
+                  </li>
                 ))}
-              </ol>
+              </Reveal>
             )}
           </div>
         </Container>

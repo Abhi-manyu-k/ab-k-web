@@ -1,0 +1,331 @@
+/* Autonomy ladder, regulation timeline, count-up, grid lamp. See the motion spec, section C.
+ *
+ * Every hidden-before-reveal state is scoped to `html.js` and to `prefers-reduced-motion: no-preference`,
+ * so the static HTML (no JS) and reduced motion always show the finished drawing. Entrances are triggered by
+ * a `data-drawn` attribute that the components set from an IntersectionObserver.
+ */
+
+@keyframes diag-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes diag-rise-8 {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes diag-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes diag-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes diag-drop {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes ladder-extrude {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+/* ─── C1. Autonomy ladder ─── */
+
+.ladder-step {
+  isolation: isolate; /* keeps the hatch (z-index -1) above the button background, below the labels */
+  transition: background-color var(--dur-1) var(--ease-snap);
+}
+
+/* Selected hatch: the same pattern as .bg-hatch, on a layer that can fade. */
+.ladder-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--color-line-strong) 70%, transparent) 0 1px,
+    transparent 1px 7px
+  );
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+/* Top edge: a 2px bar laid over the 1px border (signal when selected, ink on hover). */
+.ladder-step::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background-color: var(--color-ink);
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-snap);
+}
+
+.ladder-step:last-child::after {
+  right: -1px;
+}
+
+.ladder-step[aria-selected="true"]::before,
+.ladder-step[aria-selected="true"]::after {
+  opacity: 1;
+}
+
+.ladder-step[aria-selected="true"]::after {
+  background-color: var(--color-signal);
+}
+
+@media (hover: hover) {
+  .ladder-step[aria-selected="false"]:hover {
+    background-color: var(--color-paper-2);
+  }
+
+  .ladder-step[aria-selected="false"]:hover::after {
+    opacity: 1;
+  }
+}
+
+.ladder-dim-line {
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Steps extrude up from the baseline, L0 → L4, 90ms apart. The clip is on each step, not the staircase, so the
+   * "Recommended start" dimension above is never clipped. Fill is `backwards` only: once landed the step has no
+   * clip-path at all, so its focus ring is not cut off. */
+  html.js .ladder:not([data-drawn]) .ladder-step {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  html.js .ladder[data-drawn] .ladder-step {
+    animation: ladder-extrude 700ms var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  /* Labels fade in as their step tops out. */
+  html.js .ladder:not([data-drawn]) .ladder-step > span {
+    opacity: 0;
+  }
+
+  html.js .ladder[data-drawn] .ladder-step > span {
+    animation: diag-fade var(--dur-2) var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms + 450ms);
+  }
+
+  /* Then the recommended-zone dimension is drawn left → right; ticks and label fade in at its ends. */
+  html.js .ladder:not([data-drawn]) .ladder-dim-line {
+    transform: scaleX(0);
+  }
+
+  html.js .ladder:not([data-drawn]) :is(.ladder-dim-tick, .ladder-dim-label) {
+    opacity: 0;
+  }
+
+  html.js .ladder[data-drawn] .ladder-dim-line {
+    animation: diag-draw-x var(--dur-3) var(--ease-draw) 900ms backwards;
+  }
+
+  html.js .ladder[data-drawn] .ladder-dim-tick {
+    animation: diag-fade var(--dur-1) var(--ease-out) 900ms backwards;
+  }
+
+  html.js .ladder[data-drawn] :is(.ladder-dim-tick--end, .ladder-dim-label) {
+    animation: diag-fade var(--dur-2) var(--ease-out) backwards;
+    animation-delay: calc(900ms + var(--dur-3) * 0.75);
+  }
+
+  /* Detail panel: the controls list re-enters 40ms apart whenever the selection changes. */
+  html.js .ladder-ctl {
+    animation: diag-rise-8 var(--dur-2) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+}
+
+/* ─── C2. Regulation timeline ─── */
+
+.rt-axis {
+  transform-origin: left center;
+}
+
+.rt-today-line {
+  transform-origin: center top;
+}
+
+.rt-diamond {
+  transition:
+    scale var(--dur-1) var(--ease-snap),
+    border-color var(--dur-1) var(--ease-snap),
+    background-color var(--dur-1) var(--ease-snap);
+}
+
+/* Linked hover: a row lights its marker, a marker lights its row. */
+.rt-row {
+  transition: background-color var(--dur-1) var(--ease-snap);
+}
+
+.rt-row[data-hot] {
+  background-color: var(--color-paper-3);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .rt:not([data-drawn]) .rt-axis {
+    transform: scaleX(0);
+  }
+
+  html.js .rt:not([data-drawn]) :is(.rt-year, .rt-row, .rt-today-label) {
+    opacity: 0;
+  }
+
+  html.js .rt:not([data-drawn]) .rt-marker {
+    transform: scale(0);
+  }
+
+  html.js .rt:not([data-drawn]) .rt-today-line {
+    transform: scaleY(0);
+  }
+
+  /* The pen draws the axis… */
+  html.js .rt[data-drawn] .rt-axis {
+    animation: diag-draw-x var(--dur-4) var(--ease-draw) backwards;
+  }
+
+  /* …each year tick and label appears as the pen passes it… */
+  html.js .rt[data-drawn] .rt-year {
+    animation: diag-fade var(--dur-2) var(--ease-out) backwards;
+    animation-delay: calc(var(--p, 0) * var(--dur-4));
+  }
+
+  /* …then the markers drop in, in date order (the diamond keeps its 45° rotation; the wrapper scales). */
+  html.js .rt[data-drawn] .rt-marker {
+    animation: diag-drop var(--dur-2) var(--ease-out) backwards;
+    animation-delay: calc(var(--dur-4) + var(--i, 0) * var(--stagger-row));
+  }
+
+  /* …and finally Today is drawn top → bottom, then labelled. It mounts after hydration, so its delay runs from
+   * its own mount, which is never before the sequence starts: it always lands last. */
+  html.js .rt[data-drawn] .rt-today-line {
+    animation: diag-draw-y var(--dur-3) var(--ease-draw) backwards;
+    animation-delay: calc(var(--dur-4) + var(--n, 0) * var(--stagger-row) + var(--dur-1));
+  }
+
+  html.js .rt[data-drawn] .rt-today-label {
+    animation: diag-fade var(--dur-2) var(--ease-out) backwards;
+    animation-delay: calc(var(--dur-4) + var(--n, 0) * var(--stagger-row) + var(--dur-1) + var(--dur-3) * 0.6);
+  }
+
+  /* Table rows rise in with the row stagger (capped at 12). */
+  html.js .rt[data-drawn] .rt-row {
+    animation: diag-rise-8 var(--dur-3) var(--ease-out) backwards;
+    animation-delay: calc(min(var(--i, 0), 12) * var(--stagger-row));
+  }
+}
+
+/* ─── C3. Count-up ─── */
+
+.countup {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Overlay pinned to the right edge of the (reserved) final value; it never takes part in layout. */
+.countup-run {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  white-space: nowrap;
+}
+
+.countup-run--text {
+  right: auto;
+  left: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .countup:not([data-counted]) .countup-final {
+    opacity: 0; /* transparent, not hidden: it still holds the width and is what screen readers read */
+  }
+
+  html.js .countup:not([data-counted]) .countup-run {
+    display: block;
+  }
+}
+
+/* ─── C4. Grid lamp (driven by components/ui/GridLamp.tsx) ─── */
+
+/* Non-inheriting, so pointer moves do not restyle the sheet's whole subtree. */
+@property --mx {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: -9999px;
+}
+
+@property --my {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: -9999px;
+}
+
+/* Layered and zero-specificity, so position utilities (absolute, fixed, sticky …) still win. */
+@layer components {
+  :where(.bg-mm) {
+    position: relative;
+    isolation: isolate;
+  }
+}
+
+.bg-mm::before {
+  --mx: inherit;
+  --my: inherit;
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* The same 40px / 8px grid, a few tones stronger; major lines take a touch of ink. */
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-line-strong) 75%, var(--color-ink) 5%) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line-strong) 75%, var(--color-ink) 5%) 1px, transparent 1px),
+    linear-gradient(to right, color-mix(in srgb, var(--color-line-strong) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line-strong) 45%, transparent) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    8px 8px,
+    8px 8px;
+  -webkit-mask-image: radial-gradient(circle 240px at var(--mx) var(--my), #000 0%, transparent 100%);
+  mask-image: radial-gradient(circle 240px at var(--mx) var(--my), #000 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.bg-mm[data-lamp]::before {
+  opacity: 1;
+}
+
+@media print {
+  .bg-mm::before {
+    display: none;
+  }
+}

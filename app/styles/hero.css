@@ -1,0 +1,403 @@
+/* Home hero + machine drawing motion. See the motion spec. */
+
+/*
+ * Unlayered on purpose: these rules must win over the component layer (globals.css) and the
+ * Tailwind utilities they sit next to. Every hidden-before-reveal state is scoped under html.js,
+ * every animation fills both ways, so no-JS and reduced motion (durations collapsed globally)
+ * both end on the fully visible sheet.
+ */
+
+/* ─── B1. Load sequence ─── */
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 12px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html.js .hero-fade {
+  animation: hero-fade var(--dur-2) var(--ease-out) var(--d, 0ms) both;
+}
+
+html.js .hero-rise {
+  animation: hero-rise var(--dur-2) var(--ease-out) var(--d, 0ms) both;
+}
+
+/*
+ * Headline lines rise out of a mask. The mask is released (clip-path: none) on the last frame,
+ * so once landed nothing — descenders, italic swashes, the nowrap overhang — can be clipped,
+ * and the line box is untouched: the h1 is the same as without the animation.
+ */
+@keyframes hero-line-mask {
+  from,
+  99.9% {
+    clip-path: inset(-0.25em -0.5em -0.14em -0.5em);
+  }
+  to {
+    clip-path: none;
+  }
+}
+
+@keyframes hero-line-ink {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+html.js .hero-line {
+  animation: hero-line-mask 900ms linear var(--d, 0ms) both;
+}
+
+html.js .hero-line-ink {
+  animation: hero-line-ink 900ms var(--ease-out) var(--d, 0ms) both;
+}
+
+/* Annotation with a `delay`: the arrow draws then, and the words arrive with it. */
+.annotation-timed .annotation-stroke {
+  animation-delay: var(--annotation-delay);
+}
+
+html.js .annotation-timed .annotation-text {
+  animation: hero-fade var(--dur-2) var(--ease-out) var(--annotation-delay) both;
+}
+
+/* ─── B2. "holds." is section-hatched: the traced word becomes cut, solid material ─── */
+
+/*
+ * Two background layers clipped to the glyphs: the hatch (fixed, so its lines never slide) and a
+ * paper-coloured cover on top that shrinks towards the right — the hatch wipes in left → right.
+ * The inline padding (cancelled by an equal negative margin, so nothing moves) widens the
+ * painting area to take in the italic overhang.
+ */
+.drafted-hatch {
+  padding-inline: 0.12em;
+  margin-inline: -0.12em;
+  background-image:
+    linear-gradient(var(--color-paper), var(--color-paper)),
+    repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--color-ink) 45%, transparent) 0 1px,
+      transparent 1px 4px
+    );
+  background-repeat: no-repeat;
+  background-position:
+    100% 0,
+    0 0;
+  background-size:
+    0% 100%,
+    100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes hero-hatch {
+  from {
+    background-size:
+      100% 100%,
+      100% 100%;
+  }
+  to {
+    background-size:
+      0% 100%,
+      100% 100%;
+  }
+}
+
+html.js .drafted-hatch {
+  animation: hero-hatch 900ms var(--ease-draw) 1150ms both;
+}
+
+/* ─── B3. Machine drawing ─── */
+
+@keyframes md-draw {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Centre lines (drawn through the solid pen lines of their mask). */
+html.js .md-pen {
+  stroke-dasharray: var(--len);
+  animation: md-draw var(--dur-4) var(--ease-draw) 200ms both;
+}
+
+/* Balloon leaders: the dot lands, the line runs out to the balloon, the balloon is inked. */
+html.js .md-leader {
+  stroke-dasharray: var(--len);
+  animation: md-draw var(--dur-2) var(--ease-draw) var(--d, 0ms) both;
+}
+
+html.js .md-leader-dot {
+  animation: hero-fade var(--dur-1) var(--ease-out) var(--d, 0ms) both;
+}
+
+html.js .md-balloon {
+  animation: hero-fade var(--dur-2) var(--ease-out) calc(var(--d, 0ms) + var(--dur-2) * 0.75) both;
+}
+
+/* Transfer robot */
+.md-robot {
+  transition: transform var(--dur-3) var(--ease-draw);
+}
+
+/* PM3: stroke colour and hatch fade between states instead of swapping. */
+.md-pm3-body {
+  stroke: var(--color-ink);
+  transition: stroke var(--dur-2) var(--ease-out);
+}
+
+.md-pm3[data-state="fault"] .md-pm3-body {
+  stroke: var(--color-signal);
+}
+
+.md-pm3[data-state="ok"] .md-pm3-body {
+  stroke: var(--color-ok);
+}
+
+.md-pm3-hatch {
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.md-pm3[data-state="fault"] .md-pm3-hatch {
+  opacity: 1;
+}
+
+.md-pm3-label {
+  transition: fill var(--dur-2) var(--ease-out);
+}
+
+.md-pm3[data-state="fault"] .md-pm3-label {
+  fill: var(--color-signal);
+}
+
+/* Signal ring pulsing outward from PM3 while the agent works the fault (r 44 → 64). */
+@keyframes md-pulse {
+  from {
+    opacity: 0.5;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.4545); /* 64 / 44 */
+  }
+}
+
+.md-pulse {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.md-pm3[data-pulse] .md-pulse {
+  animation: md-pulse 1.8s var(--ease-out) infinite both;
+}
+
+/* Fault callout */
+.md-callout {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+
+.md-callout[data-on] {
+  opacity: 1;
+  transform: none;
+}
+
+.md-callout-text {
+  fill: var(--color-signal);
+  transition: fill var(--dur-2) var(--ease-out);
+}
+
+.md-callout[data-state="ok"] .md-callout-text {
+  fill: var(--color-ok);
+}
+
+/* CAD crosshair: positioned from --cx / --cy written by the pointer handler. */
+.md-cross {
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-snap);
+}
+
+.md-cross[data-on] {
+  opacity: 1;
+}
+
+.md-cross-x {
+  transform: translateX(var(--cx, 0px));
+}
+
+.md-cross-y {
+  transform: translateY(var(--cy, 0px));
+}
+
+.md-cross-label {
+  transform: translate(calc(var(--cx, 0px) + 8px), calc(var(--cy, 0px) + 6px));
+  white-space: nowrap;
+}
+
+/* ─── Agent log ─── */
+
+.md-step {
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+
+.md-step[data-state="active"] {
+  background-color: var(--color-paper-3);
+}
+
+.md-check {
+  border-color: var(--color-line-strong);
+  color: var(--color-faint);
+  transition:
+    background-color var(--dur-1) var(--ease-snap),
+    border-color var(--dur-1) var(--ease-snap),
+    color var(--dur-1) var(--ease-snap);
+}
+
+.md-step[data-state="active"] .md-check {
+  border-color: var(--color-signal);
+  color: var(--color-signal-ink);
+}
+
+.md-step[data-state="done"] .md-check {
+  border-color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.md-label {
+  color: var(--color-faint);
+  transition: color var(--dur-1) var(--ease-snap);
+}
+
+.md-step:not([data-state="todo"]) .md-label {
+  color: var(--color-ink);
+}
+
+/* Details always hold their space; a todo step's detail is simply not inked yet. */
+@keyframes md-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.md-detail {
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+html.js .md-step[data-state="todo"] .md-detail {
+  opacity: 0;
+}
+
+html.js .md-step[data-state="active"] .md-detail {
+  animation: md-detail-in var(--dur-2) var(--ease-out) both;
+}
+
+/* Active step: a 1px signal line runs along the bottom edge for the step's duration. */
+@keyframes md-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.md-progress {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  z-index: 1;
+  height: 1px;
+  background-color: var(--color-signal);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+html.js .md-step[data-state="active"] .md-progress {
+  animation: md-progress var(--ms) linear both;
+}
+
+/* The loop is paused (off-screen, hidden tab): so is the line. */
+.md:not([data-running]) .md-progress,
+.md:not([data-running]) .md-pulse {
+  animation-play-state: paused;
+}
+
+/* Sign-off: both labels share one cell (no width jump); the ok-green fill wipes in from the left. */
+.md-signoff {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+  background-image: linear-gradient(var(--color-ok), var(--color-ok));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+  transition:
+    background-size var(--dur-2) var(--ease-out),
+    border-color var(--dur-1) var(--ease-snap),
+    color var(--dur-1) var(--ease-snap);
+}
+
+.md-signoff[data-signed] {
+  border-color: var(--color-ok);
+  color: var(--color-paper);
+  background-size: 100% 100%;
+}
+
+.md-signoff-wait,
+.md-signoff-ok {
+  transition: opacity var(--dur-1) var(--ease-snap);
+}
+
+.md-signoff-ok,
+.md-signoff[data-signed] .md-signoff-wait {
+  opacity: 0;
+}
+
+.md-signoff[data-signed] .md-signoff-ok {
+  opacity: 1;
+}
+
+/* Reduced motion: the approval step, held still, every detail visible. */
+html.js .md[data-still] .md-step .md-detail {
+  opacity: 1;
+  animation: none;
+}
+
+.md[data-still] .md-progress {
+  visibility: hidden;
+}
+
+.md[data-still] .md-pulse {
+  animation: none;
+}

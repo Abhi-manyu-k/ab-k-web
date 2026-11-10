@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { pageMetadata } from "@/lib/metadata";
 import { mailto, siteConfig } from "@/lib/site";
@@ -33,7 +34,7 @@ export default function ContactPage() {
       <section className="py-20 lg:py-28">
         <Container>
           <div className="grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
-            <div>
+            <Reveal>
               <p className="note mb-3">Direct</p>
               <a href={mailto()} className="serif link text-3xl text-ink sm:text-4xl">
                 {siteConfig.contact.email}
@@ -54,15 +55,15 @@ export default function ContactPage() {
               <p className="mt-10 text-sm text-muted">
                 Based in {siteConfig.location}. I reply in English or German.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="crop border border-ink bg-paper-3 p-6 sm:p-10">
+            <Reveal delay={120} className="crop border border-ink bg-paper-3 p-6 sm:p-10">
               <p className="note mb-8 flex justify-between">
                 <span>Form ABK-06 · Message</span>
                 <span>1 / 1</span>
               </p>
               <ContactForm />
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>

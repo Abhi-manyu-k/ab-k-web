@@ -5,22 +5,34 @@ type Arrow = "left" | "down-left" | "up-left" | "none";
 /**
  * A red-pen margin note, as a checker would scribble on a drawing.
  * Pure CSS + inline SVG — no extra fonts or images.
+ *
+ * `delay` (ms) times the note: the arrow draws at that moment and the words fade in with it.
+ * Without it the note keeps its default behaviour (arrow draws at 0.6s, words always visible).
  */
 export function Annotation({
   children,
   arrow = "left",
   className,
   rotate = -3,
+  delay,
 }: {
   children: React.ReactNode;
   arrow?: Arrow;
   className?: string;
   rotate?: number;
+  delay?: number;
 }) {
+  const style: React.CSSProperties & Record<string, string> = { transform: `rotate(${rotate}deg)` };
+  if (delay !== undefined) style["--annotation-delay"] = `${delay}ms`;
+
   return (
     <span
-      className={cn("annotation pointer-events-none inline-flex select-none items-center gap-1.5", className)}
-      style={{ transform: `rotate(${rotate}deg)` }}
+      className={cn(
+        "annotation pointer-events-none inline-flex select-none items-center gap-1.5",
+        delay !== undefined && "annotation-timed",
+        className,
+      )}
+      style={style}
     >
       {arrow !== "none" && (
         <svg
@@ -37,7 +49,7 @@ export function Annotation({
           <path className="annotation-stroke" d="M11 6 4 12l8 5" />
         </svg>
       )}
-      <span>{children}</span>
+      <span className="annotation-text">{children}</span>
     </span>
   );
 }

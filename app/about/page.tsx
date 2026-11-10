@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { FadeInOnScroll } from "@/components/ui/FadeInOnScroll";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { CTASection } from "@/components/sections/CTASection";
 import { TrackRecordSection } from "@/components/sections/TrackRecordSection";
@@ -51,18 +51,17 @@ export default function AboutPage() {
 
       <section className="py-20 lg:py-28">
         <Container>
+          {/* First block below the hero: cell lines hold still, each zone's ink lands in turn. */}
           <div className="grid border-t border-l border-ink sm:grid-cols-2 lg:grid-cols-4">
             {aboutPillars.map((p, i) => (
-              <FadeInOnScroll key={p.zone} delay={i * 80} className="h-full">
-                <div className="flex h-full flex-col border-r border-b border-ink p-6 lg:p-8">
-                  <p className="note flex justify-between">
-                    <span>Zone {String.fromCharCode(65 + i)}</span>
-                    <span className="text-ink">{p.zone}</span>
-                  </p>
-                  <h2 className="serif mt-16 text-3xl text-ink">{p.title}</h2>
-                  <p className="mt-3 text-sm text-ink-2">{p.description}</p>
-                </div>
-              </FadeInOnScroll>
+              <Reveal stagger delay={i * 120} key={p.zone} className="flex h-full flex-col border-r border-b border-ink p-6 lg:p-8">
+                <p className="note flex justify-between">
+                  <span>Zone {String.fromCharCode(65 + i)}</span>
+                  <span className="text-ink">{p.zone}</span>
+                </p>
+                <h2 className="serif mt-16 text-3xl text-ink">{p.title}</h2>
+                <p className="mt-3 text-sm text-ink-2">{p.description}</p>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -70,20 +69,18 @@ export default function AboutPage() {
 
       <section className="border-t rule-ink py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="02"
-              label="Drawn by"
-              title={
-                <>
-                  An engineer <em>first.</em>
-                </>
-              }
-              intro="I write about agents I have built, for machines I have serviced. AB Kinetics is the name I publish under."
-            />
-          </FadeInOnScroll>
+          <SheetHeader
+            sheet="02"
+            label="Drawn by"
+            title={
+              <>
+                An engineer <em>first.</em>
+              </>
+            }
+            intro="I write about agents I have built, for machines I have serviced. AB Kinetics is the name I publish under."
+          />
 
-          <FadeInOnScroll>
+          <Reveal>
             <dl className="mt-14 grid grid-cols-[auto_1fr] border border-ink font-mono text-[11px] uppercase tracking-[0.08em] sm:grid-cols-[auto_1fr_1fr_1fr]">
               <div className="row-span-2 border-r border-ink p-2 sm:row-span-1">
                 <dt className="sr-only">Portrait</dt>
@@ -114,15 +111,15 @@ export default function AboutPage() {
                 </dd>
               </div>
             </dl>
-          </FadeInOnScroll>
+          </Reveal>
 
           <div className="mt-14 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
-            <FadeInOnScroll>
+            <Reveal>
               <p className="serif text-3xl leading-snug text-ink lg:text-4xl">
                 <em>&ldquo;{authorBio.quote}&rdquo;</em>
               </p>
-            </FadeInOnScroll>
-            <FadeInOnScroll delay={100}>
+            </Reveal>
+            <Reveal delay={100}>
               <div className="space-y-5 text-ink-2">
                 {authorBio.paragraphs.map((p) => (
                   <p key={p.slice(0, 40)}>{p}</p>
@@ -139,42 +136,39 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-            </FadeInOnScroll>
+            </Reveal>
           </div>
         </Container>
       </section>
 
       <section className="bg-mm border-t rule-ink py-20 lg:py-28">
         <Container>
-          <FadeInOnScroll>
-            <SheetHeader
-              sheet="03"
-              label="Process route"
-              title={
-                <>
-                  Every station <em>left a tool.</em>
-                </>
-              }
-              intro="Batteries taught safety margins. Logistics taught KPIs. Training taught how engineers actually learn. Research taught rigour. Production taught everything else."
-            />
-          </FadeInOnScroll>
-          <FadeInOnScroll>
-            <ol className="relative mt-16 grid gap-0 sm:grid-cols-2 lg:grid-cols-7">
-              {careerRoute.map((s, i) => {
-                const last = i === careerRoute.length - 1;
-                return (
-                  <li key={s.year + s.place} className="relative border-l border-ink bg-paper py-2 pl-5 pr-3 lg:border-l-0 lg:border-t lg:pl-0 lg:pt-8">
-                    <span
-                      className={`absolute -left-[5px] top-3 h-2.5 w-2.5 rotate-45 border border-ink lg:-top-[5px] lg:left-0 ${last ? "bg-signal border-signal" : "bg-paper"}`}
-                    />
-                    <span className={`font-mono text-xs ${last ? "text-signal" : "text-muted"}`}>{s.year}</span>
-                    <span className="serif mt-2 block text-xl leading-tight text-ink">{s.place}</span>
-                    <span className="mt-1 block pb-4 text-sm text-muted">{s.role}</span>
-                  </li>
-                );
-              })}
-            </ol>
-          </FadeInOnScroll>
+          <SheetHeader
+            sheet="03"
+            label="Process route"
+            title={
+              <>
+                Every station <em>left a tool.</em>
+              </>
+            }
+            intro="Batteries taught safety margins. Logistics taught KPIs. Training taught how engineers actually learn. Research taught rigour. Production taught everything else."
+          />
+          {/* Stations are placed along the route one after another. */}
+          <Reveal as="ol" stagger className="relative mt-16 grid gap-0 sm:grid-cols-2 lg:grid-cols-7">
+            {careerRoute.map((s, i) => {
+              const last = i === careerRoute.length - 1;
+              return (
+                <li key={s.year + s.place} className="relative border-l border-ink bg-paper py-2 pl-5 pr-3 lg:border-l-0 lg:border-t lg:pl-0 lg:pt-8">
+                  <span
+                    className={`absolute -left-[5px] top-3 h-2.5 w-2.5 rotate-45 border border-ink lg:-top-[5px] lg:left-0 ${last ? "bg-signal border-signal" : "bg-paper"}`}
+                  />
+                  <span className={`font-mono text-xs ${last ? "text-signal" : "text-muted"}`}>{s.year}</span>
+                  <span className="serif mt-2 block text-xl leading-tight text-ink">{s.place}</span>
+                  <span className="mt-1 block pb-4 text-sm text-muted">{s.role}</span>
+                </li>
+              );
+            })}
+          </Reveal>
         </Container>
       </section>
 

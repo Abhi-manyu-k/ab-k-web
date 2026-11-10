@@ -3,6 +3,7 @@ import { preload } from "react-dom";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { GridLamp } from "@/components/ui/GridLamp";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -83,8 +84,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${plexSans.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Reveal animations only hide content once scripting is known to work (html.js). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="min-h-screen antialiased">
+        <GridLamp />
         <Header />
         <main>{children}</main>
         <Footer />
