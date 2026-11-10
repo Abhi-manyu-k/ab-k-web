@@ -174,12 +174,19 @@ html.js .md-balloon {
   stroke: var(--color-ok);
 }
 
-.md-pm3-hatch {
+/* Held (Rev B): out of service, not faulty — muted outline and hatch. */
+.md-pm3[data-state="held"] .md-pm3-body {
+  stroke: var(--color-muted);
+}
+
+.md-pm3-hatch,
+.md-pm3-hatch-held {
   opacity: 0;
   transition: opacity var(--dur-2) var(--ease-out);
 }
 
-.md-pm3[data-state="fault"] .md-pm3-hatch {
+.md-pm3[data-state="fault"] .md-pm3-hatch,
+.md-pm3[data-state="held"] .md-pm3-hatch-held {
   opacity: 1;
 }
 
@@ -189,6 +196,10 @@ html.js .md-balloon {
 
 .md-pm3[data-state="fault"] .md-pm3-label {
   fill: var(--color-signal);
+}
+
+.md-pm3[data-state="held"] .md-pm3-label {
+  fill: var(--color-muted);
 }
 
 /* Signal ring pulsing outward from PM3 while the agent works the fault (r 44 → 64). */
@@ -234,6 +245,10 @@ html.js .md-balloon {
 
 .md-callout[data-state="ok"] .md-callout-text {
   fill: var(--color-ok);
+}
+
+.md-callout[data-state="held"] .md-callout-text {
+  fill: var(--color-muted);
 }
 
 /* CAD crosshair: positioned from --cx / --cy written by the pointer handler. */
@@ -286,6 +301,13 @@ html.js .md-balloon {
 .md-step[data-state="done"] .md-check {
   border-color: var(--color-ink);
   background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Escalated: the agent did not act. */
+.md-step[data-alert] .md-check {
+  border-color: var(--color-signal);
+  background-color: var(--color-signal);
   color: var(--color-paper);
 }
 
@@ -348,14 +370,21 @@ html.js .md-step[data-state="active"] .md-progress {
   animation: md-progress var(--ms) linear both;
 }
 
-/* The loop is paused (off-screen, hidden tab): so is the line. */
+/*
+ * The loop is paused (off-screen, hidden tab): so is the line. While the visitor holds the approval
+ * step (pointer over it, focus in it) only the countdown and its line stop; the pulse runs on. Once
+ * the visitor decides, the line stays where the decision was made.
+ */
 .md:not([data-running]) .md-progress,
-.md:not([data-running]) .md-pulse {
+.md:not([data-running]) .md-pulse,
+.md[data-hold] .md-progress,
+.md-step[data-decided] .md-progress {
   animation-play-state: paused;
 }
 
-/* Sign-off: both labels share one cell (no width jump); the ok-green fill wipes in from the left. */
+/* Sign-off badge: hidden while the visitor decides; the ok-green fill wipes in from the left. */
 .md-signoff {
+  opacity: 0;
   border-color: var(--color-ink);
   color: var(--color-ink);
   background-image: linear-gradient(var(--color-ok), var(--color-ok));
@@ -363,41 +392,81 @@ html.js .md-step[data-state="active"] .md-progress {
   background-position: 0 0;
   background-size: 0% 100%;
   transition:
+    opacity var(--dur-1) var(--ease-snap),
     background-size var(--dur-2) var(--ease-out),
     border-color var(--dur-1) var(--ease-snap),
     color var(--dur-1) var(--ease-snap);
 }
 
-.md-signoff[data-signed] {
+.md-signoff[data-verdict] {
+  opacity: 1;
+}
+
+.md-signoff[data-verdict="approve"] {
   border-color: var(--color-ok);
   color: var(--color-paper);
   background-size: 100% 100%;
 }
 
-.md-signoff-wait,
-.md-signoff-ok {
+.md-signoff[data-verdict="reject"] {
+  border-color: var(--color-signal);
+  color: var(--color-signal-ink);
+}
+
+/* Both labels share one cell, so the badge never changes width. */
+.md-signoff-ok,
+.md-signoff-no {
+  opacity: 0;
   transition: opacity var(--dur-1) var(--ease-snap);
 }
 
-.md-signoff-ok,
-.md-signoff[data-signed] .md-signoff-wait {
-  opacity: 0;
-}
-
-.md-signoff[data-signed] .md-signoff-ok {
+.md-signoff[data-verdict="approve"] .md-signoff-ok,
+.md-signoff[data-verdict="reject"] .md-signoff-no {
   opacity: 1;
 }
 
-/* Reduced motion: the approval step, held still, every detail visible. */
-html.js .md[data-still] .md-step .md-detail {
-  opacity: 1;
-  animation: none;
+/* Approve / Reject: square, instrument-like; the press nudges 1px. */
+.md-btn,
+.md-btn:focus-visible {
+  border-radius: 0;
 }
 
-.md[data-still] .md-progress {
-  visibility: hidden;
+.md-btn {
+  border: 1px solid var(--color-ink);
+  cursor: pointer;
+  transition:
+    background-size 240ms var(--ease-snap),
+    border-color var(--dur-1) var(--ease-snap),
+    color var(--dur-1) var(--ease-snap),
+    transform var(--dur-1) var(--ease-snap);
 }
 
-.md[data-still] .md-pulse {
-  animation: none;
+.md-btn:active {
+  transform: translate(1px, 1px);
+}
+
+.md-btn-approve {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  background-image: linear-gradient(var(--color-ok), var(--color-ok));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+}
+
+.md-btn-approve:hover,
+.md-btn-approve:focus-visible {
+  border-color: var(--color-ok);
+  background-size: 100% 100%;
+}
+
+.md-btn-reject {
+  background-color: transparent;
+  color: var(--color-ink);
+}
+
+.md-btn-reject:hover,
+.md-btn-reject:focus-visible {
+  border-color: var(--color-signal-ink);
+  color: var(--color-signal-ink);
 }
