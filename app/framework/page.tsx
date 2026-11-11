@@ -2,6 +2,7 @@ import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { PageHero } from "@/components/ui/PageHero";
+import { SignalField } from "@/components/ui/SignalField";
 import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { AutonomyLadder } from "@/components/ui/AutonomyLadder";
@@ -47,6 +48,7 @@ export default function FrameworkPage() {
             Autonomy levels for <em>industrial service agents.</em>
           </>
         }
+        figure={<SignalField variant="chart" className="h-[220px] w-full" caption="Every level is a control limit." />}
         description="How much may a service agent do on its own? My answer is a staircase of five levels. Each level says what the agent does, what the human does, and which controls must be in place before the agent is allowed to climb."
       >
         <dl className="mt-12 grid max-w-3xl grid-cols-2 font-mono text-[10px] uppercase tracking-[0.08em] sm:grid-cols-4">

@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { RegulationTimeline } from "@/components/ui/RegulationTimeline";
 import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
+import { SignalField } from "@/components/ui/SignalField";
 import { Tbd } from "@/components/ui/Tbd";
 import { marketFacts, regulationLastReviewed } from "@/lib/content";
 
@@ -49,6 +50,14 @@ export function SituationSection() {
             </Reveal>
           ))}
         </ul>
+
+        <Reveal className="mt-20">
+          <SignalField
+            variant="traces"
+            className="h-[140px] sm:h-[200px]"
+            caption="142 signals · 1 out of tolerance · corrected"
+          />
+        </Reveal>
 
         <div className="mt-20">
           <Reveal className="mb-6 flex items-baseline justify-between gap-4 border-b rule pb-3">

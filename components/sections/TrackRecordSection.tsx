@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
+import { SignalField } from "@/components/ui/SignalField";
 import { fieldMetrics, trackRecord } from "@/lib/content";
 
 export function TrackRecordSection({
@@ -22,6 +23,7 @@ export function TrackRecordSection({
           sheet={sheet}
           label="Track record"
           tone="plate"
+          figure={<SignalField variant="wafer" className="h-[260px] w-[260px]" />}
           title={
             <>
               Built by someone who has <em>held the wrench.</em>
