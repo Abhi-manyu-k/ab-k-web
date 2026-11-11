@@ -26,7 +26,7 @@ export function TrackRecordSection({
           figure={<SignalField variant="wafer" className="h-[260px] w-[260px]" />}
           title={
             <>
-              Built by someone who has <em>held the wrench.</em>
+              <span className="phrase">Built by someone who has</span> <em>held the wrench.</em>
             </>
           }
           intro="Before building agents, I trained engineers on the machines and serviced them on the shop floor. That's why I know what an agent is touching."

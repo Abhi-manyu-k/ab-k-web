@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
  * `traces`: a field of slow sensor signals drifting right to left. Every ~18 s one trace drifts out of
  * tolerance, turns signal orange, is pulled back inside its limits and confirmed. The site's story in one loop.
  *
- * `chart`: a control chart being written, one point every 600 ms; about every 20th point breaks the upper
+ * `chart`: a control chart being written, one point every 600 ms; about every 45th point breaks the upper
  * control limit (a hollow signal diamond) and the next three step back toward the centre line.
  *
  * `wafer`: a wafer map of dies where, every 4–7 s, a small cluster flags signal, clears to ok, and settles.
@@ -300,7 +300,7 @@ function tracesScene(seed: number): Scene {
 const CH_EVERY = 0.6; // s per point
 const CH_DX = 14; // px between points
 const CH_LIMIT = 0.38; // control limits at ±38% of the height
-const CH_CYCLE = 20; // about every 20th point breaks the upper limit
+const CH_CYCLE = 45; // about every 45th point breaks the upper limit: one on screen at a time
 const CH_OUT = 13; // position of the out-of-control point in the cycle
 
 function chartScene(seed: number): Scene {

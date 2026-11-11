@@ -65,12 +65,12 @@ export function Header() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "nav-cell flex items-center gap-1.5 whitespace-nowrap px-3 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors lg:px-4 xl:px-5",
-                  active ? "bg-ink text-paper" : "text-ink-2",
+                  active ? "text-ink" : "text-ink-2",
                 )}
               >
-                <span className={cn("nav-idx text-[9px]", active ? "text-paper/70" : "text-muted")}>0{i + 1}</span>
+                <span className={cn("nav-idx text-[9px]", active ? "text-signal" : "text-muted")}>0{i + 1}</span>
                 {link.label}
-                {!active && <span aria-hidden="true" className="nav-bar" />}
+                <span aria-hidden="true" className="nav-bar" />
               </Link>
             );
           })}

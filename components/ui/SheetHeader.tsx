@@ -26,8 +26,8 @@ export function SheetHeader({ sheet, label, title, intro, tone = "paper", figure
         </span>
         <span aria-hidden="true" className={cn("sheet-rule", tone === "plate" ? "bg-ink/40" : "bg-ink")} />
       </div>
-      <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
-        <h2 className="display sheet-title text-[2.75rem] sm:text-6xl lg:text-[4rem]">
+      <div className={cn("grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:gap-16", figure ? "lg:items-start" : "lg:items-end")}>
+        <h2 className="display sheet-title text-[2.75rem] sm:text-6xl lg:text-[3.125rem] xl:text-[4rem]">
           <SplitWords>{title}</SplitWords>
         </h2>
         {(intro || figure) && (

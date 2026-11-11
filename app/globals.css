@@ -148,6 +148,20 @@ body {
     letter-spacing: -0.03em;
   }
 
+  /* Section headlines break as written: balanced lines, and an italic phrase (or a span marked .phrase)
+   * never splits from lg up. */
+  .sheet-title,
+  .ph-title {
+    text-wrap: balance;
+  }
+
+  @media (min-width: 1024px) {
+    .display em,
+    .display .phrase {
+      white-space: nowrap;
+    }
+  }
+
   /* Hollow, drafted letterforms — like lettering traced before it is inked. */
   .drafted {
     color: transparent;
@@ -893,6 +907,12 @@ body {
 
 .nav-idx {
   transition: color var(--dur-1) var(--ease-snap);
+}
+
+/* The current page: ink text over a standing 2px signal bar (no filled block). */
+.nav-cell[aria-current] .nav-bar {
+  background-color: var(--color-signal);
+  transform: none;
 }
 
 .nav-cell:focus-visible .nav-bar {

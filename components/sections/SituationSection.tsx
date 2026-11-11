@@ -19,7 +19,7 @@ export function SituationSection() {
           label="The situation"
           title={
             <>
-              Adopt agents. <em>Regulate them.</em> At the same time.
+              Adopt agents. <em>Regulate them.</em> <span className="phrase">At the same time.</span>
             </>
           }
           intro="European industry is being asked to do both at once. Most AI tooling only helps with the first half. My work sits in the overlap."
