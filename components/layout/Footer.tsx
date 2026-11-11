@@ -78,14 +78,25 @@ export function Footer() {
           {/* Title block */}
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t rule py-4">
           <dl className="flex flex-wrap gap-x-8 gap-y-2">
-            {[
-              ["Author", siteConfig.author],
-              ["Location", siteConfig.location],
-              ["Writing as", siteConfig.name],
-              ["Material", "Graphite on paper"],
-              ["Rev.", String(year)],
-              ["©", `${year} All rights reserved`],
-            ].map(([k, v]) => (
+            {(
+              [
+                ["Author", siteConfig.author],
+                ["Location", siteConfig.location],
+                ["Writing as", siteConfig.name],
+                ["Material", "Graphite on paper"],
+                /* Colophon: the site is built the way the framework says agents should work. Agents write the
+                   code, the author signs off every merge — "acts with approval", level L2. */
+                [
+                  "Built by",
+                  <Link key="l2" href="/framework" className="hover:text-signal">
+                    Agents at L2
+                  </Link>,
+                ],
+                ["Approved", `${siteConfig.authorShort} · every merge`],
+                ["Rev.", String(year)],
+                ["©", `${year} All rights reserved`],
+              ] as [string, React.ReactNode][]
+            ).map(([k, v]) => (
               <div key={k} className="flex items-baseline gap-2">
                 <dt className="text-[9px] text-muted">{k}</dt>
                 <dd className="text-ink">{v}</dd>
