@@ -26,10 +26,8 @@ const personJsonLd = {
   url: `${siteConfig.url}/about`,
   image: `${siteConfig.url}/images/founder.webp`,
   homeLocation: { "@type": "Place", name: siteConfig.location },
-  alumniOf: [
-    { "@type": "CollegeOrUniversity", name: "RWTH Aachen University", sameAs: "https://www.rwth-aachen.de" },
-    { "@type": "CollegeOrUniversity", name: "University of Cambridge", sameAs: "https://www.cam.ac.uk" },
-  ],
+  // Cambridge was a visiting stay for the master thesis, so it is not listed as a degree.
+  alumniOf: [{ "@type": "CollegeOrUniversity", name: "RWTH Aachen University", sameAs: "https://www.rwth-aachen.de" }],
   knowsAbout: ["AI agents", "AI governance", "EU AI Act", "Field service", "Semiconductor equipment"],
   sameAs: [siteConfig.links.linkedin],
 };

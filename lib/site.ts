@@ -4,7 +4,7 @@ export const siteConfig = {
   authorShort: "A. Kanwar",
   role: "Senior AI Solutions Manager, service AI for semiconductor equipment",
   tagline: "Service AI & agent governance for European industry",
-  url: "https://www.ab-k.com",
+  url: "https://ab-k.com",
   ogImage: "/og.png",
   description:
     "I build AI agents that diagnose machines, and the governance that lets you trust them to act. Abhimanyu Kanwar, engineer from Aachen, working on service AI for semiconductor equipment.",

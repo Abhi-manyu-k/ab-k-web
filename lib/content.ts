@@ -187,6 +187,8 @@ export const framework = {
   // TODO(launch): confirm the publication date of v1.0.
   date: "2026-11-06",
   pdf: "/framework/abk-al-v1.pdf",
+  // TODO(launch): set to true once the typeset PDF replaces the placeholder file. Until then the download button is hidden.
+  pdfReady: false as boolean,
   path: "/framework",
 } as const;
 
@@ -200,11 +202,17 @@ export const frameworkChangelog = [
   },
 ] as const;
 
+/*
+ * `scenario` follows one fault (the thermocouple drift from the hero drawing) up the staircase.
+ * TODO(launch): these five scenarios are drafts — check the numbers and wording against real practice.
+ */
 export const autonomyLevels = [
   {
     level: "L0",
     name: "Informs",
     example: "Answers questions from manuals, tickets and past fixes — with sources.",
+    scenario:
+      "An engineer sees PM3 heater zone 2 reading 4 K above recipe and asks what could cause it. The agent answers from SOP 114 and three similar tickets, and cites them. The engineer does everything else.",
     agent: "Answers questions from manuals, service tickets and past fixes, and cites its sources.",
     human: "Diagnoses, decides and acts. Judges whether the answer applies to the machine in front of them.",
     controls: ["Source citations on every answer", "Access scoped to role and site"],
@@ -213,6 +221,8 @@ export const autonomyLevels = [
     level: "L1",
     name: "Recommends",
     example: "Diagnoses a fault and proposes a fix with evidence and confidence.",
+    scenario:
+      "The agent notices the same deviation itself, diagnoses thermocouple drift and recommends a −4.0 K offset followed by one dummy wafer. The engineer checks the evidence and enters the offset by hand.",
     agent: "Diagnoses a fault and proposes a fix, with the evidence and its confidence.",
     human: "Reviews the evidence, decides on the fix and carries it out.",
     controls: ["Evidence & confidence shown", "Engineer feedback loop into evaluation"],
@@ -221,6 +231,8 @@ export const autonomyLevels = [
     level: "L2",
     name: "Acts with approval",
     example: "Executes the fix on the machine after a named engineer signs off.",
+    scenario:
+      "The agent prepares the −4.0 K offset and the dummy-wafer run, then waits. The service lead approves, the agent executes, verifies Δ 0.3 K and files the audit record. This is the sequence drawn on the home page.",
     agent: "Prepares the action and executes it only after a named engineer signs off.",
     human: "Approves or rejects every single action and owns the outcome.",
     controls: ["Human approval gate per action", "Action audit log", "Rollback plan per action class"],
@@ -229,6 +241,8 @@ export const autonomyLevels = [
     level: "L3",
     name: "Acts within policy",
     example: "Runs pre-approved action classes on its own; escalates the rest.",
+    scenario:
+      "Thermocouple offsets up to ±5 K on a module with no lot in process are a pre-approved class of action. The agent applies the offset, verifies and logs it on its own. A larger drift, or a module that is running product, goes to the engineer.",
     agent: "Runs pre-approved classes of action on its own and escalates everything else.",
     human: "Defines and maintains the policy, monitors the agent and handles escalations.",
     controls: ["Policy-as-code action limits", "Live monitoring & alerting", "Kill switch"],
@@ -237,6 +251,8 @@ export const autonomyLevels = [
     level: "L4",
     name: "Acts & reports",
     example: "Owns whole service workflows; humans review by exception.",
+    scenario:
+      "The agent owns thermocouple drift as a workflow across the installed base: it corrects within policy, books a replacement when offsets add up, and reports weekly. Engineers review the exceptions and re-certify the workflow each quarter.",
     agent: "Owns whole service workflows end to end and reports what it did.",
     human: "Reviews by exception, audits the record and re-certifies the agent periodically.",
     controls: ["Continuous evaluation", "Incident & reporting process", "Periodic re-certification"],
@@ -294,14 +310,16 @@ export interface Talk {
 export const talks: Talk[] = [
   {
     id: "airsi-2025",
-    // TODO(launch): exact publication/conference date, paper title and DOI or PDF link.
+    // TODO(launch): exact publication/conference date and DOI or PDF link. The title is the one listed under
+    // Publications on LinkedIn — confirm it is the AIRSI paper.
     date: null,
     year: "2025",
     venue: "AIRSI 2025",
-    title: "Troubleshooting agent for semiconductor robotics (working title)",
+    title:
+      "The end of traditional tech support? Reducing downtimes and increasing service efficiency with the help of personalised AI service agents",
     type: "Paper",
     link: null,
-    placeholders: ["exact paper title", "date", "paper link / DOI"],
+    placeholders: ["date", "paper link / DOI"],
   },
   {
     id: "karlstad-industry-day",
@@ -354,7 +372,7 @@ export const careerRoute = [
 
 export const credentials = [
   "RWTH Aachen — M.Sc. Production Engineering",
-  "University of Cambridge — Institute for Manufacturing",
+  "University of Cambridge IfM — master thesis",
   "Cambridge Service Alliance",
   "CARMA — AI Risk Management & Alignment",
   "AIRSI 2025 — published",

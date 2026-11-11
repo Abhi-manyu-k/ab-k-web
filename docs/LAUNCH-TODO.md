@@ -18,13 +18,13 @@ Visible placeholders render as an orange dashed `[TBD: …]` box on the page.
 
 ## Framework (/framework)
 
-- [ ] Example scenario for each level L0–L4 (5 boxes, `app/framework/page.tsx`).
+- [ ] Check the five drafted example scenarios (`scenario` in `lib/content.ts` → `autonomyLevels`): numbers and wording.
 - [ ] Confirm the v1.0 publication date (`framework.date`, currently 2026-11-06; also drives the citation year and changelog).
-- [ ] Replace `public/framework/abk-al-v1.pdf` (one-page placeholder) with the typeset PDF.
+- [ ] Replace `public/framework/abk-al-v1.pdf` (one-page placeholder) with the typeset PDF, then set `framework.pdfReady` to `true` (`lib/content.ts`) — the download button is hidden until then.
 
 ## Talks & publications (/talks, `lib/content.ts` → `talks`)
 
-- [ ] AIRSI 2025: exact paper title (currently marked "working title"), date, DOI or PDF link. These also feed the ScholarlyArticle JSON-LD.
+- [ ] AIRSI 2025: confirm the paper title (taken from the LinkedIn publication entry), date, DOI or PDF link. These also feed the ScholarlyArticle JSON-LD.
 - [ ] Karlstad University Industry Day: date, exact title, slides link.
 - [ ] Cambridge Service Alliance webinars: dates, exact series title, recording link(s).
 

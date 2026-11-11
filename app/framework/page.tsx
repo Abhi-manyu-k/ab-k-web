@@ -6,7 +6,6 @@ import { SignalField } from "@/components/ui/SignalField";
 import { Reveal } from "@/components/ui/Reveal";
 import { SheetHeader } from "@/components/ui/SheetHeader";
 import { AutonomyLadder } from "@/components/ui/AutonomyLadder";
-import { Tbd } from "@/components/ui/Tbd";
 import { Annotation } from "@/components/ui/Annotation";
 import { CTASection } from "@/components/sections/CTASection";
 import { autonomyLevels, framework, frameworkChangelog } from "@/lib/content";
@@ -68,11 +67,13 @@ export default function FrameworkPage() {
           ))}
         </dl>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a href={framework.pdf} className="btn btn-ink" download>
-            <Download className="h-3.5 w-3.5" aria-hidden="true" />
-            Download PDF
-          </a>
-          <a href="#cite" className="btn btn-line">
+          {framework.pdfReady && (
+            <a href={framework.pdf} className="btn btn-ink" download>
+              <Download className="h-3.5 w-3.5" aria-hidden="true" />
+              Download PDF
+            </a>
+          )}
+          <a href="#cite" className={`btn ${framework.pdfReady ? "btn-line" : "btn-ink"}`}>
             Cite this
           </a>
         </div>
@@ -156,11 +157,8 @@ export default function FrameworkPage() {
                     </ul>
                   </div>
                   <div>
-                    <p className="note mb-2">Example scenario</p>
-                    {/* TODO(launch): add an example scenario for this level. */}
-                    <div className="border-t border-dashed rule pt-4 text-sm text-muted">
-                      <Tbd>example scenario for {l.level}</Tbd>
-                    </div>
+                    <p className="note mb-2">Example · illustrative</p>
+                    <p className="border-t border-dashed rule pt-4 text-sm text-ink-2">{l.scenario}</p>
                   </div>
                 </Reveal>
               </li>
