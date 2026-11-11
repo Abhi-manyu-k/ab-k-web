@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type Arrow = "left" | "down-left" | "up-left" | "none";
+type Arrow = "left" | "down-left" | "up-left" | "up-right" | "none";
 
 /**
  * A red-pen margin note, as a checker would scribble on a drawing.
@@ -34,7 +34,7 @@ export function Annotation({
       )}
       style={style}
     >
-      {arrow !== "none" && (
+      {arrow !== "none" && arrow !== "up-right" && (
         <svg
           aria-hidden="true"
           viewBox="0 0 48 24"
@@ -50,6 +50,22 @@ export function Annotation({
         </svg>
       )}
       <span className="annotation-text">{children}</span>
+      {/* up-right: the same stroke mirrored, set after the words so its tip is the note's right end. */}
+      {arrow === "up-right" && (
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 48 24"
+          className="h-5 w-10 shrink-0 -scale-x-100 rotate-[-25deg]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path className="annotation-stroke" d="M46 13c-9-5-21-6-41-1" />
+          <path className="annotation-stroke" d="M11 6 4 12l8 5" />
+        </svg>
+      )}
     </span>
   );
 }

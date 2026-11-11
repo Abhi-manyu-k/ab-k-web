@@ -1,0 +1,112 @@
+/* ═══ P6. X-ray: the construction drawing of the page (components/ui/XRay.tsx, xray-draw.ts) ═══ */
+
+.xray {
+  position: fixed;
+  inset: 0;
+  z-index: 80; /* over the header (50) and the grain (70) */
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+  font-family: var(--font-mono);
+}
+
+.xray.xray-on {
+  display: block;
+}
+
+.xray .xr-dim {
+  fill: none;
+  stroke: var(--color-signal);
+  stroke-width: 1;
+}
+
+.xray .xr-edge {
+  fill: none;
+  stroke: var(--color-ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+  opacity: 0.55;
+}
+
+.xray .xr-box {
+  fill: none;
+  stroke: var(--color-ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  opacity: 0.6;
+}
+
+.xray .xr-bg {
+  fill: var(--color-paper);
+  opacity: 0.92;
+}
+
+.xray .xr-panel {
+  fill: var(--color-paper);
+  stroke: var(--color-line-strong);
+  stroke-width: 1;
+}
+
+.xray .xr-sw {
+  stroke: var(--color-line-strong);
+  stroke-width: 1;
+}
+
+.xray .xr-t {
+  fill: var(--color-ink);
+  letter-spacing: 0;
+}
+
+.xray .xr-sig {
+  fill: var(--color-signal-ink);
+}
+
+.xray .xr-mut {
+  fill: var(--color-muted);
+}
+
+/* The first drawing is plotted: dimension lines draw in, everything else fades with them. */
+@keyframes xr-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes xr-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.xray-intro .xr-draw {
+  stroke-dasharray: 1;
+  animation: xr-draw 500ms var(--ease-draw) both;
+}
+
+.xray-intro {
+  animation: xr-fade 240ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xray-intro .xr-draw {
+    stroke-dasharray: none;
+    animation: none;
+  }
+}
+
+/* The footer hint only where there is a keyboard to hold X on. */
+@media (hover: hover) and (pointer: fine) {
+  .xray-hint {
+    display: inline;
+  }
+}
+
+@media print {
+  .xray {
+    display: none !important;
+  }
+}

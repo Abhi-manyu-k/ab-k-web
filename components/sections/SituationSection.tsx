@@ -12,7 +12,7 @@ const fmt = (d: string) => d.split("-").reverse().join(".");
 
 export function SituationSection() {
   return (
-    <section className="py-28 lg:py-44">
+    <section data-xray="Situation" className="py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet="02"
@@ -26,7 +26,7 @@ export function SituationSection() {
         />
 
         {/* The hairlines hold still; each cell's ink lands, cell after cell. */}
-        <ul className="mt-20 grid sm:grid-cols-3">
+        <ul data-xray="Stat row" className="mt-20 grid sm:grid-cols-3">
           {marketFacts.map((f, i) => (
             <Reveal
               as="li"

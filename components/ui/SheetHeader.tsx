@@ -19,7 +19,7 @@ interface SheetHeaderProps {
  */
 export function SheetHeader({ sheet, label, title, intro, tone = "paper", figure, className }: SheetHeaderProps) {
   return (
-    <Reveal variant="none" className={cn("sheet-head", className)}>
+    <Reveal variant="none" data-xray="Sheet header" className={cn("sheet-head", className)}>
       <div className="relative mb-10 flex items-baseline gap-4 border-b border-transparent pb-3 lg:mb-14">
         <span className={cn("note sheet-label", "!text-ink")}>
           <span className="text-signal">§{sheet}</span> — {label}

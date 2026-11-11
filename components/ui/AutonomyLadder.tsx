@@ -74,7 +74,8 @@ function PanelBody({ index, ghost = false }: { index: number; ghost?: boolean })
   );
 }
 
-export function AutonomyLadder() {
+/** `note`: an optional margin note set directly under the staircase (the framework page uses it). */
+export function AutonomyLadder({ note }: { note?: React.ReactNode } = {}) {
   const [selected, setSelected] = useState(2);
   const level = autonomyLevels[selected];
   const stairRef = useRef<HTMLDivElement>(null);
@@ -159,6 +160,7 @@ export function AutonomyLadder() {
             <span>→ Autonomy →</span>
             <span>Agent does</span>
           </div>
+          {note}
         </div>
       </div>
 

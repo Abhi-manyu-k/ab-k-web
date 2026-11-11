@@ -93,13 +93,17 @@ export default function FrameworkPage() {
           />
           {/* The staircase builds itself on view. */}
           <div className="mt-24">
-            <AutonomyLadder />
+            <AutonomyLadder
+              note={
+                /* Set under the staircase, the words left of the L2 | L3 riser (60% across), the arrow's tip at it. */
+                <Reveal as="p" delay={400} className="mt-6 flex justify-end pr-[calc(40%-0.75rem)] text-right">
+                  <Annotation arrow="up-right" rotate={-2}>
+                    the hard step is L2 → L3: from approving actions to approving policy
+                  </Annotation>
+                </Reveal>
+              }
+            />
           </div>
-          <Reveal as="p" delay={400} className="mt-6 lg:mt-2">
-            <Annotation arrow="up-left" rotate={-2}>
-              the hard step is L2 → L3: from approving actions to approving policy
-            </Annotation>
-          </Reveal>
         </Container>
       </section>
 

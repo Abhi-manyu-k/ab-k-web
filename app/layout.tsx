@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { GridLamp } from "@/components/ui/GridLamp";
+import { XRay } from "@/components/ui/XRay";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -101,6 +102,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <XRay />
       </body>
     </html>
   );

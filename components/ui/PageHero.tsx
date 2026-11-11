@@ -19,7 +19,7 @@ interface PageHeroProps {
  */
 export function PageHero({ eyebrow, title, description, children, figure }: PageHeroProps) {
   return (
-    <section className="pt-24 pb-8 sm:pt-28">
+    <section data-xray="Page hero" className="pt-24 pb-8 sm:pt-28">
       <Container>
         <div className="relative flex items-baseline gap-4 border-b border-transparent pb-3">
           <span className="note ph-eyebrow !text-ink">

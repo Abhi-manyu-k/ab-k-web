@@ -11,7 +11,7 @@ const actions = [
 
 export function CTASection() {
   return (
-    <section className="py-28 lg:py-44">
+    <section data-xray="Contact" className="py-28 lg:py-44">
       <Container>
         {/* The frame rises as one block, then the title-block rows on the right land in turn. */}
         <Reveal className="crop grid gap-12 border border-ink p-6 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:p-16">

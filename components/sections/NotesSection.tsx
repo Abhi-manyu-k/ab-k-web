@@ -12,7 +12,7 @@ const generalNotes = [
 /* General notes of the sheet: on the bare sheet, directly under the hero. */
 export function NotesSection() {
   return (
-    <section className="py-16 lg:py-24" aria-labelledby="general-notes">
+    <section data-xray="General notes" className="py-16 lg:py-24" aria-labelledby="general-notes">
       <Container className="grid gap-10 lg:grid-cols-[19rem_1fr] lg:gap-16 xl:grid-cols-[22rem_1fr]">
         <Reveal>
           <p id="general-notes" className="note">

@@ -8,7 +8,7 @@ import { autonomyLevels, framework } from "@/lib/content";
 /** Home §04 — a static elevation of the staircase; the interactive version lives on /framework. */
 export function AutonomySection() {
   return (
-    <section className="bg-mm py-28 lg:py-44">
+    <section data-xray="Autonomy" className="bg-mm py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet="04"

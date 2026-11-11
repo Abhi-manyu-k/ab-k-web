@@ -14,10 +14,10 @@ function at(ms: number, rise?: number): React.CSSProperties {
 
 export function HeroSection() {
   return (
-    <section className="pt-24 pb-16 sm:pt-28 lg:pb-24">
+    <section data-xray="Hero" className="pt-24 pb-16 sm:pt-28 lg:pb-24">
       <Container>
         {/* Headline: on the bare sheet */}
-        <div>
+        <div data-xray="Headline block">
           <p className="hero-rise note mb-8 flex flex-wrap items-center gap-x-3 gap-y-1" style={at(100, 8)}>
             <span className="text-signal">●</span>
             {siteConfig.tagline}
@@ -67,7 +67,7 @@ export function HeroSection() {
 
         {/* The frame wraps only the machine drawing, its log and the title block. MachineDrawing's own
             mobile top rule would double the frame edge, so it is dropped here. */}
-        <div className="frame frame-draw mt-16 bg-paper [&>.md]:border-t-0">
+        <div data-xray="Drawing frame" className="frame frame-draw mt-16 bg-paper [&>.md]:border-t-0">
           <MachineDrawing />
 
           {/* Title block */}

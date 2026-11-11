@@ -21,7 +21,7 @@ export async function PracticesSection() {
   );
 
   return (
-    <section className="py-28 lg:py-44">
+    <section data-xray="Practices" className="py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet="03"

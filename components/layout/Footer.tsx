@@ -2,13 +2,14 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { SheetSwitch } from "@/components/ui/SheetSwitch";
+import { XRayToggle } from "@/components/ui/XRay";
 import { legalLinks, navLinks, siteConfig } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="pb-10">
+    <footer data-xray="Footer" className="pb-10">
       <Container>
         <div className="border-t rule font-mono text-[11px] uppercase tracking-[0.08em]">
           <div className="grid gap-10 py-10 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:py-14">
@@ -91,7 +92,10 @@ export function Footer() {
               </div>
             ))}
           </dl>
-          <SheetSwitch />
+          <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
+            <XRayToggle />
+            <SheetSwitch />
+          </div>
           </div>
         </div>
       </Container>

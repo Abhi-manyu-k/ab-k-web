@@ -17,7 +17,7 @@ export function TrackRecordSection({
   showLink?: boolean;
 }) {
   return (
-    <section id={id} className="plate scroll-mt-14 py-28 lg:py-44">
+    <section id={id} data-xray="Track record" className="plate scroll-mt-14 py-28 lg:py-44">
       <Container>
         <SheetHeader
           sheet={sheet}
