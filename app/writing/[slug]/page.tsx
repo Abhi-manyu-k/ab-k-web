@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { SheetSwitch } from "@/components/ui/SheetSwitch";
 import { CTASection } from "@/components/sections/CTASection";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
@@ -75,6 +76,9 @@ export default async function EssayPage({ params }: { params: Promise<{ slug: st
             </div>
           ))}
         </dl>
+        <div className="mt-6">
+          <SheetSwitch />
+        </div>
       </PageHero>
 
       <section className="py-16 lg:py-24">

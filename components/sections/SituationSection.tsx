@@ -77,15 +77,20 @@ export function SituationSection() {
           <ArrowRight className="h-3.5 w-3.5 text-signal" aria-hidden="true" />
           <span>
             Not legal advice — I write about turning regulation into engineering controls.
-            {" · "}
-            <span className="font-mono text-[10px] uppercase tracking-[0.08em]">
-              Last reviewed:{" "}
-              {regulationLastReviewed ? (
-                <span className="text-ink">{fmt(regulationLastReviewed)}</span>
-              ) : (
-                <Tbd>date</Tbd>
-              )}
-            </span>
+            {/* The stamp shows once the table is verified; until then only in development, as a reminder. */}
+            {(regulationLastReviewed || process.env.NODE_ENV === "development") && (
+              <>
+                {" · "}
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em]">
+                  Last reviewed:{" "}
+                  {regulationLastReviewed ? (
+                    <span className="text-ink">{fmt(regulationLastReviewed)}</span>
+                  ) : (
+                    <Tbd>date</Tbd>
+                  )}
+                </span>
+              </>
+            )}
           </span>
         </Reveal>
       </Container>

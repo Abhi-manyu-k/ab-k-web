@@ -89,6 +89,12 @@ export default function RootLayout({
       <head>
         {/* Reveal animations only hide content once scripting is known to work (html.js). */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* The day sheet (a reader's choice, see SheetSwitch) is set before first paint, so it never flashes. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('sheet')==='day')document.documentElement.dataset.sheet='day'}catch(e){}",
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased">
         <GridLamp />

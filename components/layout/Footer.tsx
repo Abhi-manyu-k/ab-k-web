@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
+import { SheetSwitch } from "@/components/ui/SheetSwitch";
 import { legalLinks, navLinks, siteConfig } from "@/lib/site";
 
 export function Footer() {
@@ -74,7 +75,8 @@ export function Footer() {
           </div>
 
           {/* Title block */}
-          <dl className="flex flex-wrap gap-x-8 gap-y-2 border-t rule py-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t rule py-4">
+          <dl className="flex flex-wrap gap-x-8 gap-y-2">
             {[
               ["Author", siteConfig.author],
               ["Location", siteConfig.location],
@@ -89,6 +91,8 @@ export function Footer() {
               </div>
             ))}
           </dl>
+          <SheetSwitch />
+          </div>
         </div>
       </Container>
     </footer>

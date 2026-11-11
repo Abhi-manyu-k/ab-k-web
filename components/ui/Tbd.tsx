@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export function Tbd({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <span
+      data-tbd=""
       className={cn(
         "inline-block border border-dashed border-signal px-1.5 py-px font-mono text-[0.85em] normal-case tracking-normal text-signal",
         className,

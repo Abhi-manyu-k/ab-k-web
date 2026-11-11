@@ -632,6 +632,14 @@ export function SignalField({ variant, className, seed = 7, caption }: Props) {
     );
     io.observe(box);
 
+    // The reader switched sheets (day / night): re-read the tokens and repaint.
+    const mo = new MutationObserver(() => {
+      pal = readPalette(a);
+      if (reduced) drawStill();
+      else scene.frame(ctxA, t, pal);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-sheet"] });
+
     const onVis = () => (document.hidden ? stop() : start());
     document.addEventListener("visibilitychange", onVis);
 
@@ -640,6 +648,7 @@ export function SignalField({ variant, className, seed = 7, caption }: Props) {
       window.clearInterval(fadeTimer);
       ro.disconnect();
       io.disconnect();
+      mo.disconnect();
       document.removeEventListener("visibilitychange", onVis);
     };
   }, [variant, seed]);

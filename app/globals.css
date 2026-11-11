@@ -585,8 +585,9 @@ body {
     -webkit-appearance: none;
     padding-right: 2rem;
     cursor: pointer;
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ece8dd' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ece8dd' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+      var(--chevron),
       var(--field-signal),
       var(--field-line);
     background-repeat: no-repeat;
@@ -1073,5 +1074,61 @@ body::before {
 
   .md-pulse {
     display: none;
+  }
+}
+
+/* ═══ P4. The day sheet: the original paper palette, for reading ═════════════════════════════
+ * Night stays the default. html[data-sheet="day"] (a reader's choice, set before first paint in
+ * app/layout.tsx, see components/ui/SheetSwitch.tsx) restores the paper tokens; print always uses
+ * them. AA on paper-3 as checked for the original palette. Everything below the tokens is what is
+ * not driven by them.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+html[data-sheet="day"] {
+    --color-paper: #f2efe7;
+    --color-paper-2: #e9e5da;
+    --color-paper-3: #faf8f3;
+    --color-ink: #1c1b18;
+    --color-ink-2: #3b3934;
+    --color-muted: #5e5a52;
+    --color-faint: #6e695f;
+    --color-line: #d8d3c6;
+    --color-line-strong: #b8b1a1;
+    --color-signal: #d4471a;
+    --color-signal-ink: #b93b14;
+    --color-ok: #2f6f50;
+    --color-plate: #e9e5da;
+    --color-plate-2: #faf8f3;
+    --color-plate-line: #d8d3c6;
+    color-scheme: light;
+}
+
+html[data-sheet="day"] body::before {
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.106 0 0 0 0 0.094 0 0 0 2.4 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html[data-sheet="day"] .form-select {
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231c1b18' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+@media print {
+  html {
+    --color-paper: #f2efe7;
+    --color-paper-2: #e9e5da;
+    --color-paper-3: #faf8f3;
+    --color-ink: #1c1b18;
+    --color-ink-2: #3b3934;
+    --color-muted: #5e5a52;
+    --color-faint: #6e695f;
+    --color-line: #d8d3c6;
+    --color-line-strong: #b8b1a1;
+    --color-signal: #d4471a;
+    --color-signal-ink: #b93b14;
+    --color-ok: #2f6f50;
+    --color-plate: #e9e5da;
+    --color-plate-2: #faf8f3;
+    --color-plate-line: #d8d3c6;
+    color-scheme: light;
   }
 }
